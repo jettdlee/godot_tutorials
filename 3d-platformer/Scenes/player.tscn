@@ -1,19 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://ot3o0x36iv0u"]
+[gd_scene load_steps=5 format=3 uid="uid://ot3o0x36iv0u"]
 
 [ext_resource type="Script" uid="uid://bqs238y7pt470" path="res://Scripts/player_controller.gd" id="1_cvnsp"]
 [ext_resource type="ArrayMesh" uid="uid://b3ymmacl32sch" path="res://Assets/Models/Characters/character-male-a.obj" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://bw7be1bikfufn" path="res://Scripts/player_visual.gd" id="3_6t5aa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7p6j4"]
 radius = 0.339386
 height = 0.678772
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_cvnsp")
 
 [node name="Model" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_v0iea")
 skeleton = NodePath("../..")
+script = ExtResource("3_6t5aa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33102417, 0)
