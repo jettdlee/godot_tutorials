@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccax6i4768opj"]
+[gd_scene load_steps=15 format=3 uid="uid://ccax6i4768opj"]
 
 [ext_resource type="ArrayMesh" uid="uid://5m4ktyk6iw1s" path="res://Assets/Models/Platformer/block-grass-low-large.obj" id="1_vk57k"]
 [ext_resource type="ArrayMesh" uid="uid://bpvipxpw8d0r8" path="res://Assets/Models/Platformer/block-grass-low-narrow.obj" id="2_xfk5q"]
 [ext_resource type="ArrayMesh" uid="uid://bxefij3m64q1i" path="res://Assets/Models/Platformer/block-grass-low-long.obj" id="3_7p6j4"]
 [ext_resource type="PackedScene" uid="uid://ot3o0x36iv0u" path="res://Scenes/player.tscn" id="4_7p6j4"]
 [ext_resource type="PackedScene" uid="uid://x55cs1rybang" path="res://Scenes/enemy.tscn" id="5_6444e"]
+[ext_resource type="PackedScene" uid="uid://lsmhs66kt3wx" path="res://Scenes/coin.tscn" id="6_evi0p"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6444e"]
 points = PackedVector3Array(-0.9604686, 0, -0.712585, 1.022246, 0.37556842, 0.79854685, 0.92504716, 0.34350848, -0.9568746, -0.9768895, 0.5, 0.7563571, 0.8055162, 0, 0.929408, -0.7561676, 0.5, -0.97688717, -0.86729723, -2.7755576e-17, 0.89854425, 0.8674363, -2.7755576e-17, -0.89854425, 0.7563099, 0.5, 0.97688717, 0.9768344, 0.5, -0.7563571, -0.7985215, 0.37556326, 1.0222589, -0.7123999, 0, -0.9604659, -1.0220782, 0.40755552, -0.7665578, 0.9604135, 2.7755576e-17, -0.712585, 0.733024, 0.43908638, -1.0200285, -1.022261, 0.3755634, 0.79851556, 0.9604135, 0, 0.712585, 0.7984792, 0.37556532, 1.0222753, -0.7123999, 0, 0.9604659, -0.79852134, 0.37556323, -1.0222588, -0.9604686, 2.7755576e-17, 0.712585, 0.71253896, 0, -0.9604659, 1.022246, 0.37556842, -0.79854685, 0.9768344, 0.5, 0.7563571, -0.7561676, 0.5, 0.97688717, -0.9768895, 0.5, -0.7563571, 0.7563099, 0.5, -0.97688717, -0.9568596, 0.34350672, -0.9250816, 0.71253896, 0, 0.9604659, 0.95684505, 0.34351078, 0.9251208, 0.7984794, 0.37556535, -1.0222754, -0.86729723, -2.7755576e-17, -0.89854425)
@@ -159,3 +160,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 [node name="Enemy" parent="." instance=ExtResource("5_6444e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9904388, -0.8994579)
 move_direction = Vector3(0, 3, 0)
+
+[node name="Coin" parent="." instance=ExtResource("6_evi0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5268078, -2.5424793)
