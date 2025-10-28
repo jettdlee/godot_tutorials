@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dut3gyo4e7qbo"]
 
-[ext_resource type="Material" uid="uid://disdcqmbkftbi" path="res://Models/Pedestal/PedestalMaterial.tres" id="1_44e5k"]
-[ext_resource type="ArrayMesh" uid="uid://c1ldxdvsp4ywh" path="res://Models/Pedestal/Pedestal.obj" id="2_83v8d"]
+[ext_resource type="Material" uid="uid://disdcqmbkftbi" path="res://Assets/Models/Pedestal/PedestalMaterial.tres" id="1_44e5k"]
+[ext_resource type="ArrayMesh" uid="uid://c1ldxdvsp4ywh" path="res://Assets/Models/Pedestal/Pedestal.obj" id="2_83v8d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w0mig"]
 size = Vector3(0.7, 1.65814, 0.7)
