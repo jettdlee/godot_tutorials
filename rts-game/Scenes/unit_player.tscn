@@ -10,7 +10,7 @@ colors = PackedColorArray(0, 1, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_to24h"]
 gradient = SubResource("Gradient_dr6x0")
 
-[node name="Unit_Player" instance=ExtResource("1_dr6x0")]
+[node name="Unit_Player" groups=["UnitPlayer"] instance=ExtResource("1_dr6x0")]
 
 [node name="PlayerUnit" type="Node" parent="." index="0"]
 script = ExtResource("2_66hmh")
@@ -20,3 +20,5 @@ visible = false
 position = Vector2(0, 6.0000005)
 scale = Vector2(0.07031252, -8)
 texture = SubResource("GradientTexture1D_to24h")
+
+[node name="HealthBar" parent="." index="5" groups=["Unit"]]
