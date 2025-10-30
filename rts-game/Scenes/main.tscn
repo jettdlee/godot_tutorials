@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=4 uid="uid://bxhswheumw6jr"]
+[gd_scene load_steps=4 format=4 uid="uid://bxhswheumw6jr"]
 
 [ext_resource type="TileSet" uid="uid://iwlw6fu6pv3o" path="res://Assets/Sprites/Tiles/tile_set.tres" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://c574odfiocu4" path="res://Scenes/unit_base.tscn" id="2_bo1nx"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jjgbg"]
 vertices = PackedVector2Array(-19, -23, -125, -52, 140, -54, 179, -54, 20, -23, 179, 56, 140, 56, 20, 12, 179, 91, 262, 133.97656, -262, 133.00781, 140, 91, -124, 91, -163, 91, 179, -89, 262, -102, -262, -102, 140, -89, -163, 56, -164, -52, -125, -87, -164, -87, -19, 12, -124, 56)
@@ -47,3 +48,6 @@ position = Vector2(304, 143)
 vertices = PackedVector2Array(-125, -87, -125, -52, -164, -52, -164, -87)
 affect_navigation_mesh = true
 carve_navigation_mesh = true
+
+[node name="Unit_Base" parent="." instance=ExtResource("2_bo1nx")]
+position = Vector2(14, 43)
