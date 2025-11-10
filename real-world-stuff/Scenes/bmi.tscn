@@ -1,0 +1,142 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqwigwxensmk2"]
+
+[ext_resource type="Theme" uid="uid://cy1d4v4cpl5j2" path="res://Scenes/dark_theme_bmi.tres" id="1_wx6ub"]
+[ext_resource type="Script" uid="uid://cvli47dxav6ei" path="res://Scripts/bmi.gd" id="2_qvbr4"]
+
+[node name="BMI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wx6ub")
+script = ExtResource("2_qvbr4")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Output" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Output"]
+layout_mode = 2
+text = "BMI"
+
+[node name="HeightInput" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HeightInput"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HeightInput/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HeightInput/PanelContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HeightLineEdit" type="LineEdit" parent="VBoxContainer/HeightInput/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "184"
+alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer/HeightInput/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HeightInput/PanelContainer/MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -8.0
+offset_right = -1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+min_value = 100.0
+max_value = 200.0
+value = 100.0
+
+[node name="Control" type="Control" parent="VBoxContainer/HeightInput/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HeightInput/PanelContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Height (cm)"
+
+[node name="WeightInput" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/WeightInput"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/WeightInput/PanelContainer"]
+layout_mode = 2
+
+[node name="MinusButton" type="Button" parent="VBoxContainer/WeightInput/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "-"
+
+[node name="WeightLineEdit" type="LineEdit" parent="VBoxContainer/WeightInput/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "12"
+alignment = 1
+
+[node name="PlusButton" type="Button" parent="VBoxContainer/WeightInput/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "+"
+
+[node name="Control" type="Control" parent="VBoxContainer/WeightInput/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/WeightInput/PanelContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Weight (Kg)"
+
+[connection signal="text_changed" from="VBoxContainer/HeightInput/PanelContainer/MarginContainer/VBoxContainer/HeightLineEdit" to="." method="_on_height_line_edit_text_changed"]
+[connection signal="value_changed" from="VBoxContainer/HeightInput/PanelContainer/MarginContainer/VBoxContainer/Control/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/WeightInput/PanelContainer/HBoxContainer/MinusButton" to="." method="_on_minus_button_pressed"]
+[connection signal="text_changed" from="VBoxContainer/WeightInput/PanelContainer/HBoxContainer/WeightLineEdit" to="." method="_on_weight_line_edit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/WeightInput/PanelContainer/HBoxContainer/PlusButton" to="." method="_on_plus_button_pressed"]

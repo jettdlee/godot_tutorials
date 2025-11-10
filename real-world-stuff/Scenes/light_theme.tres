@@ -1,0 +1,122 @@
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://do3c7b6v2bjf"]
+
+[ext_resource type="FontFile" uid="uid://dhucrdogadun6" path="res://Assets/Calculator fonts/Unageo-Medium.ttf" id="1_wauns"]
+[ext_resource type="FontFile" uid="uid://c2u22t00570gg" path="res://Assets/Calculator fonts/Unageo-Bold.ttf" id="2_fxykk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fil7t"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wauns"]
+bg_color = Color(0.87058824, 0.90588236, 0.93333334, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dkkb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxykk"]
+bg_color = Color(1, 1, 1, 0.8666667)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5cml"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7skw"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.9411765, 0.95686275, 0.96862745, 1)
+draw_center = false
+corner_detail = 1
+
+[sub_resource type="Gradient" id="Gradient_n5cml"]
+offsets = PackedFloat32Array(0.006666667, 1)
+colors = PackedColorArray(0.7294118, 0.827451, 0.87058824, 1, 0.9019608, 0.9254902, 0.9411765, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t7skw"]
+gradient = SubResource("Gradient_n5cml")
+fill_from = Vector2(0.7616823, 0.50934577)
+fill_to = Vector2(0.8364486, 0.07943925)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1vs5e"]
+texture = SubResource("GradientTexture2D_t7skw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkbnd"]
+bg_color = Color(0.9019608, 0.92941177, 0.9490196, 1)
+draw_center = false
+shadow_color = Color(0, 0, 0, 0.05882353)
+shadow_size = 10
+
+[resource]
+Button/colors/font_color = Color(0.3372549, 0.34117648, 0.4117647, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.30588236, 0.30980393, 0.3764706, 1)
+Button/colors/font_hover_color = Color(0.3372549, 0.34117648, 0.4117647, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_wauns")
+Button/styles/disabled = SubResource("StyleBoxFlat_fil7t")
+Button/styles/focus = SubResource("StyleBoxFlat_wauns")
+Button/styles/hover = SubResource("StyleBoxFlat_3dkkb")
+Button/styles/normal = SubResource("StyleBoxFlat_fxykk")
+Button/styles/pressed = SubResource("StyleBoxFlat_n5cml")
+FunctionButton/base_type = &"Button"
+FunctionButton/colors/font_color = Color(0.42745098, 0.7372549, 0.72156864, 1)
+FunctionButton/colors/font_disabled_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_focus_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_hover_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_outline_color = Color(0, 0, 0, 1)
+FunctionButton/colors/font_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_disabled_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_focus_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_hover_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_normal_color = Color(0, 0, 0, 1)
+FunctionButton/colors/icon_pressed_color = Color(0, 0, 0, 1)
+FunctionButton/constants/align_to_largest_stylebox = 0
+FunctionButton/constants/h_separation = 0
+FunctionButton/constants/icon_max_width = 0
+FunctionButton/constants/outline_size = 0
+FunctionButton/font_sizes/font_size = 40
+FunctionButton/fonts/font = ExtResource("2_fxykk")
+FunctionButton/styles/disabled = SubResource("StyleBoxFlat_t7skw")
+FunctionButton/styles/focus = SubResource("StyleBoxFlat_t7skw")
+FunctionButton/styles/hover = SubResource("StyleBoxFlat_t7skw")
+FunctionButton/styles/pressed = SubResource("StyleBoxFlat_t7skw")
+GridContainer/constants/h_separation = 0
+GridContainer/constants/v_separation = 0
+Label/colors/font_color = Color(0.27058825, 0.27058825, 0.36862746, 1)
+Label/font_sizes/font_size = 80
+Label/fonts/font = ExtResource("2_fxykk")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_right = 20
+Panel/styles/panel = SubResource("StyleBoxTexture_1vs5e")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_rkbnd")
