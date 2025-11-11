@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://byuepx5avs6pp"]
+
+[ext_resource type="Material" uid="uid://cnx3wacowumvf" path="res://Environment/Textures/Marble/marble.tres" id="1_g4cxw"]
+[ext_resource type="ArrayMesh" uid="uid://0sceifwobejd" path="res://Environment/Models/pedestal.obj" id="2_jarup"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1bvp3"]
+height = 1.15051
+radius = 0.688965
+
+[sub_resource type="BoxMesh" id="BoxMesh_g4cxw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jarup"]
+albedo_color = Color(0.27, 0.188325, 0.1215, 1)
+
+[node name="Pedestal" type="StaticBody3D"]
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.25, 0)
+material_override = ExtResource("1_g4cxw")
+mesh = ExtResource("2_jarup")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.547129, 0)
+shape = SubResource("CylinderShape3D_1bvp3")
+
+[node name="NamePlate" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0639702, -0.081327, 0, 0.0232833, 0.223444, 0, 0, 0, 0.543157, 0.749, 1, 0)
+mesh = SubResource("BoxMesh_g4cxw")
+surface_material_override/0 = SubResource("StandardMaterial3D_jarup")
+
+[node name="ParticleLabel" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.34202, 0.939693, 0, 0.939693, 0.34202, -1, 1.49502e-08, -4.10753e-08, 0.78753, 1.01998, 0)
+pixel_size = 0.002
+text = "Campfire"
+font_size = 38
+outline_size = 5

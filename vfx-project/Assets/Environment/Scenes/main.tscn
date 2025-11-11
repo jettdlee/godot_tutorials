@@ -1,0 +1,623 @@
+[gd_scene load_steps=70 format=3 uid="uid://brmirt1vj6p0c"]
+
+[ext_resource type="Texture2D" uid="uid://d03qjtww2npu4" path="res://Assets/Environment/Textures/CloudySky.exr" id="2_272bh"]
+[ext_resource type="PackedScene" uid="uid://byuepx5avs6pp" path="res://Assets/Environment/Scenes/pedestal.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://drobhnhauqtpi" path="res://Assets/Player Controller/Player.tscn" id="3_h2yge"]
+[ext_resource type="Material" uid="uid://w3t1aqyln81k" path="res://Assets/Environment/Textures/Tiles/tiles.tres" id="4_1bvp3"]
+[ext_resource type="ArrayMesh" uid="uid://b4glvqjqwdb8h" path="res://Assets/Environment/Models/huge_tree.obj" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://v24rahmco526" path="res://Assets/Environment/Textures/Tree/diffuse.tga" id="5_272bh"]
+[ext_resource type="Texture2D" uid="uid://dgp1j5nvuiw1o" path="res://Assets/Environment/Textures/Tree/normal.tga" id="6_5vw27"]
+[ext_resource type="Texture2D" uid="uid://ba0ukac2uhl1l" path="res://Assets/Particle Textures/spark_06.png" id="8_suj17"]
+[ext_resource type="Texture2D" uid="uid://bsvfi2q1gut71" path="res://Assets/Particle Textures/flame_04.png" id="9_82io5"]
+[ext_resource type="Texture2D" uid="uid://hn275m12jnn" path="res://Assets/Particle Textures/smoke_04.png" id="10_5rbdq"]
+[ext_resource type="Texture2D" uid="uid://c0cynu14eustm" path="res://Assets/Particle Textures/dirt_02.png" id="11_5qdul"]
+[ext_resource type="Texture2D" uid="uid://d2b66kicmjfox" path="res://Assets/Particle Textures/slash_04.png" id="12_b4yor"]
+[ext_resource type="Texture2D" uid="uid://dps8uql1rwien" path="res://Assets/Particle Textures/trace_07.png" id="13_b4f8x"]
+[ext_resource type="Texture2D" uid="uid://cjci30vrn44oy" path="res://Assets/Particle Textures/trace_05.png" id="14_vlpxa"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5vw27"]
+panorama = ExtResource("2_272bh")
+
+[sub_resource type="Sky" id="Sky_lquwl"]
+sky_material = SubResource("PanoramaSkyMaterial_5vw27")
+
+[sub_resource type="Environment" id="Environment_7mycd"]
+background_mode = 2
+sky = SubResource("Sky_lquwl")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ssao_enabled = true
+ssao_radius = 1.5
+ssao_intensity = 4.0
+glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.6, 1, 0.9266666, 1)
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_height = 1.5
+fog_height_density = 0.02
+fog_depth_begin = 20.0
+volumetric_fog_density = 0.0231
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1bvp3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("5_272bh")
+normal_enabled = true
+normal_texture = ExtResource("6_5vw27")
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+albedo_color = Color(0.38, 0.24016, 0.1178, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fckky"]
+transparency = 1
+albedo_color = Color(4.29996, 4.29996, 2.5678508, 1)
+albedo_texture = ExtResource("8_suj17")
+
+[sub_resource type="Curve" id="Curve_8r8gq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 0.47191018), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_82io5"]
+curve = SubResource("Curve_8r8gq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5rbdq"]
+direction = Vector3(0, 1, 0)
+spread = 42.778
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, -30, 0)
+scale_min = 0.19999999
+scale_max = 0.19999999
+scale_curve = SubResource("CurveTexture_82io5")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_5qdul"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4yor"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("9_82io5")
+
+[sub_resource type="Curve" id="Curve_b4f8x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.022471905), -1.245843, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vlpxa"]
+curve = SubResource("Curve_b4f8x")
+
+[sub_resource type="Gradient" id="Gradient_qslmw"]
+offsets = PackedFloat32Array(0.018867925, 0.1981132, 1)
+colors = PackedColorArray(6.810317, 6.810317, 6.810317, 1, 1, 1, 0.003921569, 1, 2.907523, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pn1s6"]
+gradient = SubResource("Gradient_qslmw")
+
+[sub_resource type="Curve" id="Curve_ncojx"]
+_data = [Vector2(0.03787878, 0.6292135), 0.0, 0.0, 0, 0, Vector2(0.2348485, 0.8988764), 0.0, 0.0, 0, 0, Vector2(0.90909094, 0.32584274), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ww1pl"]
+curve = SubResource("Curve_ncojx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tm77v"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+gravity = Vector3(0, 2, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 4.9999976
+scale_min = 0.7
+scale_max = 1.3
+scale_curve = SubResource("CurveTexture_ww1pl")
+color = Color(2.7075353, 2.7075353, 2.7075353, 1)
+color_ramp = SubResource("GradientTexture1D_pn1s6")
+alpha_curve = SubResource("CurveTexture_vlpxa")
+
+[sub_resource type="QuadMesh" id="QuadMesh_n08ji"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ly8ur"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("10_5rbdq")
+
+[sub_resource type="Curve" id="Curve_6533d"]
+_data = [Vector2(0.0075757504, 0.6741574), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.62748533, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_un1md"]
+curve = SubResource("Curve_6533d")
+
+[sub_resource type="Curve" id="Curve_5614x"]
+_data = [Vector2(0, 0.1685394), 0.0, 1.3086585, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ouydq"]
+curve = SubResource("Curve_5614x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cnykr"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(0, 1, 0)
+spread = 16.111
+initial_velocity_max = 2.0
+gravity = Vector3(0, 1, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_ouydq")
+color = Color(0.5211409, 0.5211405, 0.52114046, 1)
+alpha_curve = SubResource("CurveTexture_un1md")
+
+[sub_resource type="QuadMesh" id="QuadMesh_higgg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ty320"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.6460396, 0.60254806, 0.49633604, 1)
+albedo_texture = ExtResource("11_5qdul")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_l7i3d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.9887642, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qslmw"]
+curve = SubResource("Curve_l7i3d")
+
+[sub_resource type="Curve" id="Curve_4ih5n"]
+_data = [Vector2(0, 0.22471917), 0.0, 1.0469269, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pn1s6"]
+curve = SubResource("Curve_4ih5n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aw8vs"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 5.0
+angular_velocity_min = -200.00002
+angular_velocity_max = 199.99998
+gravity = Vector3(0, -20, 0)
+damping_min = 5.0
+damping_max = 20.0
+scale_min = 0.29999998
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_pn1s6")
+alpha_curve = SubResource("CurveTexture_qslmw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_t5mcq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncojx"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("12_b4yor")
+
+[sub_resource type="Curve" id="Curve_ww1pl"]
+_data = [Vector2(0, 0.7865169), 0.0, 0.0, 0, 0, Vector2(1, 0.21348321), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tm77v"]
+curve = SubResource("Curve_ww1pl")
+
+[sub_resource type="Gradient" id="Gradient_n08ji"]
+offsets = PackedFloat32Array(0.16981132, 0.254717, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0, 0, 1, 1, 0.30588236, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ly8ur"]
+gradient = SubResource("Gradient_n08ji")
+
+[sub_resource type="Curve" id="Curve_un1md"]
+_data = [Vector2(0, 0.6629214), 0.0, 0.0, 0, 0, Vector2(0.21969697, 0.9325843), 0.0, 0.0, 0, 0, Vector2(1, 0.1685394), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5614x"]
+curve = SubResource("Curve_un1md")
+
+[sub_resource type="Curve" id="Curve_ouydq"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(0.24999999, 0), 8.764043, 8.764043, 0, 0, Vector2(0.4621212, 1.4606743), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_cnykr"]
+curve = SubResource("Curve_ouydq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_higgg"]
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 0.2
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 50.0
+velocity_limit_curve = SubResource("CurveTexture_cnykr")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_5614x")
+color = Color(1.0964829, 1.0964829, 1.0964829, 1)
+color_ramp = SubResource("GradientTexture1D_ly8ur")
+alpha_curve = SubResource("CurveTexture_tm77v")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ty320"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7i3d"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.5411765, 0.8352941, 1, 0.4627451)
+albedo_texture = ExtResource("13_b4f8x")
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jx7jd"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 1.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_min = 0.099999994
+scale_max = 0.5
+collision_mode = 2
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 5
+
+[sub_resource type="QuadMesh" id="QuadMesh_4ih5n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwd2b"]
+transparency = 1
+albedo_color = Color(0.5411765, 0.8352941, 1, 0.4627451)
+albedo_texture = ExtResource("14_vlpxa")
+
+[sub_resource type="Curve" id="Curve_aw8vs"]
+_limits = [0.0, 1.6853933, 0.0, 1.0]
+_data = [Vector2(0, 1.6853933), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t5mcq"]
+curve = SubResource("Curve_aw8vs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k65wi"]
+direction = Vector3(0, 1, 0)
+spread = 30.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.19999999
+scale_max = 0.19999999
+scale_over_velocity_curve = SubResource("CurveTexture_t5mcq")
+
+[sub_resource type="QuadMesh" id="QuadMesh_28p27"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.104, 0, 3.295)
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.491588, 0.75384, 0.435967, 0, -0.500635, 0.865659, 0.870828, -0.425547, -0.246106, 0, 8.68822, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_7mycd")
+
+[node name="Floor" type="StaticBody3D" parent="Environment"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Floor"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+material_override = ExtResource("4_1bvp3")
+mesh = SubResource("PlaneMesh_h2yge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
+visible = false
+shape = SubResource("WorldBoundaryShape3D_1bvp3")
+
+[node name="Trees" type="Node" parent="Environment"]
+
+[node name="Close" type="Node" parent="Environment/Trees"]
+
+[node name="HugeTree" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(0.018, 0, 0, 0, 0.018, 0, 0, 0, 0.018, 0, 0, -20)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree2" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(0.018, 0, 0, 0, 0.018, 0, 0, 0, 0.018, 0, 0, 20)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree3" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(-7.8680495e-10, 0, -0.018, 0, 0.018, 0, 0.018, 0, -7.8680495e-10, 20, 0, 8.74228e-07)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree4" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(-7.8680495e-10, 0, -0.018, 0, 0.018, 0, 0.018, 0, -7.8680495e-10, -20, 0, -8.74228e-07)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree5" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(0.0129904, 0, 0.0075, 0, 0.015, 0, -0.0075, 0, 0.0129904, -10, 0, -17.3205)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree6" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(0.0129904, 0, 0.0075, 0, 0.015, 0, -0.0075, 0, 0.0129904, 10, 0, 17.3205)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree7" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(0.0075, 0, -0.0129904, 0, 0.015, 0, 0.0129904, 0, 0.0075, 17.3205, 0, -10)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree8" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(0.0075, 0, -0.0129904, 0, 0.015, 0, 0.0129904, 0, 0.0075, -17.3205, 0, 10)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree9" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(0.0075, 0, 0.0129904, 0, 0.015, 0, -0.0129904, 0, 0.0075, -17.3205, 0, -10)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree10" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(0.0075, 0, 0.0129904, 0, 0.015, 0, -0.0129904, 0, 0.0075, 17.3205, 0, 10)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree11" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(0.0129904, 0, -0.0075, 0, 0.015, 0, 0.0075, 0, 0.0129904, 10, 0, -17.3205)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree12" type="MeshInstance3D" parent="Environment/Trees/Close"]
+transform = Transform3D(0.0129904, 0, -0.0075, 0, 0.015, 0, 0.0075, 0, 0.0129904, -10, 0, 17.3205)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="Far" type="Node" parent="Environment/Trees"]
+
+[node name="HugeTree" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(0.028, 0, 0, 0, 0.028, 0, 0, 0, 0.028, 0, -11, -30)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree2" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(0.028, 0, 0, 0, 0.028, 0, 0, 0, 0.028, 0, -11, 30)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree3" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(-1.2239189e-09, 0, -0.028, 0, 0.028, 0, 0.028, 0, -1.2239189e-09, 30, -11, 1.31134e-06)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree4" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(-1.2239189e-09, 0, -0.028, 0, 0.028, 0, 0.028, 0, -1.2239189e-09, -30, -11, -1.31134e-06)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree5" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(0.0216506, 0, -0.0125, 0, 0.025, 0, 0.0125, 0, 0.0216506, 15, -10.9, -25.9808)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree6" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(0.0216506, 0, -0.0125, 0, 0.025, 0, 0.0125, 0, 0.0216506, -15, -10.9, 25.9808)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree7" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(-0.0125, 0, -0.0216506, 0, 0.025, 0, 0.0216506, 0, -0.0125, 25.9808, -10.9, 15)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree8" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(-0.0125, 0, -0.0216506, 0, 0.025, 0, 0.0216506, 0, -0.0125, -25.9808, -10.9, -15)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree9" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(0.0125, 0, -0.0216506, 0, 0.025, 0, 0.0216506, 0, 0.0125, 25.9808, -10.9, -15)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree10" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(0.0125, 0, -0.0216506, 0, 0.025, 0, 0.0216506, 0, 0.0125, -25.9808, -10.9, 15)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree11" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(-0.0216506, 0, -0.0125, 0, 0.025, 0, 0.0125, 0, -0.0216506, 15, -10.9, 25.9808)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="HugeTree12" type="MeshInstance3D" parent="Environment/Trees/Far"]
+transform = Transform3D(-0.0216506, 0, -0.0125, 0, 0.025, 0, 0.0125, 0, -0.0216506, -15, -10.9, -25.9808)
+mesh = ExtResource("4_7mycd")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kek77")
+
+[node name="Pedestals" type="Node" parent="Environment"]
+
+[node name="Pedestal" parent="Environment/Pedestals" instance=ExtResource("3_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Model" parent="Environment/Pedestals/Pedestal" index="0"]
+skeleton = NodePath("../../../..")
+
+[node name="ParticleLabel" parent="Environment/Pedestals/Pedestal" index="3"]
+text = "Fire"
+
+[node name="Firewood" type="Node3D" parent="Environment/Pedestals/Pedestal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18081, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Pedestals/Pedestal/Firewood"]
+transform = Transform3D(0.137403, -0.0318461, -0.552182, 0.069903, 0.0995009, 0.00826995, 0.102721, -0.0251133, 0.732987, 0, 0.0287396, 0)
+mesh = SubResource("BoxMesh_h2yge")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Environment/Pedestals/Pedestal/Firewood"]
+transform = Transform3D(0.0962437, 0, 0.784161, 0, 0.107449, 0, -0.158287, 0, 0.476796, 0, 0, 0)
+mesh = SubResource("BoxMesh_h2yge")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Environment/Pedestals/Pedestal/Firewood"]
+transform = Transform3D(0.0252664, 0.0256598, -0.593679, -0.00575151, 0.112723, 0.135142, 0.191781, 0, 0.0822679, 0.0286605, 0.0375206, 0)
+mesh = SubResource("BoxMesh_h2yge")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Environment/Pedestals/Pedestal/Firewood"]
+transform = Transform3D(-0.185931, 0.00379674, -0.169206, -0.00964627, 0.110561, 0.176909, 0.0528002, 0.0335687, -0.563524, 0.0286605, 0.0872192, 0.111271)
+mesh = SubResource("BoxMesh_h2yge")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="Pedestal2" parent="Environment/Pedestals" instance=ExtResource("3_1bvp3")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, 0)
+
+[node name="Model" parent="Environment/Pedestals/Pedestal2" index="0"]
+skeleton = NodePath("../../../..")
+
+[node name="ParticleLabel" parent="Environment/Pedestals/Pedestal2" index="3"]
+text = "Hit"
+
+[node name="Pedestal3" parent="Environment/Pedestals" instance=ExtResource("3_1bvp3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.74846e-07, 0, -4)
+
+[node name="Model" parent="Environment/Pedestals/Pedestal3" index="0"]
+skeleton = NodePath("../../../..")
+
+[node name="ParticleLabel" parent="Environment/Pedestals/Pedestal3" index="3"]
+text = "Sparks"
+
+[node name="Pedestal4" parent="Environment/Pedestals" instance=ExtResource("3_1bvp3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.74846e-07, 0, 4)
+
+[node name="Model" parent="Environment/Pedestals/Pedestal4" index="0"]
+skeleton = NodePath("../../../..")
+
+[node name="ParticleLabel" parent="Environment/Pedestals/Pedestal4" index="3"]
+text = "Walk"
+
+[node name="Sparks" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03814575, 1.3037694, -3.9377131)
+visible = false
+material_override = SubResource("StandardMaterial3D_fckky")
+amount = 200
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_5rbdq")
+draw_pass_1 = SubResource("QuadMesh_5qdul")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7046943, 0)
+size = Vector3(50, 2, 50)
+
+[node name="Fire" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9894936, 1.3541209, 0.0010609627)
+visible = false
+material_override = SubResource("StandardMaterial3D_b4yor")
+amount = 30
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_tm77v")
+draw_pass_1 = SubResource("QuadMesh_n08ji")
+
+[node name="Smoke" type="GPUParticles3D" parent="Fire"]
+material_override = SubResource("StandardMaterial3D_ly8ur")
+amount = 30
+lifetime = 3.0
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_cnykr")
+draw_pass_1 = SubResource("QuadMesh_higgg")
+
+[node name="Walk" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03277254, 1.3591516, 3.962654)
+visible = false
+material_override = SubResource("StandardMaterial3D_ty320")
+amount = 30
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_aw8vs")
+draw_pass_1 = SubResource("QuadMesh_t5mcq")
+
+[node name="Hit" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0336037, 1.600852, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_ncojx")
+amount = 40
+lifetime = 0.5
+explosiveness = 1.0
+fixed_fps = 24
+interpolate = false
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_higgg")
+draw_pass_1 = SubResource("QuadMesh_ty320")
+
+[node name="Rain" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.336986, 0)
+material_override = SubResource("StandardMaterial3D_l7i3d")
+amount = 1000
+sub_emitter = NodePath("RainDroplet")
+lifetime = 2.0
+fixed_fps = 0
+collision_base_size = 0.05
+visibility_aabb = AABB(-7, -20, -7, 15, 15, 15)
+process_material = SubResource("ParticleProcessMaterial_jx7jd")
+draw_pass_1 = SubResource("QuadMesh_4ih5n")
+
+[node name="RainDroplet" type="GPUParticles3D" parent="Rain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.110362, 0)
+material_override = SubResource("StandardMaterial3D_fwd2b")
+emitting = false
+amount = 10000
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_k65wi")
+draw_pass_1 = SubResource("QuadMesh_28p27")
+
+[editable path="Environment/Pedestals/Pedestal"]
+[editable path="Environment/Pedestals/Pedestal2"]
+[editable path="Environment/Pedestals/Pedestal3"]
+[editable path="Environment/Pedestals/Pedestal4"]
