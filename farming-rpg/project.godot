@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Farming RPG"
+run/main_scene="uid://b24su32e5ewmo"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://Scripts/game_manager.gd"
 
 [dotnet]
 
