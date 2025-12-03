@@ -1,89 +1,92 @@
-[gd_scene load_steps=31 format=4 uid="uid://b24su32e5ewmo"]
+[gd_scene load_steps=35 format=4 uid="uid://b24su32e5ewmo"]
 
 [ext_resource type="Script" uid="uid://b4xcnpogd3c2r" path="res://Scripts/player.gd" id="1_bo1nx"]
-[ext_resource type="Texture2D" uid="uid://dxgdecu31j5er" path="res://Assets/Sprites/Player/Player.png" id="1_jjgbg"]
-[ext_resource type="Texture2D" uid="uid://cqcuxl3raf5vx" path="res://Assets/Sprites/Tiles/Tileset.png" id="3_8gbba"]
+[ext_resource type="Texture2D" uid="uid://c48eybj4dadl0" path="res://Sprites/Player/Player.png" id="2_6iyac"]
+[ext_resource type="Texture2D" uid="uid://ds4gixwllw4co" path="res://Sprites/Tiles/Tileset.png" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://oyn5s53x4mlu" path="res://Scripts/farm_manager.gd" id="3_jjvhh"]
 [ext_resource type="Script" uid="uid://u35li1m7kybg" path="res://Scripts/player_tools.gd" id="3_kry3j"]
+[ext_resource type="Script" uid="uid://b4300x3ckv52a" path="res://Scripts/ui_manager.gd" id="6_fdnlq"]
 [ext_resource type="PackedScene" uid="uid://duuyk2mar528u" path="res://Scenes/tool_button.tscn" id="6_hptm8"]
-[ext_resource type="Texture2D" uid="uid://b3anrnnr8bd1c" path="res://Assets/Sprites/UI/Hoe_Icon.png" id="7_d1ilt"]
-[ext_resource type="Texture2D" uid="uid://babovbpklsvnw" path="res://Assets/Sprites/UI/WaterBucket_Icon.png" id="8_6iyac"]
-[ext_resource type="Texture2D" uid="uid://dqtmoclx7vwnx" path="res://Assets/Sprites/UI/Scythe_Icon.png" id="9_fdnlq"]
-[ext_resource type="Texture2D" uid="uid://cem0ihik41pjr" path="res://Assets/Sprites/UI/TomatoSeed_Icon.png" id="10_jkdf5"]
+[ext_resource type="Texture2D" uid="uid://bysct6qdiaolh" path="res://Sprites/UI/Hoe_Icon.png" id="7_d1ilt"]
+[ext_resource type="Texture2D" uid="uid://b76a5c1simxjk" path="res://Sprites/UI/WaterBucket_Icon.png" id="8_6iyac"]
+[ext_resource type="Texture2D" uid="uid://b64hl0ony4d68" path="res://Sprites/UI/Scythe_Icon.png" id="9_fdnlq"]
+[ext_resource type="Texture2D" uid="uid://cmbasfuts4u8v" path="res://Sprites/UI/TomatoSeed_Icon.png" id="10_jkdf5"]
+[ext_resource type="Resource" uid="uid://4qm74ibw0q1r" path="res://Crops/tomato.tres" id="11_jkdf5"]
+[ext_resource type="Resource" uid="uid://dqus8o21xsti5" path="res://Crops/corn.tres" id="13_wsu2k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8gbba"]
 radius = 6.0
 height = 16.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bo1nx"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(0, 0, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8gbba"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(48, 0, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jjvhh"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(16, 0, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kry3j"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(32, 0, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6bp64"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(0, 17, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_21xkr"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(0, 0, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_344ge"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(0, 34, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jjgbg"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(48, 17, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ynf5e"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(48, 0, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hptm8"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(48, 34, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d1ilt"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(16, 17, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6iyac"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(16, 0, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fdnlq"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(16, 34, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jkdf5"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(32, 17, 16, 17)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_wsu2k"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(32, 0, 16, 17)
+atlas = ExtResource("2_6iyac")
+region = Rect2(0, 0, 16, 17)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k12tt"]
-atlas = ExtResource("1_jjgbg")
+atlas = ExtResource("2_6iyac")
+region = Rect2(48, 0, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1bgf"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(16, 0, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3802"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(32, 0, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iyac"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(0, 17, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdnlq"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(0, 0, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkdf5"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(0, 34, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fevyy"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(48, 17, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hibaj"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(48, 0, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdsj5"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(48, 34, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee4r6"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(16, 17, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt3je"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(16, 0, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pmx8"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(16, 34, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u50mg"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(32, 17, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbgmd"]
+atlas = ExtResource("2_6iyac")
+region = Rect2(32, 0, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1w6v2"]
+atlas = ExtResource("2_6iyac")
 region = Rect2(32, 34, 16, 17)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ynf5e"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_fevyy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bo1nx")
+"texture": SubResource("AtlasTexture_wsu2k")
 }],
 "loop": true,
 "name": &"idle_down",
@@ -91,7 +94,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8gbba")
+"texture": SubResource("AtlasTexture_k12tt")
 }],
 "loop": true,
 "name": &"idle_left",
@@ -99,7 +102,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jjvhh")
+"texture": SubResource("AtlasTexture_h1bgf")
 }],
 "loop": true,
 "name": &"idle_right",
@@ -107,7 +110,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kry3j")
+"texture": SubResource("AtlasTexture_b3802")
 }],
 "loop": true,
 "name": &"idle_up",
@@ -115,16 +118,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6bp64")
+"texture": SubResource("AtlasTexture_6iyac")
 }, {
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_21xkr")
+"texture": SubResource("AtlasTexture_fdnlq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_344ge")
+"texture": SubResource("AtlasTexture_jkdf5")
 }, {
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_21xkr")
+"texture": SubResource("AtlasTexture_fdnlq")
 }],
 "loop": true,
 "name": &"walk_down",
@@ -132,16 +135,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jjgbg")
+"texture": SubResource("AtlasTexture_fevyy")
 }, {
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_ynf5e")
+"texture": SubResource("AtlasTexture_hibaj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hptm8")
+"texture": SubResource("AtlasTexture_pdsj5")
 }, {
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_ynf5e")
+"texture": SubResource("AtlasTexture_hibaj")
 }],
 "loop": true,
 "name": &"walk_left",
@@ -149,16 +152,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d1ilt")
+"texture": SubResource("AtlasTexture_ee4r6")
 }, {
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_6iyac")
+"texture": SubResource("AtlasTexture_gt3je")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fdnlq")
+"texture": SubResource("AtlasTexture_3pmx8")
 }, {
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_6iyac")
+"texture": SubResource("AtlasTexture_gt3je")
 }],
 "loop": true,
 "name": &"walk_right",
@@ -166,16 +169,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jkdf5")
+"texture": SubResource("AtlasTexture_u50mg")
 }, {
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_wsu2k")
+"texture": SubResource("AtlasTexture_cbgmd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k12tt")
+"texture": SubResource("AtlasTexture_1w6v2")
 }, {
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_wsu2k")
+"texture": SubResource("AtlasTexture_cbgmd")
 }],
 "loop": true,
 "name": &"walk_up",
@@ -193,6 +196,11 @@ separation = Vector2i(1, 1)
 [sub_resource type="TileSet" id="TileSet_kry3j"]
 sources/0 = SubResource("TileSetAtlasSource_jjvhh")
 
+[sub_resource type="LabelSettings" id="LabelSettings_fdnlq"]
+font_size = 23
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -208,8 +216,9 @@ shape = SubResource("CapsuleShape2D_8gbba")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 z_index = 100
 position = Vector2(0, -6.5)
-sprite_frames = SubResource("SpriteFrames_ynf5e")
+sprite_frames = SubResource("SpriteFrames_fevyy")
 animation = &"walk_up"
+frame_progress = 0.44572622
 
 [node name="Tools" type="Node2D" parent="Player"]
 script = ExtResource("3_kry3j")
@@ -223,8 +232,9 @@ tile_map_data = PackedByteArray("AAD6/wAAAAAAAAAAAAD7/wAAAAAAAAAAAAD8/wAAAAAAAAA
 tile_set = SubResource("TileSet_kry3j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("6_fdnlq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="ToolButtons" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -239,35 +249,71 @@ grow_vertical = 0
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Hoe" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_hptm8")]
+[node name="Hoe" parent="CanvasLayer/ToolButtons" instance=ExtResource("6_hptm8")]
 layout_mode = 2
 
-[node name="Icon" parent="CanvasLayer/HBoxContainer/Hoe" index="0"]
+[node name="Icon" parent="CanvasLayer/ToolButtons/Hoe" index="0"]
 texture = ExtResource("7_d1ilt")
 
-[node name="WaterBucket" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_hptm8")]
+[node name="WaterBucket" parent="CanvasLayer/ToolButtons" instance=ExtResource("6_hptm8")]
 layout_mode = 2
+tool = 1
 
-[node name="Icon" parent="CanvasLayer/HBoxContainer/WaterBucket" index="0"]
+[node name="Icon" parent="CanvasLayer/ToolButtons/WaterBucket" index="0"]
 texture = ExtResource("8_6iyac")
 
-[node name="Scythe" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_hptm8")]
+[node name="Scythe" parent="CanvasLayer/ToolButtons" instance=ExtResource("6_hptm8")]
 layout_mode = 2
+tool = 2
 
-[node name="Icon" parent="CanvasLayer/HBoxContainer/Scythe" index="0"]
+[node name="Icon" parent="CanvasLayer/ToolButtons/Scythe" index="0"]
 texture = ExtResource("9_fdnlq")
 
-[node name="TomatoSeed" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_hptm8")]
+[node name="TomatoSeed" parent="CanvasLayer/ToolButtons" instance=ExtResource("6_hptm8")]
 layout_mode = 2
+tool = 3
+seed = ExtResource("11_jkdf5")
 
-[node name="Icon" parent="CanvasLayer/HBoxContainer/TomatoSeed" index="0"]
+[node name="Icon" parent="CanvasLayer/ToolButtons/TomatoSeed" index="0"]
 texture = ExtResource("10_jkdf5")
 
-[node name="CornSeed" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_hptm8")]
+[node name="CornSeed" parent="CanvasLayer/ToolButtons" instance=ExtResource("6_hptm8")]
 layout_mode = 2
+tool = 3
+seed = ExtResource("13_wsu2k")
 
-[editable path="CanvasLayer/HBoxContainer/Hoe"]
-[editable path="CanvasLayer/HBoxContainer/WaterBucket"]
-[editable path="CanvasLayer/HBoxContainer/Scythe"]
-[editable path="CanvasLayer/HBoxContainer/TomatoSeed"]
-[editable path="CanvasLayer/HBoxContainer/CornSeed"]
+[node name="DayText" type="Label" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 17.0
+offset_right = 99.0
+offset_bottom = 49.0
+text = "Day 50"
+label_settings = SubResource("LabelSettings_fdnlq")
+
+[node name="MoneyText" type="Label" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 62.0
+offset_right = 99.0
+offset_bottom = 94.0
+text = "£1234"
+label_settings = SubResource("LabelSettings_fdnlq")
+
+[node name="NextDayButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 29.0
+offset_right = -37.290283
+offset_bottom = 85.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 25
+text = "Next Day"
+
+[connection signal="pressed" from="CanvasLayer/NextDayButton" to="CanvasLayer" method="_on_next_day_button_pressed"]
+
+[editable path="CanvasLayer/ToolButtons/Hoe"]
+[editable path="CanvasLayer/ToolButtons/WaterBucket"]
+[editable path="CanvasLayer/ToolButtons/Scythe"]
+[editable path="CanvasLayer/ToolButtons/TomatoSeed"]
+[editable path="CanvasLayer/ToolButtons/CornSeed"]

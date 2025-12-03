@@ -14,7 +14,8 @@ var current_seed : CropData
 @onready var farm_manager : FarmManager = $"../../FarmManager"
 
 func _ready() -> void:
-	current_tool = Tool.HOE
+	GameManager.SetPlayerTool.connect(_set_tool)
+	GameManager.SetPlayerTool.emit.call_deferred(Tool.HOE, null)
 	
 func _set_tool(tool : Tool, seed : CropData):
 	current_tool = tool

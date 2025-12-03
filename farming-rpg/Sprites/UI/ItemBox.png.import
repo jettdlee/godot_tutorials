@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://babovbpklsvnw"
-path="res://.godot/imported/WaterBucket_Icon.png-02dd692b8fbe3a53275f86677cf80ac8.ctex"
+uid="uid://c52mn8i1wh6e1"
+path="res://.godot/imported/ItemBox.png-54c3a72fcbf6a03b4415e7ac79f14b79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/UI/WaterBucket_Icon.png"
-dest_files=["res://.godot/imported/WaterBucket_Icon.png-02dd692b8fbe3a53275f86677cf80ac8.ctex"]
+source_file="res://Sprites/UI/ItemBox.png"
+dest_files=["res://.godot/imported/ItemBox.png-54c3a72fcbf6a03b4415e7ac79f14b79.ctex"]
 
 [params]
 

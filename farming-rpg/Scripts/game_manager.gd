@@ -6,21 +6,21 @@ signal HarvestCrop (crop : Crop)
 signal ChangeSeedQuantity (crop_data : CropData, quantity : int)
 signal ChangeMoney (money : int)
 
-var day : int = 1
-var money : int = 0
+var day : int = 0
+var money : int = 10
 var all_crop_data : Array[CropData] = [
-	preload("res://Crops/tomato.tres"),
-	preload("res://Crops/corn.tres")
+	preload("res://Crops/corn.tres"),
+	preload("res://Crops/tomato.tres")
 ]
 
 var owned_seeds : Dictionary[CropData, int]
 
 func _ready() -> void:
 	give_money.call_deferred(10)
+	set_next_day.call_deferred()
 	
 	for cd in all_crop_data:
 		give_seed.call_deferred(cd, 2)
-	
 	
 func set_next_day():
 	day += 1

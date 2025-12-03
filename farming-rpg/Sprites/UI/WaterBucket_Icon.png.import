@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqtmoclx7vwnx"
-path="res://.godot/imported/Scythe_Icon.png-e58caf0021bb71f92cfddf393dacddbd.ctex"
+uid="uid://b76a5c1simxjk"
+path="res://.godot/imported/WaterBucket_Icon.png-bbfae1f1c93b81d6df4cdfa5ab24f849.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/UI/Scythe_Icon.png"
-dest_files=["res://.godot/imported/Scythe_Icon.png-e58caf0021bb71f92cfddf393dacddbd.ctex"]
+source_file="res://Sprites/UI/WaterBucket_Icon.png"
+dest_files=["res://.godot/imported/WaterBucket_Icon.png-bbfae1f1c93b81d6df4cdfa5ab24f849.ctex"]
 
 [params]
 

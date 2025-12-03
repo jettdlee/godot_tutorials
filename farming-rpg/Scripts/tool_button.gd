@@ -9,10 +9,10 @@ extends TextureButton
 func _ready() -> void:
 	quantity_text.text = ""
 	pivot_offset = size / 2
-	
+	GameManager.ChangeSeedQuantity.connect(_on_change_seed_quantity)
 
 func _on_pressed() -> void:
-	pass # Replace with function body.
+	GameManager.SetPlayerTool.emit(tool, seed)
 
 func _on_mouse_entered() -> void:
 	scale.x = 1.05

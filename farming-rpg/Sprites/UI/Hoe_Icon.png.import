@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjqx7gld1vet"
-path="res://.godot/imported/ItemBox.png-702c1f3e059a7e732c9431a79f2e613f.ctex"
+uid="uid://bysct6qdiaolh"
+path="res://.godot/imported/Hoe_Icon.png-f4ba38ff431453e4c1ab04964f317618.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/UI/ItemBox.png"
-dest_files=["res://.godot/imported/ItemBox.png-702c1f3e059a7e732c9431a79f2e613f.ctex"]
+source_file="res://Sprites/UI/Hoe_Icon.png"
+dest_files=["res://.godot/imported/Hoe_Icon.png-f4ba38ff431453e4c1ab04964f317618.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cem0ihik41pjr"
-path="res://.godot/imported/TomatoSeed_Icon.png-9d91ef925ec1f7ac88ce58667a58045b.ctex"
+uid="uid://bht57gdi4744e"
+path="res://.godot/imported/CornSeed_Icon.png-e9f74cdc28f7a778c5ecedb16b4ed04f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/UI/TomatoSeed_Icon.png"
-dest_files=["res://.godot/imported/TomatoSeed_Icon.png-9d91ef925ec1f7ac88ce58667a58045b.ctex"]
+source_file="res://Sprites/UI/CornSeed_Icon.png"
+dest_files=["res://.godot/imported/CornSeed_Icon.png-e9f74cdc28f7a778c5ecedb16b4ed04f.ctex"]
 
 [params]
 

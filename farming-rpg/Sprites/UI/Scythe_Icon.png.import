@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqcuxl3raf5vx"
-path="res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"
+uid="uid://b64hl0ony4d68"
+path="res://.godot/imported/Scythe_Icon.png-0a3ed11ab34cf95808a12207ab1cb4e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tiles/Tileset.png"
-dest_files=["res://.godot/imported/Tileset.png-e9b3b182e6834cf2faf469c423b44388.ctex"]
+source_file="res://Sprites/UI/Scythe_Icon.png"
+dest_files=["res://.godot/imported/Scythe_Icon.png-0a3ed11ab34cf95808a12207ab1cb4e6.ctex"]
 
 [params]
 
