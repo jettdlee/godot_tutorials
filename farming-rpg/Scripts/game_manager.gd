@@ -16,11 +16,21 @@ var all_crop_data : Array[CropData] = [
 var owned_seeds : Dictionary[CropData, int]
 
 func _ready() -> void:
+	get_tree().scene_changed.connect(_on_change_scene)
+	
+	if get_tree().current_scene.name == "Main":
+		_on_change_scene()
+	
+func _on_change_scene():
+	if get_tree().current_scene.name != "Main":
+		return
+	
 	give_money.call_deferred(10)
 	set_next_day.call_deferred()
 	
 	for cd in all_crop_data:
 		give_seed.call_deferred(cd, 2)
+		
 	
 func set_next_day():
 	day += 1
