@@ -1,12 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2iluw8hwoehk"]
+[gd_scene load_steps=9 format=4 uid="uid://d2iluw8hwoehk"]
 
 [ext_resource type="Script" uid="uid://bblts78do3qau" path="res://Scripts/player.gd" id="1_3mqfk"]
 [ext_resource type="Texture2D" uid="uid://dy253l2ijyuqb" path="res://Sprites/People.png" id="2_iixi8"]
 [ext_resource type="Texture2D" uid="uid://dq3boaqnrlhny" path="res://Sprites/Weapons.png" id="3_cyadu"]
+[ext_resource type="TileSet" uid="uid://ckt63d4sw1i5b" path="res://Sprites/tileset.tres" id="4_cyadu"]
+[ext_resource type="Texture2D" uid="uid://divmryxvl32mh" path="res://Sprites/Tiles.png" id="4_iixi8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xgxfi"]
 radius = 3.0
 height = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgxfi"]
+size = Vector2(16, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5f3p6"]
+radius = 6.0827627
 
 [node name="Main" type="Node2D"]
 
@@ -36,3 +44,59 @@ position = Vector2(0, -8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+
+[node name="RoomTemplate" type="StaticBody2D" parent="."]
+
+[node name="Base" type="TileMapLayer" parent="RoomTemplate"]
+tile_map_data = PackedByteArray("AAD+/wcAAAAGAAYAAAD9/wcAAAAGAAYAAAABAAcAAAAGAAYAAAACAAcAAAAGAAYAAAD8/wcAAAAGAAYAAAD7/wcAAAAGAAYAAAD6/wcAAAAGAAYAAAD5/wcAAAAGAAYAAAD4/wcAAAAHAAkAADD4/wYAAAAGAAYAAFD4/wUAAAAGAAYAAFD4/wQAAAAGAAYAAFD4/wMAAAAGAAYAAFD4/wIAAAAGAAYAAFD4/wEAAAAGAAYAAFD4//7/AAAGAAYAAFD4//3/AAAGAAYAAFD4//z/AAAGAAYAAFD4//v/AAAGAAYAAFD4//r/AAAGAAYAAFD4//n/AAAGAAYAAFD4//j/AAAAAAkAAAD5//j/AAAGAAYAAAD6//j/AAAGAAYAAAD7//j/AAAGAAYAAAD8//j/AAAGAAYAAAD9//j/AAAGAAYAAAD+//j/AAAGAAYAAAABAPj/AAAGAAYAAAACAPj/AAAGAAYAAAADAPj/AAAGAAYAAAAEAPj/AAAGAAYAAAAFAPj/AAAGAAYAAAAEAAcAAAAGAAYAAAADAAcAAAAGAAYAAAAGAAcAAAAGAAYAAAAFAAcAAAAGAAYAAAAHAAcAAAAHAAkAAFAHAPj/AAAHAAkAAAAGAPj/AAAGAAYAAAAHAPn/AAAGAAYAAFAHAPr/AAAGAAYAAFAHAPv/AAAGAAYAAFAHAPz/AAAGAAYAAFAHAP3/AAAGAAYAAFAHAP7/AAAGAAYAAFAHAAIAAAAGAAYAAFAHAAMAAAAGAAYAAFAHAAEAAAAGAAYAAFAHAAQAAAAGAAYAAFAHAAUAAAAGAAYAAFAHAAYAAAAGAAYAAFA=")
+tile_set = ExtResource("4_cyadu")
+
+[node name="WallCollider" type="CollisionPolygon2D" parent="RoomTemplate"]
+polygon = PackedVector2Array(-57, -58, -8, -58, -8, -76, -73, -76, -73, -8, -57, -8)
+
+[node name="WallCollider2" type="CollisionPolygon2D" parent="RoomTemplate"]
+rotation = 1.5612634
+polygon = PackedVector2Array(-57, -58, -8, -58, -8, -76, -73, -76, -73, -8, -57, -8)
+
+[node name="WallCollider3" type="CollisionPolygon2D" parent="RoomTemplate"]
+rotation = 3.1183915
+polygon = PackedVector2Array(-57, -58, -8, -58, -8, -76, -73, -76, -73, -8, -57, -8)
+
+[node name="WallCollider4" type="CollisionPolygon2D" parent="RoomTemplate"]
+rotation = -1.5691737
+polygon = PackedVector2Array(-57, -58, -8, -58, -8, -76, -73, -76, -73, -8, -57, -8)
+
+[node name="EntranceNorth" type="Node2D" parent="RoomTemplate"]
+
+[node name="Door" type="Node2D" parent="RoomTemplate/EntranceNorth"]
+
+[node name="Tunnel" type="TileMapLayer" parent="RoomTemplate/EntranceNorth/Door"]
+tile_map_data = PackedByteArray("AAD+//f/AAAGAAYAAGD+//b/AAAGAAYAAGABAPf/AAAGAAYAAGABAPb/AAAGAAYAAGA=")
+tile_set = ExtResource("4_cyadu")
+
+[node name="DoorShut" type="StaticBody2D" parent="RoomTemplate/EntranceNorth/Door"]
+position = Vector2(0, -62)
+
+[node name="DoorSprite" type="Sprite2D" parent="RoomTemplate/EntranceNorth/Door/DoorShut"]
+position = Vector2(-4, 0)
+texture = ExtResource("4_iixi8")
+region_enabled = true
+region_rect = Rect2(11, 31, 8, 8)
+
+[node name="DoorSprite2" type="Sprite2D" parent="RoomTemplate/EntranceNorth/Door/DoorShut"]
+position = Vector2(4, 0)
+texture = ExtResource("4_iixi8")
+region_enabled = true
+region_rect = Rect2(11, 31, 8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomTemplate/EntranceNorth/Door/DoorShut"]
+shape = SubResource("RectangleShape2D_xgxfi")
+
+[node name="ExitTrigger" type="Area2D" parent="RoomTemplate/EntranceNorth/Door"]
+position = Vector2(0, -73)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomTemplate/EntranceNorth/Door/ExitTrigger"]
+shape = SubResource("CircleShape2D_5f3p6")
+
+[node name="PlayerSpawn" type="Node2D" parent="RoomTemplate/EntranceNorth"]
+position = Vector2(0, -47)
