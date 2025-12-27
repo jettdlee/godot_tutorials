@@ -1,0 +1,2 @@
+class_name RoomEntrance
+extends Node2D
