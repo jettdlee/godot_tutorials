@@ -61,9 +61,18 @@ func _instantiate_rooms():
 			if _get_map(x, y) == false:
 				continue
 			var room : Room = room_scene.instantiate()
+			var is_first_room : bool = first_room_x == x and first_room_y == y
+			
 			get_tree().root.add_child.call_deferred(room)
 			rooms.append(room)
 			room.global_position = Vector2(x, y) * room_pos_offset
+			
+			if is_first_room:
+				first_room = room
+			room.initialize()
+	
+	for room in rooms:
+		pass
 	
 func _get_map(x : int, y : int) -> bool:
 	return map[x + y * map_size]

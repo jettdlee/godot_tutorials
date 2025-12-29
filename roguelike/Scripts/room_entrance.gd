@@ -11,14 +11,14 @@ extends Node2D
 @onready var player_spawn : Node2D = $PlayerSpawn
 @onready var exit_trigger : Area2D = $Door/ExitTrigger
 
-var neighbor : Room
+var neighbour : Room
 
 func _ready() -> void:
 	exit_trigger.body_entered.connect(_on_body_entered_exit_trigger)
 	
 	
-func _set_neighbor(neighbor_room : Room):
-	neighbor = neighbor_room
+func set_neighbour(neighbour_room : Room):
+	neighbour = neighbour_room
 	toggle_barrier(false)
 
 func toggle_barrier(toggle : bool):
@@ -26,13 +26,13 @@ func toggle_barrier(toggle : bool):
 	barrier_collider.disabled = !toggle
 	door.visible = !toggle
 
-func _open_door():
+func open_door():
 	if barrier.visible:
 		return
 	door_shut.visible = false
 	door_shut_collider.disabled = true
 	
-func _close_door():
+func close_door():
 	if barrier.visible:
 		return
 	door_shut.visible = true
