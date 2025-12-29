@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2iluw8hwoehk"]
+[gd_scene load_steps=7 format=3 uid="uid://d2iluw8hwoehk"]
 
 [ext_resource type="Script" uid="uid://bblts78do3qau" path="res://Scripts/player.gd" id="1_3mqfk"]
 [ext_resource type="Texture2D" uid="uid://dy253l2ijyuqb" path="res://Sprites/People.png" id="2_iixi8"]
 [ext_resource type="Texture2D" uid="uid://dq3boaqnrlhny" path="res://Sprites/Weapons.png" id="3_cyadu"]
 [ext_resource type="Script" uid="uid://nl6notg3faal" path="res://Scripts/room_generation.gd" id="4_iixi8"]
+[ext_resource type="PackedScene" uid="uid://bymaqupq5dl4f" path="res://Scenes/Projectiles/projectile.tscn" id="5_cyadu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xgxfi"]
 radius = 3.0
@@ -36,8 +37,10 @@ region_rect = Rect2(60, 50, 10, 10)
 position = Vector2(0, -8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+position = Vector2(579, 324)
 
 [node name="RoomGeneration" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("4_iixi8")
 player = NodePath("../Player")
+
+[node name="Projectile" parent="." instance=ExtResource("5_cyadu")]
