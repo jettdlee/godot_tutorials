@@ -72,7 +72,31 @@ func _instantiate_rooms():
 			room.initialize()
 	
 	for room in rooms:
-		pass
+		var map_pos : Vector2 = _get_map_index(room)
+		var x = map_pos.x
+		var y = map_pos.y
+		
+		if y > 0 and _get_map(x, y - 1):
+			room.set_neighbour.call_deferred(Room.Direction.NORTH, get_room_from_map(x, y - 1))
+		if y < map_size - 1 and _get_map(x, y + 1):
+			room.set_neighbour.call_deferred(Room.Direction.SOUTH, get_room_from_map(x, y + 1))
+		if x < map_size - 1 and _get_map(x + 1, y):
+			room.set_neighbour.call_deferred(Room.Direction.EAST, get_room_from_map(x + 1, y))
+		if x > 0 and _get_map(x - 1, y):
+			room.set_neighbour.call_deferred(Room.Direction.WEST, get_room_from_map(x - 1, y))
+	
+	first_room._player_enter.call_deferred(Room.Direction.NORTH, player, true)
+			
+func get_room_from_map(x : int, y : int) -> Room:
+	for room in rooms:
+		var pos = _get_map_index(room)
+		if pos.x != x and pos.y != y:
+			continue
+		return room
+	return null
+		
+func _get_map_index(room: Room) -> Vector2i:
+	return Vector2i(room.global_position / room_pos_offset)
 	
 func _get_map(x : int, y : int) -> bool:
 	return map[x + y * map_size]

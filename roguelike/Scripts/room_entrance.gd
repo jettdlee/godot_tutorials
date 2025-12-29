@@ -15,7 +15,7 @@ var neighbour : Room
 
 func _ready() -> void:
 	exit_trigger.body_entered.connect(_on_body_entered_exit_trigger)
-	
+	toggle_barrier(true)
 	
 func set_neighbour(neighbour_room : Room):
 	neighbour = neighbour_room

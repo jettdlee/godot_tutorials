@@ -23,7 +23,7 @@ func _ready() -> void:
 func initialize():
 	pass
 
-func _set_neighbour(neighbour_direction : Direction, neighbour_room : Room):
+func set_neighbour(neighbour_direction : Direction, neighbour_room : Room):
 	if neighbour_direction == Direction.NORTH:
 		entrance_north.set_neighbour(neighbour_room)
 	elif neighbour_direction == Direction.SOUTH:
