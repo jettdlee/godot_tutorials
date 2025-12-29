@@ -18,6 +18,12 @@ var room_scene : PackedScene = preload("res://Scenes/Rooms/room_template.tscn")
 
 func _ready() -> void:
 	_generate()
+	for x in range(map_size):
+		var line : String
+		for y in range(map_size):
+			line += "# " if _get_map(x, y) else "0 "
+		print(line)
+			
 	
 func _generate():
 	room_count = 0
@@ -36,23 +42,28 @@ func _check_room(x : int, y : int, desired_direction : Vector2, is_first_room : 
 	room_count += 1
 	_set_map(x, y , true)
 	var go_north : bool = randf() > (0.2 if desired_direction == Vector2.UP else 0.8)
+	var go_east : bool = randf() > (0.2 if desired_direction == Vector2.RIGHT else 0.8)
+	var go_south : bool = randf() > (0.2 if desired_direction == Vector2.DOWN else 0.8)
+	var go_west : bool = randf() > (0.2 if desired_direction == Vector2.LEFT else 0.8)
+	
 	if go_north or is_first_room:
 		_check_room(x, y - 1, Vector2.UP if is_first_room else desired_direction)
-		
-	var go_east : bool = randf() > (0.2 if desired_direction == Vector2.RIGHT else 0.8)
 	if go_east or is_first_room:
-		_check_room(x - 1, y, Vector2.RIGHT if is_first_room else desired_direction)
-		
-	var go_south : bool = randf() > (0.2 if desired_direction == Vector2.DOWN else 0.8)
+		_check_room(x + 1, y, Vector2.RIGHT if is_first_room else desired_direction)
 	if go_south or is_first_room:
 		_check_room(x, y + 1, Vector2.DOWN if is_first_room else desired_direction)
-		
-	var go_west : bool = randf() > (0.2 if desired_direction == Vector2.LEFT else 0.8)
 	if go_west or is_first_room:
-		_check_room(x + 1, y, Vector2.LEFT if is_first_room else desired_direction)
+		_check_room(x - 1, y, Vector2.LEFT if is_first_room else desired_direction)
 
 func _instantiate_rooms():
-	pass
+	for x in range(map_size):
+		for y in range(map_size):
+			if _get_map(x, y) == false:
+				continue
+			var room : Room = room_scene.instantiate()
+			get_tree().root.add_child.call_deferred(room)
+			rooms.append(room)
+			room.global_position = Vector2(x, y) * room_pos_offset
 	
 func _get_map(x : int, y : int) -> bool:
 	return map[x + y * map_size]
