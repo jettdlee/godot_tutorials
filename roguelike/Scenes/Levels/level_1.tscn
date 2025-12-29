@@ -36,8 +36,7 @@ region_rect = Rect2(60, 50, 10, 10)
 position = Vector2(0, -8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(403, 195)
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(4, 4)
 
 [node name="RoomGeneration" type="Node" parent="."]
 script = ExtResource("4_iixi8")
