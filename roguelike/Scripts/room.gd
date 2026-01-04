@@ -33,7 +33,7 @@ func set_neighbour(neighbour_direction : Direction, neighbour_room : Room):
 	elif neighbour_direction == Direction.WEST:
 		entrance_west.set_neighbour(neighbour_room)
 
-func _player_enter(entry_direction : Direction, player : CharacterBody2D, first_room : bool = false):
+func player_enter(entry_direction : Direction, player : CharacterBody2D, first_room : bool = false):
 	if entry_direction == Direction.NORTH:
 		player.global_position = entrance_north.player_spawn.global_position
 	elif entry_direction == Direction.SOUTH:
@@ -57,13 +57,13 @@ func _on_defeat_enemy(enemy):
 	pass
 
 func open_doors():
-	entrance_north.open_door()
-	entrance_east.open_door()
-	entrance_south.open_door()
-	entrance_west.open_door()
+	entrance_north.open_door.call_deferred()
+	entrance_east.open_door.call_deferred()
+	entrance_south.open_door.call_deferred()
+	entrance_west.open_door.call_deferred()
 	
 func close_doors():
-	entrance_north.close_door()
-	entrance_east.close_door()
-	entrance_south.close_door()
-	entrance_west.close_door()
+	entrance_north.close_door.call_deferred()
+	entrance_east.close_door.call_deferred()
+	entrance_south.close_door.call_deferred()
+	entrance_west.close_door.call_deferred()

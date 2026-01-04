@@ -85,12 +85,12 @@ func _instantiate_rooms():
 		if x > 0 and _get_map(x - 1, y):
 			room.set_neighbour.call_deferred(Room.Direction.WEST, get_room_from_map(x - 1, y))
 	
-	first_room._player_enter.call_deferred(Room.Direction.NORTH, player, true)
+	first_room.player_enter.call_deferred(Room.Direction.NORTH, player, true)
 			
 func get_room_from_map(x : int, y : int) -> Room:
 	for room in rooms:
 		var pos = _get_map_index(room)
-		if pos.x != x and pos.y != y:
+		if pos.x != x or pos.y != y:
 			continue
 		return room
 	return null
