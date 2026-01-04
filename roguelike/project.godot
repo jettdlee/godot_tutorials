@@ -15,6 +15,10 @@ run/main_scene="uid://d2iluw8hwoehk"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalSignals="*res://Scripts/global_signals.gd"
+
 [input]
 
 move_up={

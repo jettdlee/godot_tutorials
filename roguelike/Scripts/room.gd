@@ -45,6 +45,8 @@ func _player_enter(entry_direction : Direction, player : CharacterBody2D, first_
 	
 	if first_room:
 		player.global_position = global_position
+		
+	GlobalSignals.OnPlaterEnterRoom.emit(self)
 	
 	if enemies_in_room > 0 and not doors_always_open:
 		close_doors()

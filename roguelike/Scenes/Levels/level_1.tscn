@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2iluw8hwoehk"]
+[gd_scene load_steps=8 format=3 uid="uid://d2iluw8hwoehk"]
 
 [ext_resource type="Script" uid="uid://bblts78do3qau" path="res://Scripts/player.gd" id="1_3mqfk"]
 [ext_resource type="Texture2D" uid="uid://dy253l2ijyuqb" path="res://Sprites/People.png" id="2_iixi8"]
 [ext_resource type="Texture2D" uid="uid://dq3boaqnrlhny" path="res://Sprites/Weapons.png" id="3_cyadu"]
 [ext_resource type="Script" uid="uid://nl6notg3faal" path="res://Scripts/room_generation.gd" id="4_iixi8"]
+[ext_resource type="Script" uid="uid://boq47boke58ur" path="res://Scripts/camera_controller.gd" id="4_xgxfi"]
 [ext_resource type="PackedScene" uid="uid://bymaqupq5dl4f" path="res://Scenes/Projectiles/projectile.tscn" id="5_cyadu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xgxfi"]
@@ -38,6 +39,8 @@ position = Vector2(0, -8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(579, 324)
+zoom = Vector2(4, 4)
+script = ExtResource("4_xgxfi")
 
 [node name="RoomGeneration" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("4_iixi8")
