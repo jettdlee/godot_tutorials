@@ -1,3 +1,4 @@
+class_name Enemy
 extends CharacterBody2D
 
 @export var current_hp : int = 4
@@ -59,5 +60,5 @@ func take_damage(damage : int):
 		die()
 	
 func die():
+	GlobalSignals.OnDefeatEnemy.emit(self)
 	queue_free()
-	pass

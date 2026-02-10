@@ -18,7 +18,11 @@ enum Direction {
 var enemies_in_room : int
 
 func _ready() -> void:
-	pass
+	GlobalSignals.OnDefeatEnemy.connect(_on_enemy_defeated)
+	for child in get_children():
+		if child is Enemy:
+			enemies_in_room += 1
+			child.initialize(self)
 	
 func initialize():
 	pass
@@ -67,3 +71,9 @@ func close_doors():
 	entrance_east.close_door.call_deferred()
 	entrance_south.close_door.call_deferred()
 	entrance_west.close_door.call_deferred()
+
+func _on_enemy_defeated(enemy : Enemy):
+	if enemy.get_parent() == self:
+		enemies_in_room -= 1
+		if enemies_in_room <= 0:
+			open_doors()
