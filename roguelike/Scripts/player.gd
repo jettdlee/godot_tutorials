@@ -34,5 +34,5 @@ func _shoot():
 	projectile.owner_character = self
 	
 func take_damage(amount : int):
-	pass
+	print('take damage')
 	
