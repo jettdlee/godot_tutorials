@@ -53,7 +53,7 @@ func _damage_flash ():
 	visible = true
 
 func die():
-	pass
+	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
 	
 func heal(amount : int):
 	cur_hp += amount

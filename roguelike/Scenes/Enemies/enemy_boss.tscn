@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://by03e2s10x352"]
+
+[ext_resource type="PackedScene" uid="uid://bl4w3w1ra0afi" path="res://Scenes/Enemies/enemy.tscn" id="1_18w5d"]
+
+[node name="Enemy" instance=ExtResource("1_18w5d")]
+current_hp = 20
+max_hp = 20
+attack_range = 15.0
+
+[node name="Sprite" parent="." index="0"]
+region_rect = Rect2(20, 41, 10, 9)

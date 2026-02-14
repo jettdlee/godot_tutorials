@@ -5,10 +5,10 @@
 [ext_resource type="Script" uid="uid://nl6notg3faal" path="res://Scripts/room_generation.gd" id="4_iixi8"]
 [ext_resource type="PackedScene" uid="uid://d1n2dwu2dwmpf" path="res://Scenes/Rooms/room_template.tscn" id="4_jv26f"]
 [ext_resource type="Script" uid="uid://boq47boke58ur" path="res://Scripts/camera_controller.gd" id="4_xgxfi"]
-[ext_resource type="PackedScene" uid="uid://bymaqupq5dl4f" path="res://Scenes/Projectiles/projectile.tscn" id="5_cyadu"]
 [ext_resource type="PackedScene" uid="uid://g16331534m5t" path="res://Scenes/Rooms/room_enemy2.tscn" id="5_jv26f"]
 [ext_resource type="PackedScene" uid="uid://byoq4j8egjuub" path="res://Scenes/Rooms/room_enemy4.tscn" id="7_jv26f"]
 [ext_resource type="PackedScene" uid="uid://b6texysdmryj3" path="res://Scenes/Rooms/room_item.tscn" id="8_rb0md"]
+[ext_resource type="PackedScene" uid="uid://duh0bhjok6aqm" path="res://Scenes/Rooms/room_boss.tscn" id="9_tjl6l"]
 [ext_resource type="Script" uid="uid://cesi5fbyn057a" path="res://Scripts/player_health.gd" id="10_7r2dd"]
 [ext_resource type="Script" uid="uid://ptokx4orvjqx" path="res://Scripts/minimap.gd" id="10_hwvp3"]
 [ext_resource type="Texture2D" uid="uid://bu5iiwgowsr50" path="res://Sprites/Items/minimap_room.tres" id="10_u5ghp"]
@@ -31,9 +31,8 @@ script = ExtResource("4_xgxfi")
 script = ExtResource("4_iixi8")
 first_room_scene = ExtResource("4_jv26f")
 room_scenes = Array[PackedScene]([ExtResource("4_5f3p6"), ExtResource("5_jv26f"), ExtResource("7_jv26f"), ExtResource("8_rb0md")])
+boss_room = ExtResource("9_tjl6l")
 player = NodePath("../Player")
-
-[node name="Projectile" parent="." instance=ExtResource("5_cyadu")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
