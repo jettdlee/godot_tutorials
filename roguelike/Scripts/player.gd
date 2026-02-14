@@ -11,6 +11,9 @@ var projectile_scene : PackedScene = preload("res://Scenes/Projectiles/projectil
 @onready var weapon_origin : Node2D = $Weapon
 @onready var muzzle : Node2D = $Weapon/Muzzle
 
+func _ready() -> void:
+	GlobalSignals.OnPlayerUpdateHealth.emit.call_deferred(cur_hp, max_hp)
+
 func _physics_process(delta: float) -> void:
 	var move_input : Vector2 = Input.get_vector("move_left","move_right","move_up","move_down")
 	velocity = move_input * move_speed
@@ -37,6 +40,7 @@ func _shoot():
 	
 func take_damage(amount : int):
 	cur_hp -= amount
+	GlobalSignals.OnPlayerUpdateHealth.emit(cur_hp, max_hp)
 	if cur_hp <= 0:
 		die()
 	
@@ -47,5 +51,6 @@ func heal(amount : int):
 	cur_hp += amount
 	if cur_hp > max_hp:
 		cur_hp = max_hp
-		
+	
+	GlobalSignals.OnPlayerUpdateHealth.emit(cur_hp, max_hp)
 	
