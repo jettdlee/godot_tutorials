@@ -56,8 +56,14 @@ func _try_attack():
 	
 func take_damage(damage : int):
 	current_hp -= damage
+	_damage_flash()
 	if current_hp <= 0:
 		die()
+		
+func _damage_flash ():
+	visible = false
+	await get_tree().create_timer(0.07).timeout
+	visible = true
 	
 func die():
 	GlobalSignals.OnDefeatEnemy.emit(self)

@@ -41,9 +41,15 @@ func _shoot():
 func take_damage(amount : int):
 	cur_hp -= amount
 	GlobalSignals.OnPlayerUpdateHealth.emit(cur_hp, max_hp)
+	_damage_flash()
 	if cur_hp <= 0:
 		die()
-	
+
+func _damage_flash ():
+	visible = false
+	await get_tree().create_timer(0.07).timeout
+	visible = true
+
 func die():
 	pass
 	
