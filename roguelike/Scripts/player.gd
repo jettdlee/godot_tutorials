@@ -37,11 +37,13 @@ func _shoot():
 	projectile.global_position = muzzle.global_position
 	projectile.rotation = weapon_origin.rotation
 	projectile.owner_character = self
+	$ShootSound.play()
 	
 func take_damage(amount : int):
 	cur_hp -= amount
 	GlobalSignals.OnPlayerUpdateHealth.emit(cur_hp, max_hp)
 	_damage_flash()
+	$DamageSound.play()
 	if cur_hp <= 0:
 		die()
 

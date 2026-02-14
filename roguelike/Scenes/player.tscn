@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckjbjh5ofxi06"]
+[gd_scene load_steps=8 format=3 uid="uid://ckjbjh5ofxi06"]
 
 [ext_resource type="Script" uid="uid://bblts78do3qau" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dy253l2ijyuqb" path="res://Sprites/People.png" id="2_vgqql"]
 [ext_resource type="Texture2D" uid="uid://dq3boaqnrlhny" path="res://Sprites/Weapons.png" id="3_fkybt"]
+[ext_resource type="AudioStream" uid="uid://clcd5r8c37n2" path="res://Audio/PlayerAttack.wav" id="4_vgqql"]
+[ext_resource type="AudioStream" uid="uid://bdm0lej7npgy2" path="res://Audio/PlayerDamaged.wav" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://bwuejxvrc5pmv" path="res://Audio/CollectItem.wav" id="6_x3wgy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xgxfi"]
 radius = 3.0
@@ -33,3 +36,12 @@ region_rect = Rect2(60, 50, 10, 10)
 
 [node name="Muzzle" type="Node2D" parent="Weapon"]
 position = Vector2(0, -8)
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_vgqql")
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fkybt")
+
+[node name="ItemSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_x3wgy")

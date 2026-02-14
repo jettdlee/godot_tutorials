@@ -20,6 +20,7 @@ func _on_body_entered(body: Node2D) -> void:
 		body.shoot_rate -= value
 	elif type == ItemType.MOVE_SPEED:
 		body.move_speed += value
-		
+	
+	body.get_node("ItemSound").play()
 	queue_free()
 	

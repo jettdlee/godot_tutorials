@@ -57,6 +57,7 @@ func _try_attack():
 func take_damage(damage : int):
 	current_hp -= damage
 	_damage_flash()
+	$DamageSound.play()
 	if current_hp <= 0:
 		die()
 		
