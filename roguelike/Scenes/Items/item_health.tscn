@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1u8l3byyi2n3"]
+
+[ext_resource type="PackedScene" uid="uid://b0r5rnxmy7qa7" path="res://Scenes/Items/item.tscn" id="1_0rh8g"]
+
+[node name="Item" instance=ExtResource("1_0rh8g")]
+value = 2.0

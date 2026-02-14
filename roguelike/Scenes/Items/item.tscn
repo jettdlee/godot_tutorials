@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0r5rnxmy7qa7"]
+
+[ext_resource type="Script" uid="uid://b6hpjq7gegihy" path="res://Scripts/item.gd" id="1_nd5d4"]
+[ext_resource type="Texture2D" uid="uid://cc4rwx32u2mq1" path="res://Sprites/Potions.png" id="2_nnyoo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_afv7b"]
+radius = 4.0
+
+[node name="Item" type="Area2D"]
+collision_mask = 3
+script = ExtResource("1_nd5d4")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_nnyoo")
+region_enabled = true
+region_rect = Rect2(31, 40, 8, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_afv7b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2iluw8hwoehk"]
+[gd_scene load_steps=10 format=3 uid="uid://d2iluw8hwoehk"]
 
 [ext_resource type="PackedScene" uid="uid://ckjbjh5ofxi06" path="res://Scenes/player.tscn" id="1_iixi8"]
 [ext_resource type="PackedScene" uid="uid://ciwlgj0wibema" path="res://Scenes/Rooms/room_enemy1.tscn" id="4_5f3p6"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bymaqupq5dl4f" path="res://Scenes/Projectiles/projectile.tscn" id="5_cyadu"]
 [ext_resource type="PackedScene" uid="uid://g16331534m5t" path="res://Scenes/Rooms/room_enemy2.tscn" id="5_jv26f"]
 [ext_resource type="PackedScene" uid="uid://byoq4j8egjuub" path="res://Scenes/Rooms/room_enemy4.tscn" id="7_jv26f"]
+[ext_resource type="PackedScene" uid="uid://b6texysdmryj3" path="res://Scenes/Rooms/room_item.tscn" id="8_rb0md"]
 
 [node name="Main" type="Node2D"]
 
@@ -21,7 +22,7 @@ script = ExtResource("4_xgxfi")
 [node name="RoomGeneration" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("4_iixi8")
 first_room_scene = ExtResource("4_jv26f")
-room_scenes = Array[PackedScene]([ExtResource("4_5f3p6"), ExtResource("5_jv26f"), ExtResource("7_jv26f")])
+room_scenes = Array[PackedScene]([ExtResource("4_5f3p6"), ExtResource("5_jv26f"), ExtResource("7_jv26f"), ExtResource("8_rb0md")])
 player = NodePath("../Player")
 
 [node name="Projectile" parent="." instance=ExtResource("5_cyadu")]
