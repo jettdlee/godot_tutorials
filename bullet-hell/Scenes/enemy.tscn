@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmstwv6h504if"]
+
+[ext_resource type="Script" uid="uid://x02qdr08u3yu" path="res://Scripts/enemy.gd" id="1_1f0kj"]
+[ext_resource type="Texture2D" uid="uid://bkuf78jy5i7l6" path="res://Sprites/Spritesheet.png" id="1_hghv2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1f0kj"]
+radius = 17.262676
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_1f0kj")
+max_speed = 50.0
+acceleration = 10.0
+drag = 0.9
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 8)
+texture = ExtResource("1_hghv2")
+offset = Vector2(0, -8)
+region_enabled = true
+region_rect = Rect2(641, 128, 31, 31)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1f0kj")
+
+[node name="Muzzle" type="Node2D" parent="."]
+
+[node name="EnemyBulletPool" type="Node" parent="."]
+
+[node name="AvoidanceRay" type="RayCast2D" parent="."]
