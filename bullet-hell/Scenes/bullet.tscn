@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bkuf78jy5i7l6" path="res://Sprites/Spritesheet.png" id="2_ycag2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
-size = Vector2(20, 8)
+size = Vector2(21, 19)
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_oduel")
