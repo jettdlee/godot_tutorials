@@ -1,14 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmstwv6h504if"]
+[gd_scene load_steps=9 format=3 uid="uid://cmstwv6h504if"]
 
 [ext_resource type="Script" uid="uid://x02qdr08u3yu" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://bkuf78jy5i7l6" path="res://Sprites/Spritesheet.png" id="1_hghv2"]
 [ext_resource type="Script" uid="uid://6ixc7qt27f0p" path="res://Scripts/node_pool.gd" id="3_287tu"]
 [ext_resource type="PackedScene" uid="uid://ckxx2tb40u8qy" path="res://Scenes/enemy_bullet.tscn" id="4_0830c"]
+[ext_resource type="AudioStream" uid="uid://k47g0cmfqnxv" path="res://Audio/EnemyDamaged.wav" id="5_0830c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1f0kj"]
 radius = 17.262676
 
-[node name="Enemy" type="CharacterBody2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_287tu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0830c"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_mask = 6
 script = ExtResource("1_1f0kj")
 max_speed = 50.0
 acceleration = 10.0
@@ -33,3 +40,20 @@ script = ExtResource("3_287tu")
 node_scene = ExtResource("4_0830c")
 
 [node name="AvoidanceRay" type="RayCast2D" parent="."]
+collision_mask = 5
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -9.0
+offset_top = -21.0
+offset_right = 9.0
+offset_bottom = -19.0
+theme_override_styles/background = SubResource("StyleBoxFlat_287tu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0830c")
+max_value = 50.0
+value = 30.0
+show_percentage = false
+
+[node name="DamagedAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_0830c")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

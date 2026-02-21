@@ -1,13 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://6q6nkxm1j0fd"]
+[gd_scene load_steps=11 format=3 uid="uid://6q6nkxm1j0fd"]
 
 [ext_resource type="Script" uid="uid://c0lhekcg5n5gu" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://bkuf78jy5i7l6" path="res://Sprites/Spritesheet.png" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://6ixc7qt27f0p" path="res://Scripts/node_pool.gd" id="3_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://cxsb4um6wwqac" path="res://Scenes/bullet.tscn" id="4_vgqql"]
+[ext_resource type="AudioStream" uid="uid://tebn1s1g8bq8" path="res://Audio/PlayerAttack.wav" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://dcu6q6rlt8k1o" path="res://Audio/PlayerDamaged.wav" id="6_x3wgy"]
+[ext_resource type="AudioStream" uid="uid://cwomjoopyl5jj" path="res://Audio/DrinkPotion.wav" id="7_3smsa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgqql"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkybt"]
+bg_color = Color(1, 0, 0, 1)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 6
 script = ExtResource("1_cvnsp")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -26,3 +35,23 @@ position = Vector2(0, -10)
 [node name="PlayerBulletPool" type="Node" parent="."]
 script = ExtResource("3_6t5aa")
 node_scene = ExtResource("4_vgqql")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -17.0
+offset_top = -23.0
+offset_right = 17.0
+offset_bottom = -19.0
+theme_override_styles/background = SubResource("StyleBoxFlat_vgqql")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fkybt")
+max_value = 50.0
+value = 30.0
+show_percentage = false
+
+[node name="ShootAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fkybt")
+
+[node name="DamagedAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_x3wgy")
+
+[node name="PotionAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_3smsa")

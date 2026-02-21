@@ -7,7 +7,9 @@
 size = Vector2(21, 19)
 
 [node name="Bullet" type="Area2D"]
+collision_layer = 2
 script = ExtResource("1_oduel")
+owner_group = "Player"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_ycag2")

@@ -4,13 +4,24 @@ extends CharacterBody2D
 @export var acceleration : float = 0.2
 @export var braking : float = 0.15
 @export var shoot_rate : float = 0.1
+@export var current_hp : int = 100
+@export var max_hp : int = 100
 
 @onready var sprite : Sprite2D = $Sprite
 @onready var muzzle = $Muzzle
 @onready var bullet_pool = $PlayerBulletPool
+@onready var health_bar = $HealthBar
+@onready var shoot_audio : AudioStreamPlayer2D = $ShootAudio
+@onready var damaged_audio : AudioStreamPlayer2D = $DamagedAudio
+@onready var potion_audio : AudioStreamPlayer2D = $PotionAudio
 
 var move_input : Vector2
 var last_shoot_time : float
+var additional_bullet_speed : float
+
+func _ready() -> void:
+	health_bar.max_value = max_hp
+	health_bar.value = current_hp
 
 func _physics_process(delta: float) -> void:
 	move_input = Input.get_vector("move_left","move_right","move_up", "move_down")
@@ -28,6 +39,8 @@ func _process(delta: float) -> void:
 		if Time.get_unix_time_from_system() - last_shoot_time > shoot_rate:
 			_shoot()
 			
+	_move_wobble()
+			
 func _shoot():
 	last_shoot_time = Time.get_unix_time_from_system()
 	var bullet = bullet_pool.spawn()
@@ -37,4 +50,39 @@ func _shoot():
 	var mouse_pos = get_global_mouse_position()
 	var mouse_dir = muzzle.global_position.direction_to(mouse_pos)
 	bullet.move_dir = mouse_dir
+	bullet.additional_speed = additional_bullet_speed
+	shoot_audio.play()
 	
+func take_damage(damage : int):
+	current_hp -= damage
+	damaged_audio.play()
+
+	if current_hp <= 0:
+		$"..".set_game_over()
+	else:
+		_damage_flash()
+		health_bar.value = current_hp
+		$"../Camera2D".damage_shake()
+
+func _damage_flash ():
+	sprite.modulate = Color.BLACK
+	await get_tree().create_timer(0.05).timeout
+	sprite.modulate = Color.WHITE
+
+func _move_wobble():
+	if move_input.length() <= 0:
+		sprite.rotation_degrees = 0
+	var t = Time.get_unix_time_from_system()
+	var rot = sin(t * 20) * 2
+	sprite.rotation_degrees = rot
+
+func heal (amount : int):
+	current_hp += amount
+	
+	if current_hp > max_hp:
+		current_hp = max_hp
+	
+	health_bar.value = current_hp
+	
+func drink_potion():
+	potion_audio.play()
