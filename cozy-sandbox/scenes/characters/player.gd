@@ -19,6 +19,11 @@ func _physics_process(_delta: float) -> void:
 	if can_move:
 		get_input()
 	set_animation()
+	if direction:
+		if not $Timers/WalkTimer.time_left:
+			$Timers/WalkTimer.start()
+	else:
+		$Timers/WalkTimer.stop()
 	velocity = direction * speed * int(can_move)
 	move_and_slide()
 
@@ -48,3 +53,15 @@ func set_animation():
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	can_move = true
+	if current_tool == Global.Tools.HOE:
+		$Audio/HoeSound.play()
+	if current_tool == Global.Tools.WATER:
+		$Audio/WaterSound.play()
+	if current_tool == Global.Tools.FISH:
+		$Audio/FishSound.play()
+
+func axe_sword_swing():
+	$Audio/AxeSwordSound.play()
+
+func _on_walk_timer_timeout() -> void:
+	$Audio/WalkSound.play()
