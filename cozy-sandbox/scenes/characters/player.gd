@@ -11,15 +11,20 @@ const state_names = {
 }
 
 var direction: Vector2
+var last_direction: Vector2
 @export var speed := 200
+@export var tool_offset := 20
 var can_move : bool = true
 var current_tool: Global.Tools = Global.Tools.HOE
+
+signal tool_interact(tool: Global.Tools, pos: Vector2)
 
 func _physics_process(_delta: float) -> void:
 	if can_move:
 		get_input()
 	set_animation()
 	if direction:
+		last_direction = direction
 		if not $Timers/WalkTimer.time_left:
 			$Timers/WalkTimer.start()
 	else:
@@ -34,6 +39,8 @@ func get_input():
 		tool_state_machine.travel(state_names[current_tool])
 		$AnimationTree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		can_move = false
+		if current_tool in [Global.Tools.HOE, Global.Tools.WATER]:
+			tool_interact.emit(current_tool, position)
 	
 	if Input.is_action_just_pressed("tool_forward") or Input.is_action_just_pressed("tool_backward"):
 		var toggle_direction = int(Input.get_axis("tool_backward", "tool_forward"))
@@ -62,6 +69,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 
 func axe_sword_swing():
 	$Audio/AxeSwordSound.play()
+	tool_interact.emit(current_tool, position + last_direction * tool_offset)
 
 func _on_walk_timer_timeout() -> void:
 	$Audio/WalkSound.play()

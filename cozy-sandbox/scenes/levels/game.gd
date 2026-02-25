@@ -3,6 +3,7 @@ extends Node2D
 @export var daytime_gradient : Gradient
 @export var music_curve : Curve
 
+
 func _process(_delta: float) -> void:
 	var daytime_point =  1.0 - ($DayTimer.time_left / $DayTimer.wait_time)
 	$CanvasModulate.color = daytime_gradient.sample(daytime_point)
@@ -21,3 +22,14 @@ func day_restart():
 func reset_level():
 	$DayTimer.start()
 	$Music.play()
+	for tree in get_tree().get_nodes_in_group('Trees'):
+		tree.reset()
+
+
+func _on_player_tool_interact(tool: int, pos: Vector2) -> void:
+	if tool == Global.Tools.AXE:
+		for tree in get_tree().get_nodes_in_group("Trees"):
+			if tree.position.distance_to(pos) < 16:
+				tree.health -= 1
+				tree.get_apple()
+				tree.cut()
