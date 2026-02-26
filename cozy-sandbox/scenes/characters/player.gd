@@ -16,13 +16,17 @@ var last_direction: Vector2
 @export var tool_offset := 20
 var can_move : bool = true
 var current_tool: Global.Tools = Global.Tools.HOE
+var fishing := false
 
 signal tool_interact(tool: Global.Tools, pos: Vector2)
 
 func _physics_process(_delta: float) -> void:
 	if can_move:
 		get_input()
-	set_animation()
+		set_animation()
+	elif fishing:
+		get_fishing_input()
+	
 	if direction:
 		last_direction = direction
 		if not $Timers/WalkTimer.time_left:
@@ -41,6 +45,12 @@ func get_input():
 		can_move = false
 		if current_tool in [Global.Tools.HOE, Global.Tools.WATER]:
 			tool_interact.emit(current_tool, position)
+		elif current_tool == Global.Tools.FISH:
+			fishing = true
+			$Timers/FishDelayTimer.start()
+			await $AnimationTree.animation_finished
+			tool_interact.emit(current_tool, position + last_direction * tool_offset)
+			$FishGameContainer/FishGame.show()
 	
 	if Input.is_action_just_pressed("tool_forward") or Input.is_action_just_pressed("tool_backward"):
 		var toggle_direction = int(Input.get_axis("tool_backward", "tool_forward"))
@@ -55,11 +65,16 @@ func set_animation():
 		$AnimationTree.set("parameters/MoveStateMachine/Move/blend_position", direction_animation)
 		for state in state_names.values():
 			$AnimationTree.set("parameters/ToolStateMachine/" + state + "/blend_position", direction_animation)
+		$AnimationTree.set("parameters/FishingBlendSpace/blend_position", direction_animation)
+
 	else:
 		move_state_machine.travel("Idle")
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	can_move = true
+	if not fishing:
+		can_move = true
+	else:
+		$AnimationTree.set("parameters/FishBlend/blend_amount", 1)
 	if current_tool == Global.Tools.HOE:
 		$Audio/HoeSound.play()
 	if current_tool == Global.Tools.WATER:
@@ -73,3 +88,24 @@ func axe_sword_swing():
 
 func _on_walk_timer_timeout() -> void:
 	$Audio/WalkSound.play()
+
+func stun():
+	can_move = false
+	$Timers/StunTimer.start()
+	
+func _on_stun_timer_timeout() -> void:
+	can_move = true
+
+func stop_fishing():
+	fishing = false
+	can_move = true
+	$AnimationTree.set("parameters/FishBlend/blend_amount", 0)
+	$FishGameContainer/FishGame.hide()
+
+func get_fishing_input():
+	direction = Input.get_vector("left", "right", "up", "down")
+	if direction and not $Timers/FishDelayTimer.time_left:
+		stop_fishing()
+	if Input.is_action_just_pressed('action'):
+		if $FishGameContainer/FishGame.get_fish():
+			stop_fishing()

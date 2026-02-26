@@ -492,6 +492,7 @@ y_sort_enabled = true
 position = Vector2(122, 67)
 
 [node name="Tree" parent="Objects" instance=ExtResource("5_a1osm")]
+position = Vector2(-48, -67)
 
 [node name="Tree2" parent="Objects" instance=ExtResource("5_a1osm")]
 position = Vector2(206, -87)
@@ -569,4 +570,30 @@ color = Color(0, 0, 0, 1)
 stream = ExtResource("9_cx7qy")
 autoplay = true
 
+[node name="BlobSpawnPositions" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="BlobSpawnPositions"]
+position = Vector2(-154, -28)
+
+[node name="Marker2D2" type="Marker2D" parent="BlobSpawnPositions"]
+position = Vector2(-123, 128)
+
+[node name="Marker2D3" type="Marker2D" parent="BlobSpawnPositions"]
+position = Vector2(165, 310)
+
+[node name="Marker2D4" type="Marker2D" parent="BlobSpawnPositions"]
+position = Vector2(449, 302)
+
+[node name="Marker2D5" type="Marker2D" parent="BlobSpawnPositions"]
+position = Vector2(627, 47)
+
+[node name="Marker2D6" type="Marker2D" parent="BlobSpawnPositions"]
+position = Vector2(576, -146)
+
+[node name="Timer" type="Node" parent="."]
+
+[node name="BlobSpawnTimer" type="Timer" parent="Timer"]
+wait_time = 10.0
+
 [connection signal="tool_interact" from="Objects/Player" to="." method="_on_player_tool_interact"]
+[connection signal="timeout" from="Timer/BlobSpawnTimer" to="." method="_on_blob_spawn_timer_timeout"]
