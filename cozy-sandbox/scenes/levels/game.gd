@@ -29,24 +29,28 @@ func reset_level():
 
 func _on_player_tool_interact(tool: int, pos: Vector2) -> void:
 	var grid_coord = Vector2i(int(pos.x/Global.TILE_SIZE),int(pos.y/Global.TILE_SIZE))
-	if tool == Global.Tools.AXE:
-		for tree in get_tree().get_nodes_in_group("Trees"):
-			if tree.position.distance_to(pos) < 16:
-				tree.health -= 1
-				tree.get_apple()
-				tree.cut()
+	match tool:
+		Global.Tools.AXE:
+			for tree in get_tree().get_nodes_in_group("Trees"):
+				if tree.position.distance_to(pos) < 16:
+					tree.health -= 1
+					tree.get_apple()
+					tree.cut()
+		Global.Tools.SWORD:
+			for blob in get_tree().get_nodes_in_group('Blobs'):
+				if blob.position.distance_to(pos) < 14:
+					blob.flash()
+					blob.push()
+					blob.health -= 1
+		Global.Tools.FISH:
+			if not $Layers/WaterLayer.get_cell_tile_data(grid_coord):
+				await get_tree().create_timer(0.5).timeout
+				$Objects/Player.stop_fishing()
+		Global.Tools.HOE:
+			var cell = $Layers/GrassLayer.get_cell_tile_data(grid_coord) as TileData
+			if cell and cell.get_custom_data('farmable'):
+				$Layers/SoilLayer.set_cells_terrain_connect([grid_coord], 0, 0)
 	
-	if tool == Global.Tools.SWORD:
-		for blob in get_tree().get_nodes_in_group('Blobs'):
-			if blob.position.distance_to(pos) < 14:
-				blob.flash()
-				blob.push()
-				blob.health -= 1
-
-	if tool == Global.Tools.FISH:
-		if not $Layers/WaterLayer.get_cell_tile_data(grid_coord):
-			await get_tree().create_timer(0.5).timeout
-			$Objects/Player.stop_fishing()
 
 func _on_blob_spawn_timer_timeout() -> void:
 	var blob = blob_scene.instantiate()

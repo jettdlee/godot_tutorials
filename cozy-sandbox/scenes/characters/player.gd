@@ -44,7 +44,8 @@ func get_input():
 		$AnimationTree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		can_move = false
 		if current_tool in [Global.Tools.HOE, Global.Tools.WATER]:
-			tool_interact.emit(current_tool, position)
+			await $AnimationTree.animation_finished
+			tool_interact.emit(current_tool, position + last_direction * tool_offset)
 		elif current_tool == Global.Tools.FISH:
 			fishing = true
 			$Timers/FishDelayTimer.start()
