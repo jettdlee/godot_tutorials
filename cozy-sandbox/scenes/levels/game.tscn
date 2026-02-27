@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bf0yuue48pk6v"]
+[gd_scene load_steps=32 format=4 uid="uid://bf0yuue48pk6v"]
 
 [ext_resource type="Script" uid="uid://cv8pavyw07cuo" path="res://scenes/levels/game.gd" id="1_7rg7d"]
 [ext_resource type="Texture2D" uid="uid://baw527j36pxgi" path="res://graphics/tilesets/grass.png" id="1_61jgc"]
@@ -8,8 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://ds07yx1pn2a82" path="res://scenes/levels/tree.tscn" id="5_a1osm"]
 [ext_resource type="Texture2D" uid="uid://c15lysgtp52wu" path="res://graphics/tilesets/soil.png" id="5_uk881"]
 [ext_resource type="PackedScene" uid="uid://bpx2rb1ue8myr" path="res://scenes/levels/simple_object.tscn" id="6_limtx"]
+[ext_resource type="Texture2D" uid="uid://bnpu4147dkhe4" path="res://graphics/tilesets/soil_water.png" id="6_r0gsk"]
+[ext_resource type="Texture2D" uid="uid://cc3c5w3cngbit" path="res://graphics/rain/floor.png" id="7_6370d"]
 [ext_resource type="Shader" uid="uid://bdtv578lpha7w" path="res://shaders/day_transition.gdshader" id="8_xmnyv"]
 [ext_resource type="AudioStream" uid="uid://7a4rv3t3jhq3" path="res://audio/music.mp3" id="9_cx7qy"]
+[ext_resource type="Texture2D" uid="uid://e5sdpu0o05kg" path="res://graphics/rain/drops.png" id="13_fojqs"]
+[ext_resource type="AudioStream" uid="uid://pbohj8jumnb2" path="res://audio/rain.mp3" id="14_fojqs"]
 
 [sub_resource type="Gradient" id="Gradient_7rg7d"]
 offsets = PackedFloat32Array(0, 0.42666668, 1)
@@ -862,9 +866,47 @@ terrain_set_0/terrain_0/name = "Soil"
 terrain_set_0/terrain_0/color = Color(0.09353503, 0.44984072, 0.36128572, 1)
 sources/0 = SubResource("TileSetAtlasSource_r0gsk")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oi2tv"]
+texture = ExtResource("6_r0gsk")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6370d"]
+sources/0 = SubResource("TileSetAtlasSource_oi2tv")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bgnkb"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eiv1w"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1000, 500, 1)
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 0.79999995
+anim_speed_max = 1.1999999
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cx7qy"]
 shader = ExtResource("8_xmnyv")
 shader_parameter/progress = 0.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d2m8s"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_886ur"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1000, 500, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(-70, 98, 0)
+anim_speed_min = 0.79999995
+anim_speed_max = 1.1999999
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_7rg7d")
@@ -888,6 +930,15 @@ tile_set = SubResource("TileSet_7rg7d")
 
 [node name="SoilLayer" type="TileMapLayer" parent="Layers"]
 tile_set = SubResource("TileSet_oi2tv")
+
+[node name="SoilWaterLayer" type="TileMapLayer" parent="Layers"]
+tile_set = SubResource("TileSet_6370d")
+
+[node name="FloorRainParticles" type="GPUParticles2D" parent="Layers"]
+material = SubResource("CanvasItemMaterial_bgnkb")
+amount = 200
+texture = ExtResource("7_6370d")
+process_material = SubResource("ParticleProcessMaterial_eiv1w")
 
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -999,5 +1050,17 @@ position = Vector2(576, -146)
 [node name="BlobSpawnTimer" type="Timer" parent="Timer"]
 wait_time = 10.0
 
+[node name="Overlay" type="Node2D" parent="."]
+
+[node name="RainParticles" type="GPUParticles2D" parent="Overlay"]
+material = SubResource("CanvasItemMaterial_d2m8s")
+texture = ExtResource("13_fojqs")
+process_material = SubResource("ParticleProcessMaterial_886ur")
+
+[node name="RainMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_fojqs")
+volume_db = -20.0
+
+[connection signal="seed_interact" from="Objects/Player" to="." method="_on_player_seed_interact"]
 [connection signal="tool_interact" from="Objects/Player" to="." method="_on_player_tool_interact"]
 [connection signal="timeout" from="Timer/BlobSpawnTimer" to="." method="_on_blob_spawn_timer_timeout"]

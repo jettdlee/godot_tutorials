@@ -16,9 +16,11 @@ var last_direction: Vector2
 @export var tool_offset := 20
 var can_move : bool = true
 var current_tool: Global.Tools = Global.Tools.HOE
+var current_seed: Global.Seeds = Global.Seeds.CORN
 var fishing := false
 
 signal tool_interact(tool: Global.Tools, pos: Vector2)
+signal seed_interact(seed: Global.Seeds, pos: Vector2)
 
 func _physics_process(_delta: float) -> void:
 	if can_move:
@@ -57,6 +59,16 @@ func get_input():
 		var toggle_direction = int(Input.get_axis("tool_backward", "tool_forward"))
 		current_tool = posmod(current_tool + toggle_direction, Global.Tools.size()) as Global.Tools
 		$PlayerUI.reveal(current_tool)
+		
+	if Input.is_action_just_pressed("seed_toggle"):
+		current_seed = posmod(current_seed + 1, Global.Seeds.size()) as Global.Seeds
+		$PlayerUI.show_seed(current_seed)
+	if Input.is_action_just_pressed("plant"):
+		can_move = false
+		direction = Vector2.ZERO
+		seed_interact.emit(current_seed, position + last_direction * tool_offset)
+		await get_tree().create_timer(0.5).timeout
+		can_move = true
 
 func set_animation():
 	if direction:
