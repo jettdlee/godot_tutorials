@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmg1qmyu3niu5"]
+
+[ext_resource type="Texture2D" uid="uid://df8wrax1j7fm0" path="res://graphics/style/duck_hat_albedo.png" id="1_l05rn"]
+[ext_resource type="ArrayMesh" uid="uid://dq3x2cgjrg3u8" path="res://graphics/style/duck_hat_mesh.obj" id="2_t824k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ux6ud"]
+albedo_texture = ExtResource("1_l05rn")
+
+[node name="DuckHat" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+material_override = SubResource("StandardMaterial3D_ux6ud")
+mesh = ExtResource("2_t824k")

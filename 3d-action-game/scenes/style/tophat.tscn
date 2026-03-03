@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://lroto8bl1ki3"]
+
+[ext_resource type="Texture2D" uid="uid://bf66ldo8w5hip" path="res://graphics/style/top_hat_albedo.png" id="1_j0qm2"]
+[ext_resource type="ArrayMesh" uid="uid://do6j8yrw5cv8f" path="res://graphics/style/top_hat_mesh.obj" id="2_walfs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x1a1v"]
+albedo_texture = ExtResource("1_j0qm2")
+
+[node name="Tophat" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.962218, 0.27228, 0, -0.27228, 0.962218, 0, 0, 0, 1, 0.11, 0.81, 0)
+material_override = SubResource("StandardMaterial3D_x1a1v")
+mesh = ExtResource("2_walfs")

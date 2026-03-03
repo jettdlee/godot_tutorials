@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba4n2fo2c2ugx"]
+
+[ext_resource type="Script" uid="uid://b02kqsv7as4im" path="res://Global/global.gd" id="1_tll1b"]
+
+[node name="Global" type="Node"]
+process_mode = 3
+script = ExtResource("1_tll1b")
+
+[node name="PauseTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

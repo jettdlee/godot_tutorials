@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3ned6xh1qt4"]
+
+[ext_resource type="PackedScene" uid="uid://dixktolqbfdr6" path="res://scenes/weapons/weapon.tscn" id="1_ieojg"]
+[ext_resource type="PackedScene" uid="uid://dw58psjxc07tk" path="res://graphics/weapons/dagger.gltf" id="2_n5jhk"]
+
+[node name="Dagger" instance=ExtResource("1_ieojg")]
+weapon_name = "Dagger"
+
+[node name="dagger2" parent="." index="1" instance=ExtResource("2_n5jhk")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1ruyaalj8xkk"]
+
+[ext_resource type="PackedScene" uid="uid://4vt7lcsw83wg" path="res://scenes/shields/shield.tscn" id="1_xvxhi"]
+[ext_resource type="PackedScene" uid="uid://qn7teovqvw61" path="res://graphics/shields/shield_square.gltf" id="2_jjypc"]
+
+[node name="SquareShield" instance=ExtResource("1_xvxhi")]
+
+[node name="shield_square2" parent="." index="0" instance=ExtResource("2_jjypc")]
+
+[editable path="shield_square2"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4tu03nw8i7cu"]
+
+[ext_resource type="PackedScene" uid="uid://4vt7lcsw83wg" path="res://scenes/shields/shield.tscn" id="1_7b1b7"]
+[ext_resource type="PackedScene" uid="uid://b0tbscqb73oko" path="res://graphics/shields/shield_round_color.gltf" id="2_bsynd"]
+
+[node name="RoundShield" instance=ExtResource("1_7b1b7")]
+
+[node name="shield_round_color2" parent="." index="0" instance=ExtResource("2_bsynd")]
+
+[editable path="shield_round_color2"]

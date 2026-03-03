@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://djhhlvs7bvbl5"]
+
+[ext_resource type="Texture2D" uid="uid://dr1yn26hajbnc" path="res://graphics/style/glasses_albedo.png" id="1_kjcij"]
+[ext_resource type="ArrayMesh" uid="uid://blh55r2cmedjn" path="res://graphics/style/star_glasses_mesh.obj" id="2_nwmgn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m41hq"]
+albedo_texture = ExtResource("1_kjcij")
+
+[node name="Starglasses" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.412, 0.061)
+material_override = SubResource("StandardMaterial3D_m41hq")
+mesh = ExtResource("2_nwmgn")

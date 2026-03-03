@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://csummfkcs8kh5"]
+
+[ext_resource type="PackedScene" uid="uid://4vt7lcsw83wg" path="res://scenes/shields/shield.tscn" id="1_l4ovr"]
+[ext_resource type="PackedScene" uid="uid://b73nofu4axgpt" path="res://graphics/shields/shield_spikes.gltf" id="2_nenk5"]
+
+[node name="SpikeShield" instance=ExtResource("1_l4ovr")]
+
+[node name="shield_spikes2" parent="." index="0" instance=ExtResource("2_nenk5")]
+
+[editable path="shield_spikes2"]

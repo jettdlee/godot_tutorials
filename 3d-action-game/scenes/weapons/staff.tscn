@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://6twejixe1j0g"]
+
+[ext_resource type="PackedScene" uid="uid://dixktolqbfdr6" path="res://scenes/weapons/weapon.tscn" id="1_1rce3"]
+[ext_resource type="PackedScene" uid="uid://b2vxmq5ag42qa" path="res://graphics/weapons/staff.gltf" id="2_0wqef"]
+
+[node name="Staff" instance=ExtResource("1_1rce3")]
+
+[node name="staff2" parent="." index="0" instance=ExtResource("2_0wqef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.880887, 0)
+
+[node name="RayCast3D" parent="." index="1"]
+target_position = Vector3(0, 2.14, 0)

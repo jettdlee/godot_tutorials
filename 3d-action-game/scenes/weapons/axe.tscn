@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6s52evbkjpti"]
+
+[ext_resource type="PackedScene" uid="uid://dixktolqbfdr6" path="res://scenes/weapons/weapon.tscn" id="1_w43rl"]
+[ext_resource type="PackedScene" uid="uid://bpwx3u45s55tj" path="res://graphics/weapons/axe_1handed.gltf" id="2_5wbh6"]
+
+[node name="Axe" instance=ExtResource("1_w43rl")]
+weapon_name = "Axe"
+
+[node name="RayCast3D" parent="." index="0"]
+target_position = Vector3(-0.45, 1, 0)
+
+[node name="axe_1handed2" parent="." index="1" instance=ExtResource("2_5wbh6")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
