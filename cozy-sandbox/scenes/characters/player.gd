@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @onready var move_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var tool_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/ToolStateMachine/playback")
+@onready var resource_ui: Control = get_tree().get_first_node_in_group('Resource UI')
+
 const state_names = {
 	Global.Tools.HOE: 'hoe',
 	Global.Tools.AXE: 'axe',
@@ -18,9 +20,20 @@ var can_move : bool = true
 var current_tool: Global.Tools = Global.Tools.HOE
 var current_seed: Global.Seeds = Global.Seeds.CORN
 var fishing := false
+var building := false
 
 signal tool_interact(tool: Global.Tools, pos: Vector2)
 signal seed_interact(seed: Global.Seeds, pos: Vector2)
+signal build_mode
+
+var resources = {
+	Global.Resources.APPLE: 0,
+	Global.Resources.WOOD: 0,
+	Global.Resources.FISH: 0,
+	Global.Resources.TOMATO: 0,
+	Global.Resources.CORN: 0,
+	Global.Resources.PUMPKIN: 0
+}
 
 func _physics_process(_delta: float) -> void:
 	if can_move:
@@ -69,7 +82,15 @@ func get_input():
 		seed_interact.emit(current_seed, position + last_direction * tool_offset)
 		await get_tree().create_timer(0.5).timeout
 		can_move = true
+	if Input.is_action_just_pressed('build'):
+		can_move = false
+		building = true
+		build_mode.emit()
+		direction = Vector2.ZERO
+		move_state_machine.travel('idle')
+		$AnimationTree.set("parameters/MoveStateMachine/Idle/blend_position", Vector2.DOWN)
 
+		
 func set_animation():
 	if direction:
 		move_state_machine.travel("Move")
@@ -122,3 +143,7 @@ func get_fishing_input():
 	if Input.is_action_just_pressed('action'):
 		if $FishGameContainer/FishGame.get_fish():
 			stop_fishing()
+			
+func get_resource(resource: Global.Resources, amount: int = 1):
+	resources[resource] += amount
+	resource_ui.update_resources()

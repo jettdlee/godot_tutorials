@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpdvkpbi8sn0c"]
+
+[ext_resource type="Texture2D" uid="uid://3pkldf7cfcvi" path="res://graphics/ui/objects.png" id="1_r4lnm"]
+[ext_resource type="Script" uid="uid://btk7jh81m24r5" path="res://scenes/levels/object.gd" id="1_tueor"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tueor"]
+
+[node name="Object" type="StaticBody2D" groups=["Objects"]]
+script = ExtResource("1_tueor")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_r4lnm")
+hframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tueor")

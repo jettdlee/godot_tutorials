@@ -1,0 +1,201 @@
+[gd_scene load_steps=10 format=3 uid="uid://bv68305nmlinw"]
+
+[ext_resource type="Script" uid="uid://da205u3r3lh5a" path="res://scenes/ui/resource_ui.gd" id="1_4cf3w"]
+[ext_resource type="Texture2D" uid="uid://d3xfh036yaih" path="res://graphics/ui/apple.png" id="1_iahqc"]
+[ext_resource type="FontFile" uid="uid://ruuwrd57m8p" path="res://font/Minecraft.ttf" id="2_vmyg7"]
+[ext_resource type="Texture2D" uid="uid://3lq7oq7m5lcq" path="res://graphics/ui/wood.png" id="4_q7ma8"]
+[ext_resource type="Texture2D" uid="uid://bhwf8xk420ego" path="res://graphics/ui/silverfish.png" id="5_l7wqp"]
+[ext_resource type="Texture2D" uid="uid://bybmj7udtenxj" path="res://graphics/ui/corn.png" id="6_w1ox6"]
+[ext_resource type="Texture2D" uid="uid://cjr603d480bnf" path="res://graphics/ui/tomato.png" id="7_q17ca"]
+[ext_resource type="Texture2D" uid="uid://dfe8dxw6ptaea" path="res://graphics/ui/pumpkin.png" id="8_q0d7p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_iahqc"]
+font_size = 10
+
+[node name="ResourceUI" type="Control" groups=["Resource UI"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4cf3w")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Apple" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_iahqc")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Apple"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -31.0
+offset_right = 11.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8784314, 0.8784314, 0.8901961, 1)
+theme_override_fonts/font = ExtResource("2_vmyg7")
+theme_override_font_sizes/font_size = 12
+text = "4"
+label_settings = SubResource("LabelSettings_iahqc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Wood" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_q7ma8")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Wood"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -31.0
+offset_right = 11.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8784314, 0.8784314, 0.8901961, 1)
+theme_override_fonts/font = ExtResource("2_vmyg7")
+theme_override_font_sizes/font_size = 12
+text = "4"
+label_settings = SubResource("LabelSettings_iahqc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fish" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_l7wqp")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Fish"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -31.0
+offset_right = 11.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8784314, 0.8784314, 0.8901961, 1)
+theme_override_fonts/font = ExtResource("2_vmyg7")
+theme_override_font_sizes/font_size = 12
+text = "4"
+label_settings = SubResource("LabelSettings_iahqc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Corn" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_w1ox6")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Corn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -31.0
+offset_right = 11.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8784314, 0.8784314, 0.8901961, 1)
+theme_override_fonts/font = ExtResource("2_vmyg7")
+theme_override_font_sizes/font_size = 12
+text = "4"
+label_settings = SubResource("LabelSettings_iahqc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tomato" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("7_q17ca")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Tomato"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -31.0
+offset_right = 11.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8784314, 0.8784314, 0.8901961, 1)
+theme_override_fonts/font = ExtResource("2_vmyg7")
+theme_override_font_sizes/font_size = 12
+text = "4"
+label_settings = SubResource("LabelSettings_iahqc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pumpkin" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_q0d7p")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Pumpkin"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -31.0
+offset_right = 11.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8784314, 0.8784314, 0.8901961, 1)
+theme_override_fonts/font = ExtResource("2_vmyg7")
+theme_override_font_sizes/font_size = 12
+text = "4"
+label_settings = SubResource("LabelSettings_iahqc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

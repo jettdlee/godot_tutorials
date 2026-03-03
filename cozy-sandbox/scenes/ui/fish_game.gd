@@ -1,5 +1,6 @@
 extends Control
 
+@onready var player = get_tree().get_first_node_in_group('Player')
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,6 +11,7 @@ func _ready() -> void:
 
 func get_fish() -> bool:
 	if abs($FishRect.offset_left) < 40:
+		player.get_resource(Global.Resources.FISH, 1)
 		return true
 	else:
 		return false

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxbby6da4bfpf"]
+
+[ext_resource type="Script" uid="uid://c6tf0oi04xgwy" path="res://scenes/ui/build_overlay.gd" id="1_curpj"]
+[ext_resource type="Texture2D" uid="uid://3pkldf7cfcvi" path="res://graphics/ui/objects.png" id="1_xwbd5"]
+
+[node name="BuildOverlay" type="Node2D"]
+script = ExtResource("1_curpj")
+
+[node name="PreviewSprite" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("1_xwbd5")
+hframes = 7

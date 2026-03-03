@@ -4,13 +4,18 @@ const apple_texture = preload("res://graphics/plants/apple.png")
 var health : int = 3:
 	set(value):
 		health = value
-		if health <= 0:
+		if health <= 0 and alive:
 			$Sprite.hide()
 			$Stump.show()
 			var shape = RectangleShape2D.new()
 			shape.size = Vector2(12, 6)
 			$CollisionShape2D.shape = shape
 			$CollisionShape2D.position.y = 8
+			player.get_resource(Global.Resources.WOOD, randi_range(2,4))
+			alive = false
+
+@onready var player = get_tree().get_first_node_in_group('Player')
+var alive: bool = true
 
 func _ready() -> void:
 	$Sprite.frame = [0, 1].pick_random()
@@ -35,6 +40,8 @@ func create_apples(num : int):
 func get_apple():
 	if $Apples.get_children():
 		$Apples.get_children().pick_random().queue_free()
+		player.get_resource(Global.Resources.APPLE)
+		
 
 func reset():
 	for apple in $Apples.get_children():

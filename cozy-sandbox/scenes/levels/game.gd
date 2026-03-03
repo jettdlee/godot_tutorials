@@ -5,6 +5,9 @@ extends Node2D
 
 var plant_scene = preload("res://scenes/levels/plant.tscn")
 var blob_scene = preload("res://scenes/characters/blob.tscn")
+var object_scene = preload("res://scenes/levels/object.tscn")
+var door_checker_scene = preload("res://scenes/levels/door_checker.tscn")
+
 var raining := false:
 	set(value):
 		raining = value
@@ -98,3 +101,56 @@ func _on_player_seed_interact(seed_enum: int, pos: Vector2) -> void:
 		$Objects.add_child(plant)
 		plant.position = plant_pos
 		plant.setup(seed_enum, grid_coord)
+
+
+func _on_player_build_mode() -> void:
+	$DayTimer.paused = true
+	$Overlay/BuildOverlay.reveal($Objects/Player.position)
+	$CanvasLayer/ResourceUI._tween_animation(1.0)
+
+
+func _on_build_overlay_build(pos: Vector2i, object: int) -> void:
+	if object == Global.Objects.WALLS:
+		$Objects/WallsLayer.set_cells_terrain_connect([pos],0,0)
+		$Layers/HouseFloorLayer.set_cell(pos, 0, Vector2i.ZERO)
+	
+	if object == Global.Objects.DOOR:
+		var current_cell = $Objects/WallsLayer.get_cell_tile_data(pos) as TileData
+		if current_cell and current_cell.get_custom_data('CanDoor'):
+			if not current_cell.get_custom_data('Door'):
+				$Objects/WallsLayer.set_cell(pos, 0, Vector2i(0,4))
+				var door_checker = door_checker_scene.instantiate()
+				$Objects.add_child(door_checker)
+				door_checker.setup(pos)
+				door_checker.connect('change_door', door_handler)
+	
+	if object not in [Global.Objects.WALLS, Global.Objects.DOOR]:
+		for obj in get_tree().get_nodes_in_group('Objects'):
+			if obj.can_delete(pos):
+				obj.queue_free()
+		var object_instance = object_scene.instantiate() as StaticBody2D
+		object_instance.setup(object)
+		var target_group = $Layers/CarpetLayer if object == Global.Objects.CARPET else $Objects
+		target_group.add_child(object_instance)
+		object_instance.position = pos * Global.TILE_SIZE + Vector2i(8, 8)
+
+func _on_build_overlay_delete(pos: Vector2i) -> void:
+	for object in get_tree().get_nodes_in_group('Objects'):
+		if object.can_delete(pos):
+			object.queue_free()
+			return
+			
+	var tile_data =  $Objects/WallsLayer.get_cell_tile_data(pos) as TileData
+	if tile_data and tile_data.get_custom_data('Door'):
+		for door_checker in get_tree().get_nodes_in_group('Door Checker'):
+			if door_checker.door_coord == pos:
+				door_checker.queue_free()
+				$Objects/WallsLayer.set_cells_terrain_connect([pos],0,0)
+				$Layers/HouseFloorLayer.set_cell(pos, 0, Vector2i.ZERO)
+				return
+	
+	$Objects/WallsLayer.set_cells_terrain_connect([pos],0,-1)
+	$Layers/HouseFloorLayer.erase_cell(pos)
+
+func door_handler(door_coord: Vector2i, open: bool):
+	$Objects/WallsLayer.set_cell(door_coord, 0, Vector2i(1,1) if open else Vector2(0,4))
