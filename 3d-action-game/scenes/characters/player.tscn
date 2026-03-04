@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjgjyxpjvtnkd"]
+
+[ext_resource type="PackedScene" uid="uid://d2x1bkgp1xag" path="res://scenes/characters/character.tscn" id="1_rp718"]
+[ext_resource type="PackedScene" uid="uid://b0d2yj6cs7jem" path="res://scenes/characters/player_skin.tscn" id="2_yewv4"]
+[ext_resource type="PackedScene" uid="uid://c0jhnaoec34na" path="res://scenes/characters/camera_controller.tscn" id="3_76oj4"]
+
+[node name="Player" instance=ExtResource("1_rp718")]
+
+[node name="PlayerSkin" parent="." index="1" instance=ExtResource("2_yewv4")]
+
+[node name="CameraController" parent="." index="2" instance=ExtResource("3_76oj4")]
+transform = Transform3D(1, 0, 0, 0, 0.90630776, 0.42261827, 0, -0.42261827, 0.90630776, 0, 1.4, 0)
