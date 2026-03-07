@@ -31,7 +31,7 @@ var weapons: Dictionary = {
 			'range': 1.3,
 			'audio': preload("res://audio/axe_sound.wav")
 		},
-		'staff': 
+	'staff': 
 		{
 			'type': 'weapon',
 			'damage': 1, 

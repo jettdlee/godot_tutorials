@@ -1,7 +1,7 @@
 extends SpringArm3D
 
 @export var min_limit_x : float = -0.8
-@export var max_limit_x : float = -0.8
+@export var max_limit_x : float = -0.2
 @export var horizontal_acceleration : float = 2
 @export var vertical_acceleration : float = 1
 @export var mouse_acceleration : float = 0.005

@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2x1bkgp1xag"]
+[gd_scene load_steps=3 format=3 uid="uid://d2x1bkgp1xag"]
+
+[ext_resource type="Script" uid="uid://d0bxb20delc2f" path="res://scenes/characters/character.gd" id="1_x31xa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f826p"]
 
 [node name="Character" type="CharacterBody3D"]
+script = ExtResource("1_x31xa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_f826p")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]

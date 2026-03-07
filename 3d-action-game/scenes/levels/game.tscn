@@ -88,9 +88,8 @@ inner_radius = 1.8576027
 outer_radius = 2.9995716
 material = SubResource("StandardMaterial3D_a1osm")
 
-[node name="PlayerSkin" type="Node3D" parent="."]
+[node name="Characters" type="Node3D" parent="."]
 
-[node name="Player" parent="PlayerSkin" instance=ExtResource("2_eqihu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6389847, 0, -1.9361286)
-collision_layer = 2
-collision_mask = 5
+[node name="Player" parent="Characters" instance=ExtResource("2_eqihu")]
+acceleration = 8.0
+deceleration = 8.0
