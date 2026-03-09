@@ -31436,6 +31436,11 @@ transform = Transform3D(-0.3420194, -1.1920929e-07, -0.939692, -0.8018597, 0.521
 bone_name = "handslot.r"
 bone_idx = 18
 
+[node name="LeftHand" type="BoneAttachment3D" parent="Knight/Rig/Skeleton3D"]
+transform = Transform3D(-0.34201965, 1.4901161e-07, 0.93969214, 0.80185974, 0.5213842, 0.29185298, -0.48994058, 0.8533213, -0.17832403, 0.54002404, 0.78498393, 0.2438627)
+bone_name = "handslot.l"
+bone_idx = 8
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Knight"]
 libraries = {
 &"": SubResource("AnimationLibrary_gykda")
