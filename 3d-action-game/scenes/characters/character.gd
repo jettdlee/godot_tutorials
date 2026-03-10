@@ -2,6 +2,8 @@ class_name Character
 extends CharacterBody3D
 
 @export var base_speed : float = 4
+@export var run_speed: float = 6
+@export var defend_speed: float = 2
 var movement_input: Vector2
 
 @export var jump_height: float = 2.25
@@ -16,8 +18,21 @@ var movement_input: Vector2
 @onready var attack_animation = $AnimationTree.get_tree_root().get_node('AttackAnimation') as AnimationNodeAnimation 
 
 var attacking: bool = false
-var defending: bool = false
+var defending: bool = false:
+	set(value):
+		if not defending and value:
+			defend_toggle(true)
+		if defending and not value:
+			defend_toggle(false)
+		defending = value
 
+func defend_toggle(forward: bool):
+	var tween = create_tween()
+	tween.tween_method(_defend_change, 1.0 - float(forward), float(forward), 0.25)
+	
+func _defend_change(value):
+	$AnimationTree.set("parameters/DefendBlend/blend_amount", value)
+	
 func apply_gravity(gravity, delta):
 	velocity.y -= gravity * delta
 	

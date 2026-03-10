@@ -5,27 +5,40 @@ extends Character
 @onready var camera = $CameraController/Camera3D
 @onready var skin = $PlayerSkin
 
-var weapons = [Global.weapons['sword']]
+var weapons = [Global.weapons['sword'], Global.weapons['dagger'], Global.weapons['staff']]
 var weapon_index: int
-var shields = [Global.shields['square']]
+var shields = [Global.shields['square'], Global.shields['round'], Global.shields['spike']]
 var shield_index: int
+var styles = [Global.style['duckhat']]
+var style_index: int
 
 func _ready() -> void:
 	equip(weapons[weapon_index], $PlayerSkin/Knight/Rig/Skeleton3D/RightHand)
 	equip(shields[shield_index], $PlayerSkin/Knight/Rig/Skeleton3D/LeftHand)
+	equip(styles[style_index], $PlayerSkin/Knight/Rig/Skeleton3D/Head)
 
 func _physics_process(delta: float) -> void:
 	move_logic(delta)
 	jump_logic(delta)
 	ability_logic()
 	move_and_slide()
-	
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed('switch_weapon'):
+		weapon_index = posmod(weapon_index + 1, weapons.size())
+		equip(weapons[weapon_index], $PlayerSkin/Knight/Rig/Skeleton3D/RightHand)
+	if Input.is_action_just_pressed('switch_shield'):
+		shield_index = posmod(shield_index + 1, shields.size())
+		equip(shields[shield_index], $PlayerSkin/Knight/Rig/Skeleton3D/LeftHand)
+
 func move_logic(delta: float):
 	movement_input = Input.get_vector('left','right', 'forward','backward').rotated(-camera.global_rotation.y)
 	var velocity_2d = Vector2(velocity.x, velocity.z)
 	
 	if movement_input != Vector2.ZERO:
-		velocity_2d += movement_input * base_speed * delta * acceleration
+		var speed = run_speed if Input.is_action_pressed('run') else base_speed
+		speed = defend_speed if defending else base_speed
+		velocity_2d += movement_input * speed * delta * acceleration
 		velocity_2d = velocity_2d.limit_length(base_speed)
 		var target_angle = -movement_input.angle() + PI/2
 		skin.rotation.y = rotate_toward(skin.rotation.y, target_angle, delta * 6)
