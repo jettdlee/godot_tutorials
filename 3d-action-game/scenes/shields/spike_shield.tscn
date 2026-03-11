@@ -1,10 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://csummfkcs8kh5"]
+[gd_scene load_steps=5 format=3 uid="uid://csummfkcs8kh5"]
 
 [ext_resource type="PackedScene" uid="uid://4vt7lcsw83wg" path="res://scenes/shields/shield.tscn" id="1_l4ovr"]
 [ext_resource type="PackedScene" uid="uid://b73nofu4axgpt" path="res://graphics/shields/shield_spikes.gltf" id="2_nenk5"]
+[ext_resource type="Shader" uid="uid://chr8on5g5ioxi" path="res://shaders/flash.gdshader" id="3_nenk5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l4ovr"]
+render_priority = 0
+shader = ExtResource("3_nenk5")
+shader_parameter/alpha = 0.0
+shader_parameter/color = Color(1, 1, 1, 1)
 
 [node name="SpikeShield" instance=ExtResource("1_l4ovr")]
 
 [node name="shield_spikes2" parent="." index="0" instance=ExtResource("2_nenk5")]
+
+[node name="shield_spikes" parent="shield_spikes2" index="0"]
+material_overlay = SubResource("ShaderMaterial_l4ovr")
 
 [editable path="shield_spikes2"]

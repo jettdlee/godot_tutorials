@@ -3,7 +3,6 @@ extends Character
 @export var acceleration: float = 8
 @export var deceleration: float = 8
 @onready var camera = $CameraController/Camera3D
-@onready var skin = $PlayerSkin
 
 var weapons = [Global.weapons['sword'], Global.weapons['dagger'], Global.weapons['staff']]
 var weapon_index: int
@@ -13,6 +12,7 @@ var styles = [Global.style['duckhat']]
 var style_index: int
 
 func _ready() -> void:
+	skin = $PlayerSkin
 	equip(weapons[weapon_index], $PlayerSkin/Knight/Rig/Skeleton3D/RightHand)
 	equip(shields[shield_index], $PlayerSkin/Knight/Rig/Skeleton3D/LeftHand)
 	equip(styles[style_index], $PlayerSkin/Knight/Rig/Skeleton3D/Head)
@@ -22,8 +22,9 @@ func _physics_process(delta: float) -> void:
 	jump_logic(delta)
 	ability_logic()
 	move_and_slide()
+	attack_logic()
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed('switch_weapon'):
 		weapon_index = posmod(weapon_index + 1, weapons.size())
 		equip(weapons[weapon_index], $PlayerSkin/Knight/Rig/Skeleton3D/RightHand)
@@ -58,6 +59,7 @@ func jump_logic(delta):
 		set_move_state('Jump_Idle')
 	var gravity = jump_gravity if velocity.y > 0.0 else fall_gravity
 	apply_gravity(gravity, delta)
+	current_weapon.play_audio()
 
 func ability_logic():
 	if Input.is_action_just_pressed("attack"):
@@ -65,3 +67,6 @@ func ability_logic():
 			$AnimationTree.set("parameters/AttackOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 			attacking = true
 	defending = Input.is_action_pressed("defend")
+
+func death_logic():
+	get_tree().quit()
