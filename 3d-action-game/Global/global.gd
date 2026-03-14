@@ -1,5 +1,6 @@
 extends Node
 
+@onready var inventory = get_tree().get_first_node_in_group('Inventory')
 var weapons: Dictionary = {
 	'dagger': 
 		{
@@ -84,3 +85,12 @@ var style: Dictionary = {
 		'thumbnail': preload("res://graphics/ui/thumbnails/top_hat.png")
 	},
 }
+
+func pause(value: bool = true):
+	if $PauseTimer.time_left == 0.0:
+		get_tree().paused = value
+		$PauseTimer.start()
+		if value:
+			inventory.show()
+		else:
+			inventory.hide()

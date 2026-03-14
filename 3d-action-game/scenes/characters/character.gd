@@ -34,7 +34,13 @@ var squash_and_stretch: float = 1.0:
 		squash_and_stretch = value
 		var negative = 1.0 + (1.0 - squash_and_stretch)
 		skin.scale = Vector3(negative, squash_and_stretch, negative)
-var health: int = 5
+var health: int = 5:
+	set(value):
+		if 'hud' in self:
+			get_tree().get_first_node_in_group('HUD').set_health(value)
+			if value <= 0:
+				get_tree().quit()
+		health = value
 
 func defend_toggle(forward: bool):
 	var tween = create_tween()

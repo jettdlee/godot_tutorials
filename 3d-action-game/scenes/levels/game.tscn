@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://nye5vprw6dvd"]
+[gd_scene load_steps=11 format=3 uid="uid://nye5vprw6dvd"]
 
 [ext_resource type="Material" uid="uid://ci4xx4eqkjvvg" path="res://graphics/test texture/test_material.tres" id="1_e6yxx"]
 [ext_resource type="Texture2D" uid="uid://cqn8gi2a50q32" path="res://graphics/test texture/white.svg" id="2_61jgc"]
 [ext_resource type="PackedScene" uid="uid://bjgjyxpjvtnkd" path="res://scenes/characters/player.tscn" id="2_eqihu"]
-[ext_resource type="PackedScene" uid="uid://id5e115vm3o5" path="res://scenes/characters/skeleton.tscn" id="4_riktp"]
+[ext_resource type="PackedScene" uid="uid://bcy56abjdvhme" path="res://scenes/ui/hud.tscn" id="5_a1osm"]
+[ext_resource type="PackedScene" uid="uid://db4e4w1nceqic" path="res://scenes/ui/inventory.tscn" id="6_limtx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eqihu"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -92,6 +93,9 @@ material = SubResource("StandardMaterial3D_a1osm")
 [node name="Characters" type="Node3D" parent="."]
 
 [node name="Player" parent="Characters" instance=ExtResource("2_eqihu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8589501, 0)
 
-[node name="Skeleton" parent="Characters" instance=ExtResource("4_riktp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.151699, 0, -2.3195868)
+[node name="HUD" parent="." instance=ExtResource("5_a1osm")]
+
+[node name="Inventory" parent="." instance=ExtResource("6_limtx")]
+visible = false

@@ -3,6 +3,7 @@ extends Character
 @export var acceleration: float = 8
 @export var deceleration: float = 8
 @onready var camera = $CameraController/Camera3D
+@onready var hud = get_tree().get_first_node_in_group('HUD')
 
 var weapons = [Global.weapons['sword'], Global.weapons['dagger'], Global.weapons['staff']]
 var weapon_index: int
@@ -16,6 +17,7 @@ func _ready() -> void:
 	equip(weapons[weapon_index], $PlayerSkin/Knight/Rig/Skeleton3D/RightHand)
 	equip(shields[shield_index], $PlayerSkin/Knight/Rig/Skeleton3D/LeftHand)
 	equip(styles[style_index], $PlayerSkin/Knight/Rig/Skeleton3D/Head)
+	hud.setup(health)
 
 func _physics_process(delta: float) -> void:
 	move_logic(delta)
@@ -31,6 +33,8 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed('switch_shield'):
 		shield_index = posmod(shield_index + 1, shields.size())
 		equip(shields[shield_index], $PlayerSkin/Knight/Rig/Skeleton3D/LeftHand)
+	if Input.is_action_just_pressed('menu'):
+		Global.pause()
 
 func move_logic(delta: float):
 	movement_input = Input.get_vector('left','right', 'forward','backward').rotated(-camera.global_rotation.y)
