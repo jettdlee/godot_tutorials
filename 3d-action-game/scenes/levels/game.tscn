@@ -1,24 +1,24 @@
-[gd_scene load_steps=11 format=3 uid="uid://nye5vprw6dvd"]
+[gd_scene load_steps=11 format=3 uid="uid://byn6wmraigxb1"]
 
-[ext_resource type="Material" uid="uid://ci4xx4eqkjvvg" path="res://graphics/test texture/test_material.tres" id="1_e6yxx"]
+[ext_resource type="Material" uid="uid://cswgf2fmrqsvy" path="res://graphics/test texture/test_material.tres" id="1_e6yxx"]
 [ext_resource type="Texture2D" uid="uid://cqn8gi2a50q32" path="res://graphics/test texture/white.svg" id="2_61jgc"]
-[ext_resource type="PackedScene" uid="uid://bjgjyxpjvtnkd" path="res://scenes/characters/player.tscn" id="2_eqihu"]
-[ext_resource type="PackedScene" uid="uid://bcy56abjdvhme" path="res://scenes/ui/hud.tscn" id="5_a1osm"]
-[ext_resource type="PackedScene" uid="uid://db4e4w1nceqic" path="res://scenes/ui/inventory.tscn" id="6_limtx"]
+[ext_resource type="PackedScene" uid="uid://dudm8bm7y6qxk" path="res://scenes/characters/player.tscn" id="2_eqihu"]
+[ext_resource type="PackedScene" uid="uid://dtdfw4qm38gpv" path="res://scenes/ui/hud.tscn" id="4_riktp"]
+[ext_resource type="PackedScene" uid="uid://civ54yt103x5u" path="res://scenes/ui/inventory.tscn" id="5_a1osm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eqihu"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
 [sub_resource type="Sky" id="Sky_61jgc"]
 sky_material = SubResource("ProceduralSkyMaterial_eqihu")
 
 [sub_resource type="Environment" id="Environment_riktp"]
 background_mode = 1
-background_color = Color(0.48235294, 0.50980395, 0.7137255, 1)
+background_color = Color(0.482353, 0.509804, 0.901961, 1)
 sky = SubResource("Sky_61jgc")
 ambient_light_source = 2
-ambient_light_color = Color(0.96862745, 0.8352941, 0.85882354, 1)
+ambient_light_color = Color(0.968627, 0.835294, 0.858824, 1)
 ambient_light_energy = 0.6
 tonemap_mode = 2
 ssao_enabled = true
@@ -28,14 +28,13 @@ glow_intensity = 0.09
 glow_strength = 0.85
 glow_blend_mode = 1
 fog_enabled = true
-fog_light_color = Color(0.50980395, 0.8745098, 0.87058824, 1)
+fog_light_color = Color(0.509804, 0.87451, 0.890196, 1)
 fog_density = 0.0001
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.005
 adjustment_enabled = true
 adjustment_brightness = 1.1
 adjustment_contrast = 1.2
-adjustment_saturation = 1.05
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_riktp"]
 dof_blur_far_enabled = true
@@ -44,7 +43,7 @@ dof_blur_far_transition = 250.0
 dof_blur_amount = 0.06
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1osm"]
-albedo_color = Color(1, 0.42352942, 0.3254902, 1)
+albedo_color = Color(1, 0.8, 0.203922, 1)
 albedo_texture = ExtResource("2_61jgc")
 
 [node name="Game" type="Node3D"]
@@ -54,48 +53,54 @@ environment = SubResource("Environment_riktp")
 camera_attributes = SubResource("CameraAttributesPractical_riktp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 4.565702, 0)
-light_color = Color(0.9411765, 0.9411765, 0.9411765, 1)
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(0.941176, 0.941176, 0.941176, 1)
 shadow_enabled = true
 shadow_opacity = 0.8
 shadow_blur = 1.2
-directional_shadow_max_distance = 1.0
 
 [node name="Terrain" type="CSGCombiner3D" parent="."]
 use_collision = true
 collision_mask = 0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Terrain"]
-size = Vector3(158.62329, 0.14086914, 187.0791)
+size = Vector3(48.3965, 0.0915527, 48.2031)
 material = ExtResource("1_e6yxx")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.350451, 2.5868225, 17.840023)
-size = Vector3(11.646484, 4.555786, 16.118042)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.972607, 1.21738, 0.376989)
+size = Vector3(5.74512, 3.06348, 4.7052)
 material = ExtResource("1_e6yxx")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.571787, 2.5868225, 17.840023)
-size = Vector3(11.646484, 4.555786, 16.118042)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.972607, 1.21738, -9.38548)
+size = Vector3(5.74512, 3.06348, 8.14508)
+material = ExtResource("1_e6yxx")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0252, 0.6792, -9.38548)
+size = Vector3(5.74512, 3.06348, 8.14508)
 material = ExtResource("1_e6yxx")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.983057, -0.14421177, 17.840023)
-size = Vector3(11.646484, 4.555786, 16.118042)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.972607, -1.53571, 3.94614)
+size = Vector3(5.74512, 5.30322, 3.06305)
 material = ExtResource("1_e6yxx")
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="Terrain"]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -6.292444, 9.192453, 17.890171)
-inner_radius = 1.8576027
-outer_radius = 2.9995716
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 7.27333, 7.32226, -8.4339)
+inner_radius = 4.142
+outer_radius = 6.656
+sides = 14
+ring_sides = 11
 material = SubResource("StandardMaterial3D_a1osm")
 
 [node name="Characters" type="Node3D" parent="."]
 
 [node name="Player" parent="Characters" instance=ExtResource("2_eqihu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8589501, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.995388, 0, 10.121)
 
-[node name="HUD" parent="." instance=ExtResource("5_a1osm")]
+[node name="HUD" parent="." instance=ExtResource("4_riktp")]
 
-[node name="Inventory" parent="." groups=["Inventory"] instance=ExtResource("6_limtx")]
+[node name="Inventory" parent="." instance=ExtResource("5_a1osm")]
 visible = false

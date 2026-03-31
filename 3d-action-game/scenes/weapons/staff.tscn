@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://6twejixe1j0g"]
+[gd_scene load_steps=3 format=3 uid="uid://6twejixe1j0g"]
 
 [ext_resource type="PackedScene" uid="uid://dixktolqbfdr6" path="res://scenes/weapons/weapon.tscn" id="1_1rce3"]
 [ext_resource type="PackedScene" uid="uid://b2vxmq5ag42qa" path="res://graphics/weapons/staff.gltf" id="2_0wqef"]
-[ext_resource type="AudioStream" uid="uid://ceoeu85n8k8hu" path="res://audio/staff_sound.wav" id="3_52f0k"]
 
 [node name="Staff" instance=ExtResource("1_1rce3")]
 
@@ -11,6 +10,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.880887, 0)
 
 [node name="RayCast3D" parent="." index="1"]
 target_position = Vector3(0, 2.14, 0)
-
-[node name="AttackSound" parent="." index="2"]
-stream = ExtResource("3_52f0k")

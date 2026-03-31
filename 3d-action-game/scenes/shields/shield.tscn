@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://4vt7lcsw83wg"]
 
-[ext_resource type="Script" uid="uid://dvjuxfjicnbsr" path="res://scenes/shields/shield.gd" id="1_o5tic"]
-[ext_resource type="AudioStream" uid="uid://kpw0hy0rkf5a" path="res://audio/metal_button_press1.wav" id="2_yi5dm"]
+[ext_resource type="Script" uid="uid://dtyakeq2fd52l" path="res://scenes/shields/shield.gd" id="1_o5tic"]
+[ext_resource type="AudioStream" uid="uid://bxy5veyouq3lb" path="res://audio/metal_button_press1.wav" id="2_yi5dm"]
 
 [node name="Shield" type="Node3D"]
 script = ExtResource("1_o5tic")
 
 [node name="HitSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_yi5dm")
+volume_db = -10.0

@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://4vt7lcsw83wg" path="res://scenes/shields/shield.tscn" id="1_7b1b7"]
 [ext_resource type="PackedScene" uid="uid://b0tbscqb73oko" path="res://graphics/shields/shield_round_color.gltf" id="2_bsynd"]
-[ext_resource type="Shader" uid="uid://chr8on5g5ioxi" path="res://shaders/flash.gdshader" id="3_bsynd"]
+[ext_resource type="Shader" uid="uid://d4hkv4ij14phm" path="res://shaders/flash.gdshader" id="3_bsynd"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7b1b7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2tv1w"]
 render_priority = 0
 shader = ExtResource("3_bsynd")
 shader_parameter/alpha = 0.0
@@ -13,8 +13,9 @@ shader_parameter/color = Color(1, 1, 1, 1)
 [node name="RoundShield" instance=ExtResource("1_7b1b7")]
 
 [node name="shield_round_color2" parent="." index="0" instance=ExtResource("2_bsynd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.055)
 
 [node name="shield_round_color" parent="shield_round_color2" index="0"]
-material_overlay = SubResource("ShaderMaterial_7b1b7")
+material_overlay = SubResource("ShaderMaterial_2tv1w")
 
 [editable path="shield_round_color2"]

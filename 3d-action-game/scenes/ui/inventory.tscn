@@ -1,41 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://db4e4w1nceqic"]
+[gd_scene load_steps=8 format=3 uid="uid://civ54yt103x5u"]
 
-[ext_resource type="Script" uid="uid://cyonfathctd1m" path="res://scenes/ui/inventory.gd" id="1_s6ek7"]
-[ext_resource type="FontFile" uid="uid://bm53cv1klorfh" path="res://graphics/ui/The Wild Breath of Zelda.otf" id="2_avmd0"]
-[ext_resource type="PackedScene" uid="uid://0vtxtrxqc46v" path="res://scenes/ui/player_viewport.tscn" id="3_xeaml"]
+[ext_resource type="Script" uid="uid://b50a26xkkv52h" path="res://scenes/ui/inventory.gd" id="1_s6ek7"]
+[ext_resource type="FontFile" uid="uid://bkstuxsb48nic" path="res://graphics/UI/The Wild Breath of Zelda.otf" id="2_xeaml"]
+[ext_resource type="PackedScene" uid="uid://bs3exqkfr5rhe" path="res://scenes/ui/player_viewport.tscn" id="3_5yy05"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6ek7"]
-bg_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulvp7"]
+bg_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xeaml"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weae1"]
 draw_center = false
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0.10980392, 1, 0, 1)
+border_color = Color(0.34902, 0.909804, 0, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5yy05"]
-bg_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfvro"]
+bg_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 expand_margin_left = 10.0
 expand_margin_right = 10.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avmd0"]
-bg_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj5ws"]
+bg_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="Inventory" type="Control"]
+[node name="Inventory" type="Control" groups=["Inventory"]]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 15
@@ -61,7 +61,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_s6ek7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ulvp7")
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ItemPanelContainer"]
 layout_mode = 2
@@ -72,7 +72,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Panel" type="Panel" parent="HBoxContainer/ItemPanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xeaml")
+theme_override_styles/panel = SubResource("StyleBoxFlat_weae1")
 
 [node name="Control" type="Control" parent="HBoxContainer/ItemPanelContainer"]
 layout_mode = 2
@@ -80,11 +80,11 @@ layout_mode = 2
 [node name="Label" type="Label" parent="HBoxContainer/ItemPanelContainer/Control"]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 50.0
-theme_override_colors/font_color = Color(0.10980392, 1, 0, 1)
-theme_override_fonts/font = ExtResource("2_avmd0")
+offset_left = 54.0
+theme_override_colors/font_color = Color(0.34902, 0.905882, 0, 1)
+theme_override_fonts/font = ExtResource("2_xeaml")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_5yy05")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bfvro")
 text = "Weapons"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -125,7 +125,17 @@ layout_mode = 2
 [node name="PlayerPanelContainer" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_avmd0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_vj5ws")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/PlayerPanelContainer"]
+layout_mode = 2
+stretch = true
+
+[node name="PlayerViewport" parent="HBoxContainer/PlayerPanelContainer/SubViewportContainer" instance=ExtResource("3_5yy05")]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(332, 548)
+render_target_update_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PlayerPanelContainer"]
 layout_mode = 2
@@ -136,14 +146,4 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Panel" type="Panel" parent="HBoxContainer/PlayerPanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xeaml")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/PlayerPanelContainer"]
-layout_mode = 2
-stretch = true
-
-[node name="PlayerViewport" parent="HBoxContainer/PlayerPanelContainer/SubViewportContainer" instance=ExtResource("3_xeaml")]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(332, 548)
-render_target_update_mode = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_weae1")

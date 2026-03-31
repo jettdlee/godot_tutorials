@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://iy4hqh2mtwhd"]
+[gd_scene load_steps=2 format=3 uid="uid://c3hyovi36spss"]
 
-[ext_resource type="Texture2D" uid="uid://c1n1xh3vapavk" path="res://graphics/ui/heart.png" id="1_86inv"]
+[ext_resource type="Texture2D" uid="uid://dnv5cbbtf5f0v" path="res://graphics/UI/heart.png" id="1_86inv"]
 
 [node name="Heart" type="Control"]
 custom_minimum_size = Vector2(16, 16)

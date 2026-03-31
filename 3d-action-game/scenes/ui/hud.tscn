@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcy56abjdvhme"]
+[gd_scene load_steps=2 format=3 uid="uid://dtdfw4qm38gpv"]
 
-[ext_resource type="Script" uid="uid://bh666qmgit3cp" path="res://scenes/ui/hud.gd" id="1_0mwgc"]
+[ext_resource type="Script" uid="uid://bmr6k2yuqyxtq" path="res://scenes/ui/hud.gd" id="1_0mwgc"]
 
 [node name="HUD" type="Control" groups=["HUD"]]
 layout_mode = 3
@@ -14,7 +14,7 @@ script = ExtResource("1_0mwgc")
 [node name="Hearts" type="HFlowContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.25
+anchor_right = 0.2
 anchor_bottom = 0.1
 offset_left = 15.0
 offset_top = 15.0

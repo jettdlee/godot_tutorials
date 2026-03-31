@@ -1,12 +1,12 @@
 extends Node
 
-@onready var inventory = get_tree().get_first_node_in_group('Inventory')
+@onready var inventory = get_tree().get_first_node_in_group("Inventory")
 var weapons: Dictionary = {
 	'dagger': 
 		{
 			'type': 'weapon',
 			'damage': 1, 
-			'thumbnail': preload("res://graphics/ui/thumbnails/dagger.png"), 
+			'thumbnail': preload("res://graphics/thumbnails/dagger.png"), 
 			'scene': preload("res://scenes/weapons/dagger.tscn"),
 			'animation': '1H_Melee_Attack_Stab',
 			'range': 1.2,
@@ -16,7 +16,7 @@ var weapons: Dictionary = {
 		{
 			'type': 'weapon',
 			'damage': 2, 
-			'thumbnail': preload("res://graphics/ui/thumbnails/sword.png"), 
+			'thumbnail': preload("res://graphics/thumbnails/sword.png"), 
 			'scene': preload("res://scenes/weapons/sword.tscn"),
 			'animation': '1H_Melee_Attack_Slice_Horizontal',
 			'range': 1.5,
@@ -26,17 +26,17 @@ var weapons: Dictionary = {
 		{
 			'type': 'weapon',
 			'damage': 3, 
-			'thumbnail': preload("res://graphics/ui/thumbnails/axe.png"), 
+			'thumbnail': preload("res://graphics/thumbnails/axe.png"), 
 			'scene': preload("res://scenes/weapons/axe.tscn"),
 			'animation': '2H_Melee_Attack_Spin',
 			'range': 1.3,
 			'audio': preload("res://audio/axe_sound.wav")
 		},
-	'staff': 
+		'staff': 
 		{
 			'type': 'weapon',
 			'damage': 1, 
-			'thumbnail': preload("res://graphics/ui/thumbnails/staff.png"), 
+			'thumbnail': preload("res://graphics/thumbnails/staff.png"), 
 			'scene': preload("res://scenes/weapons/staff.tscn"),
 			'animation': '2H_Melee_Attack_Slice',
 			'range': 2.1,
@@ -47,19 +47,19 @@ var shields: Dictionary = {
 	'square': {
 		'type': 'shield',
 		'defense': 0.8,
-		'thumbnail': preload("res://graphics/ui/thumbnails/square.png"),
+		'thumbnail': preload("res://graphics/thumbnails/square.png"),
 		'scene': preload("res://scenes/shields/square_shield.tscn")
 	},
 	'round': {
 		'type': 'shield',
 		'defense': 0.9,
-		'thumbnail': preload("res://graphics/ui/thumbnails/round.png"),
+		'thumbnail': preload("res://graphics/thumbnails/round.png"),
 		'scene': preload("res://scenes/shields/round_shield.tscn")
 	},
 	'spike': {
 		'type': 'shield',
 		'defense': 0.6,
-		'thumbnail': preload("res://graphics/ui/thumbnails/spike.png"),
+		'thumbnail': preload("res://graphics/thumbnails/spike.png"),
 		'scene': preload("res://scenes/shields/spike_shield.tscn")
 	},
 }
@@ -67,24 +67,25 @@ var style: Dictionary = {
 	'sunglasses': {
 		'type': 'style',
 		'scene': preload("res://scenes/style/sunglasses.tscn"),
-		'thumbnail': preload("res://graphics/ui/thumbnails/sun_glasses.png")
+		'thumbnail': preload("res://graphics/thumbnails/sun_glasses.png")
 	},
 	'starglasses': {
 		'type': 'style',
 		'scene': preload("res://scenes/style/starglasses.tscn"),
-		'thumbnail': preload("res://graphics/ui/thumbnails/star_glasses.png")
+		'thumbnail': preload("res://graphics/thumbnails/star_glasses.png")
 	},
 	'duckhat': {
 		'type': 'style',
 		'scene': preload("res://scenes/style/duck_hat.tscn"),
-		'thumbnail': preload("res://graphics/ui/thumbnails/duck.png")
+		'thumbnail': preload("res://graphics/thumbnails/duck.png")
 	},
 	'tophat': {
 		'type': 'style',
 		'scene': preload("res://scenes/style/tophat.tscn"),
-		'thumbnail': preload("res://graphics/ui/thumbnails/top_hat.png")
+		'thumbnail': preload("res://graphics/thumbnails/top_hat.png")
 	},
 }
+
 
 func pause(value: bool = true):
 	if $PauseTimer.time_left == 0.0:
