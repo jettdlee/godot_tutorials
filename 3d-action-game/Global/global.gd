@@ -91,6 +91,6 @@ func pause(value: bool = true):
 		get_tree().paused = value
 		$PauseTimer.start()
 		if value:
-			inventory.show()
+			inventory.reveal()
 		else:
 			inventory.hide()

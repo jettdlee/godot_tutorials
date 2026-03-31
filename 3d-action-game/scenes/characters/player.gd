@@ -10,7 +10,7 @@ var weapon_index: int
 var shields = [Global.shields['square'], Global.shields['round'], Global.shields['spike']]
 var shield_index: int
 var styles = [Global.style['duckhat']]
-var style_index: int
+var style_index: int = -1
 
 func _ready() -> void:
 	skin = $PlayerSkin
@@ -74,3 +74,7 @@ func ability_logic():
 
 func death_logic():
 	get_tree().quit()
+
+func unequip():
+	for child in $PlayerSkin/Knight/Rig/Skeleton3D/Head.get_children():
+		child.queue_free()

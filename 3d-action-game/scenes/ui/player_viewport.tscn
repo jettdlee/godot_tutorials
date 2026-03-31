@@ -1,6 +1,22 @@
-[gd_scene load_steps=87 format=4 uid="uid://0vtxtrxqc46v"]
+[gd_scene load_steps=92 format=4 uid="uid://0vtxtrxqc46v"]
 
+[ext_resource type="Script" uid="uid://inbe212nv34s" path="res://scenes/ui/knight.gd" id="1_epkef"]
 [ext_resource type="Texture2D" uid="uid://dm4nqfbmo7b57" path="res://graphics/characters/Knight_knight_texture.png" id="1_pxcog"]
+
+[sub_resource type="World3D" id="World3D_pxcog"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pxcog"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_epkef"]
+sky_material = SubResource("ProceduralSkyMaterial_pxcog")
+
+[sub_resource type="Environment" id="Environment_2rj47"]
+background_mode = 2
+sky = SubResource("Sky_epkef")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46emn"]
 resource_name = "knight_texture"
@@ -14765,6 +14781,7 @@ tracks/56/keys = PackedFloat32Array(0, 1, 0.75825286, 2.0632694e-07, -0.65196073
 [sub_resource type="Animation" id="Animation_jwo8q"]
 resource_name = "Idle"
 length = 1.0666667
+loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -30962,8 +30979,19 @@ _data = {
 }
 
 [node name="PlayerViewport" type="SubViewport"]
+own_world_3d = true
+world_3d = SubResource("World3D_pxcog")
 
-[node name="Knight" type="Node3D" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2rj47")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="Knight" type="Node3D" parent="." groups=["PlayerPreview"]]
+script = ExtResource("1_epkef")
 
 [node name="Rig" type="Node3D" parent="Knight"]
 
@@ -31343,10 +31371,26 @@ skin = SubResource("Skin_uxuqt")
 mesh = SubResource("ArrayMesh_c37ju")
 skin = SubResource("Skin_uxuqt")
 
+[node name="RightHand" type="BoneAttachment3D" parent="Knight/Rig/Skeleton3D"]
+transform = Transform3D(4.246644e-07, -0.14989443, -0.9887013, -0.99999905, 8.940687e-08, -1.742609e-07, -2.2554677e-07, 0.98870134, -0.14989455, -0.49106094, 0.6410296, 0.10659542)
+bone_name = "handslot.r"
+bone_idx = 18
+
+[node name="LeftHand" type="BoneAttachment3D" parent="Knight/Rig/Skeleton3D"]
+transform = Transform3D(-3.5728657e-08, 0.26286295, 0.9648325, 0.99999917, -1.1920936e-07, 3.0257627e-07, 3.3321462e-07, 0.9648326, -0.2628631, 0.5077682, 0.63670504, -0.018521156)
+bone_name = "handslot.l"
+bone_idx = 8
+
+[node name="Head" type="BoneAttachment3D" parent="Knight/Rig/Skeleton3D"]
+transform = Transform3D(0.9997204, -1.4014349e-09, 0.023646597, 1.3934147e-09, 0.99999994, 3.5568634e-10, -0.023646597, -3.226374e-10, 0.9997204, -4.3038546e-09, 1.2278259, 1.5739471e-15)
+bone_name = "head"
+bone_idx = 21
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Knight"]
 libraries = {
 &"": SubResource("AnimationLibrary_gykda")
 }
+autoplay = "Idle"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99102527, 0.13367485, 0, -0.13367485, 0.99102527, 0, 1.4869976, 2.134005)
+transform = Transform3D(1, 0, 0, 0, 0.99102527, 0.13367485, 0, -0.13367485, 0.99102527, 0, 1.4869976, 2.6534247)

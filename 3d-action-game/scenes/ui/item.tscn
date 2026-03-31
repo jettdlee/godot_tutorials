@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://cs76jhteiu7oj"]
+
+[ext_resource type="Script" uid="uid://3tei3dcmjkhb" path="res://scenes/ui/item.gd" id="1_cwagn"]
+[ext_resource type="Texture2D" uid="uid://gpgql5jc04fn" path="res://graphics/ui/thumbnails/dagger.png" id="1_x2pnp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6k7k"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwagn"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.9297146, 0.9297147, 0.9297146, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmkv6"]
+draw_center = false
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.8, 0.8, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Item" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_y6k7k")
+theme_override_styles/focus = SubResource("StyleBoxFlat_cwagn")
+script = ExtResource("1_cwagn")
+
+[node name="EquippedPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nmkv6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_x2pnp")
+expand_mode = 4
+stretch_mode = 5
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="resized" from="." to="." method="_on_resized"]
