@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://qqmnucaiu5g1"
-path="res://.godot/imported/castle.blend-00a48293b83aa95fada6eddd23a15115.scn"
+uid="uid://dl8kiwoyi4iaf"
+path="res://.godot/imported/overworld_environment.blend-0e09c130905de9f52e3ae3b16211970c.scn"
 
 [deps]
 
-source_file="res://graphics/objects/castle.blend"
-dest_files=["res://.godot/imported/castle.blend-00a48293b83aa95fada6eddd23a15115.scn"]
+source_file="res://overworld_environment.blend"
+dest_files=["res://.godot/imported/overworld_environment.blend-0e09c130905de9f52e3ae3b16211970c.scn"]
 
 [params]
 
@@ -37,7 +37,13 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Sun": {
+"import/skip_import": true
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

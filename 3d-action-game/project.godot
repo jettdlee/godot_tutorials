@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Adventure game"
-run/main_scene="uid://byn6wmraigxb1"
+run/main_scene="uid://c540cnf70st5l"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -32,10 +32,6 @@ folder_colors={
 "res://scenes/": "red",
 "res://shaders/": "pink"
 }
-
-[filesystem]
-
-import/blender/enabled=false
 
 [input]
 

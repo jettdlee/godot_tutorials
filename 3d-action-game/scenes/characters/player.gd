@@ -5,9 +5,9 @@ extends Character
 @onready var camera = $CameraController/Camera3D
 @onready var hud = get_tree().get_first_node_in_group("HUD")
 
-var weapons = [Global.weapons['sword'], Global.weapons['dagger'], Global.weapons['staff']]
+var weapons = [Global.weapons['sword']]
 var weapon_index: int
-var shields = [Global.shields['round'], Global.shields['square'], Global.shields['spike']]
+var shields = [Global.shields['round']]
 var shield_index: int
 var styles = [Global.style['duckhat']]
 var style_index: int = -1

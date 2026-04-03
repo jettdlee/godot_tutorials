@@ -1,7 +1,5 @@
-[gd_scene load_steps=11 format=3 uid="uid://byn6wmraigxb1"]
+[gd_scene load_steps=8 format=3 uid="uid://byn6wmraigxb1"]
 
-[ext_resource type="Material" uid="uid://cswgf2fmrqsvy" path="res://graphics/test texture/test_material.tres" id="1_e6yxx"]
-[ext_resource type="Texture2D" uid="uid://cqn8gi2a50q32" path="res://graphics/test texture/white.svg" id="2_61jgc"]
 [ext_resource type="PackedScene" uid="uid://dudm8bm7y6qxk" path="res://scenes/characters/player.tscn" id="2_eqihu"]
 [ext_resource type="PackedScene" uid="uid://dtdfw4qm38gpv" path="res://scenes/ui/hud.tscn" id="4_riktp"]
 [ext_resource type="PackedScene" uid="uid://civ54yt103x5u" path="res://scenes/ui/inventory.tscn" id="5_a1osm"]
@@ -42,10 +40,6 @@ dof_blur_far_distance = 150.0
 dof_blur_far_transition = 250.0
 dof_blur_amount = 0.06
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1osm"]
-albedo_color = Color(1, 0.8, 0.203922, 1)
-albedo_texture = ExtResource("2_61jgc")
-
 [node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -59,46 +53,14 @@ shadow_enabled = true
 shadow_opacity = 0.8
 shadow_blur = 1.2
 
-[node name="Terrain" type="CSGCombiner3D" parent="."]
-use_collision = true
-collision_mask = 0
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Terrain"]
-size = Vector3(48.3965, 0.0915527, 48.2031)
-material = ExtResource("1_e6yxx")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.972607, 1.21738, 0.376989)
-size = Vector3(5.74512, 3.06348, 4.7052)
-material = ExtResource("1_e6yxx")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.972607, 1.21738, -9.38548)
-size = Vector3(5.74512, 3.06348, 8.14508)
-material = ExtResource("1_e6yxx")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0252, 0.6792, -9.38548)
-size = Vector3(5.74512, 3.06348, 8.14508)
-material = ExtResource("1_e6yxx")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.972607, -1.53571, 3.94614)
-size = Vector3(5.74512, 5.30322, 3.06305)
-material = ExtResource("1_e6yxx")
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="Terrain"]
-transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 7.27333, 7.32226, -8.4339)
-inner_radius = 4.142
-outer_radius = 6.656
-sides = 14
-ring_sides = 11
-material = SubResource("StandardMaterial3D_a1osm")
+[node name="Terrain" type="Node3D" parent="."]
 
 [node name="Characters" type="Node3D" parent="."]
 
 [node name="Player" parent="Characters" instance=ExtResource("2_eqihu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.995388, 0, 10.121)
+
+[node name="Pickups" type="Node3D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource("4_riktp")]
 
