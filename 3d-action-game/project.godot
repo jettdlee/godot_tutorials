@@ -23,6 +23,10 @@ Global="*res://Global/global.tscn"
 
 project/assembly_name="Adventure game"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
@@ -122,3 +126,10 @@ defend={
 3d_physics/layer_1="terrain"
 3d_physics/layer_2="player"
 3d_physics/layer_3="enemies"
+
+[shader_globals]
+
+player_position={
+"type": "vec3",
+"value": Vector3(0, 0, 0)
+}

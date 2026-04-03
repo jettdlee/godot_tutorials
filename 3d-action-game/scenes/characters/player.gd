@@ -21,6 +21,7 @@ func _ready() -> void:
 	hud.setup(health)
 
 func _physics_process(delta: float) -> void:
+	RenderingServer.global_shader_parameter_set("player_position", global_position)
 	move_logic(delta)
 	jump_logic(delta)
 	ability_logic()
