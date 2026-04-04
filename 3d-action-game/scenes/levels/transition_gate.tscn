@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://4nchbdojg1ih"]
+
+[ext_resource type="Script" uid="uid://clhtpilhgcej5" path="res://scenes/levels/transition_gate.gd" id="1_n08rl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7drs8"]
+radius = 1.5
+
+[node name="TransitionGate" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_n08rl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7drs8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

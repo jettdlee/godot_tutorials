@@ -11,15 +11,15 @@ func _process(delta: float) -> void:
 	var joy_dir_accelerated = joy_dir * delta * Vector2(horizontal_acceleration, vertical_acceleration)
 	rotate_from_vector(joy_dir_accelerated)
 
-#func _ready() -> void:
-	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-#
-#func _input(event: InputEvent) -> void:
-	#if event is InputEventMouseMotion:
-		#var mouse_dir_accelerated = event.relative * mouse_acceleration
-		#rotate_from_vector(mouse_dir_accelerated)
-	#if Input.is_action_just_pressed("ui_cancel"):
-		#get_tree().quit()
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		var mouse_dir_accelerated = event.relative * mouse_acceleration
+		rotate_from_vector(mouse_dir_accelerated)
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
 
 func rotate_from_vector(v: Vector2):
 	if v.length() == 0 : return
