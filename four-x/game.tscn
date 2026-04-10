@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://d3iew4o7d0iof"]
+
+[ext_resource type="Script" uid="uid://jf34asn6mi10" path="res://HexTileMap.cs" id="1_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://dei4puytmf3ye" path="res://Assets/hex_128.png" id="2_feb5d"]
+[ext_resource type="Texture2D" uid="uid://o44444c8ny21" path="res://Assets/hex_overlays.png" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://dldlfb0mx38f6" path="res://Camera.cs" id="4_fc0e3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
+texture = ExtResource("2_feb5d")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_7jktm"]
+tile_shape = 3
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_fc0e3")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7jktm"]
+texture = ExtResource("3_feb5d")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ryrav"]
+tile_shape = 3
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_7jktm")
+
+[sub_resource type="TileSet" id="TileSet_eow3j"]
+tile_shape = 3
+tile_size = Vector2i(128, 128)
+
+[node name="Game" type="Node" unique_id=1039913]
+
+[node name="HexTileMap" type="Node2D" parent="." unique_id=441496480]
+script = ExtResource("1_e2o6t")
+width = 50
+height = 50
+
+[node name="BaseLayer" type="TileMapLayer" parent="HexTileMap" unique_id=1869568720]
+tile_set = SubResource("TileSet_7jktm")
+
+[node name="HexBordersLayer" type="TileMapLayer" parent="HexTileMap" unique_id=982433549]
+tile_set = SubResource("TileSet_ryrav")
+
+[node name="SelectionOverlayLayer" type="TileMapLayer" parent="HexTileMap" unique_id=1554028417]
+tile_set = SubResource("TileSet_eow3j")
+
+[node name="Camera" type="Camera2D" parent="." unique_id=555692188]
+position = Vector2(1, 0)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("4_fc0e3")
