@@ -1,9 +1,16 @@
 [gd_scene format=3 uid="uid://d3iew4o7d0iof"]
 
+[ext_resource type="Script" uid="uid://bahtdxpm8ejgg" path="res://Game.cs" id="1_7jktm"]
 [ext_resource type="Script" uid="uid://jf34asn6mi10" path="res://HexTileMap.cs" id="1_e2o6t"]
 [ext_resource type="Texture2D" uid="uid://dei4puytmf3ye" path="res://Assets/hex_128.png" id="2_feb5d"]
 [ext_resource type="Texture2D" uid="uid://o44444c8ny21" path="res://Assets/hex_overlays.png" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://dldlfb0mx38f6" path="res://Camera.cs" id="4_fc0e3"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ryrav"]
+noise_type = 3
+frequency = 0.0078
+fractal_type = 2
+fractal_octaves = 4
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("2_feb5d")
@@ -38,6 +45,8 @@ tile_shape = 3
 tile_size = Vector2i(128, 128)
 
 [node name="Game" type="Node" unique_id=1039913]
+script = ExtResource("1_7jktm")
+noise = SubResource("FastNoiseLite_ryrav")
 
 [node name="HexTileMap" type="Node2D" parent="." unique_id=441496480]
 script = ExtResource("1_e2o6t")
