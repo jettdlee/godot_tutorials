@@ -40,9 +40,16 @@ tile_shape = 3
 tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_7jktm")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ryrav"]
+texture = ExtResource("3_feb5d")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:1/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_eow3j"]
 tile_shape = 3
 tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_ryrav")
 
 [node name="Game" type="Node" unique_id=1039913]
 script = ExtResource("1_7jktm")
@@ -50,13 +57,14 @@ noise = SubResource("FastNoiseLite_ryrav")
 
 [node name="HexTileMap" type="Node2D" parent="." unique_id=441496480]
 script = ExtResource("1_e2o6t")
-width = 50
-height = 50
+width = 200
+height = 200
 
 [node name="BaseLayer" type="TileMapLayer" parent="HexTileMap" unique_id=1869568720]
 tile_set = SubResource("TileSet_7jktm")
 
 [node name="HexBordersLayer" type="TileMapLayer" parent="HexTileMap" unique_id=982433549]
+modulate = Color(1, 1, 1, 0.14509805)
 tile_set = SubResource("TileSet_ryrav")
 
 [node name="SelectionOverlayLayer" type="TileMapLayer" parent="HexTileMap" unique_id=1554028417]

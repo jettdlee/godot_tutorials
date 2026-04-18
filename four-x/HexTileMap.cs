@@ -12,9 +12,17 @@ public partial class Hex : GodotObject
     public readonly Vector2I coordinates;
     public TerrainType terrainType;
 
+    public int food;
+    public int production;
+
     public Hex(Vector2I coords)
     {
         this.coordinates = coords;
+    }
+
+    public override string ToString()
+    {
+        return $"Coordintes: ({this.coordinates.X}, {this.coordinates.Y}), Terrain Type: {this.terrainType}, Food: {this.food}, Production: {this.production}";
     }
 }
 
@@ -50,12 +58,69 @@ public partial class HexTileMap : Node2D
             { TerrainType.BEACH, new Vector2I(0, 2) },
         };
         GenerateTerrain();
+        GenerateResources();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
+
+    Vector2I currentSelectedCell = new Vector2I(-1, -1);
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mouse)
+        {
+            Vector2I mapCoords = baseLayer.LocalToMap(ToLocal(GetGlobalMousePosition()));
+
+            if (mapCoords.X >= 0 && mapCoords.X < width && mapCoords.Y >= 0 && mapCoords.Y < height )
+            {
+                if (mouse.ButtonMask == MouseButtonMask.Left)
+                {
+                    GD.Print(mapData[mapCoords]);
+
+                    if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
+                    overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
+                    currentSelectedCell = mapCoords;
+                }
+            } else
+            {
+                overlayLayer.SetCell(currentSelectedCell, -1);
+            }
+        }
+    }
+
+    public void GenerateResources()
+    {
+        Random r = new Random();
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Hex h = mapData[new Vector2I(x, y)];
+                switch (h.terrainType)
+                {
+                    case TerrainType.PLAINS:
+                        h.food = r.Next(2, 6);
+                        h.production = r.Next(0, 3);
+                        break;
+                    case TerrainType.FOREST:
+                        h.food = r.Next(1, 4);
+                        h.production = r.Next(2, 6);
+                        break;
+                    case TerrainType.DESERT:
+                        h.food = r.Next(0, 2);
+                        h.production = r.Next(0, 2);
+                        break;
+                    case TerrainType.BEACH:
+                        h.food = r.Next(0, 4);
+                        h.production = r.Next(0, 2);
+                        break;
+                }
+            }
+        }
+    }
 
     public void GenerateTerrain()
     {
@@ -102,8 +167,6 @@ public partial class HexTileMap : Node2D
         mountainNoise.FractalLacunarity = 2f;
 
         float mountainNoiseMax = 0f;
-
-
 
         for (int x = 0; x < width; x++)
         {
