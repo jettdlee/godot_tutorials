@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dei4puytmf3ye" path="res://Assets/hex_128.png" id="2_feb5d"]
 [ext_resource type="Texture2D" uid="uid://o44444c8ny21" path="res://Assets/hex_overlays.png" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://dldlfb0mx38f6" path="res://Camera.cs" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://bh63f4sumavmv" path="res://UIManager.tscn" id="6_ryrav"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ryrav"]
 noise_type = 3
@@ -75,3 +76,7 @@ position = Vector2(1, 0)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("4_fc0e3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=102774229]
+
+[node name="UiManager" parent="CanvasLayer" unique_id=127151639 instance=ExtResource("6_ryrav")]
