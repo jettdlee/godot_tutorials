@@ -14,10 +14,12 @@ public partial class Hex : GodotObject
 
     public int food;
     public int production;
+    public City ownerCity;
 
     public Hex(Vector2I coords)
     {
         this.coordinates = coords;
+        ownerCity = null;
     }
 
     public override string ToString()
@@ -28,6 +30,8 @@ public partial class Hex : GodotObject
 
 public partial class HexTileMap : Node2D
 {
+    PackedScene cityScene;
+
     [Export]
     public int width = 100;
 
@@ -45,8 +49,12 @@ public partial class HexTileMap : Node2D
     public delegate void SendHexDataEventHandler(Hex h);
     public event SendHexDataEventHandler SendHexData;
 
+    [Signal]
+    public delegate void ClickOffMapEventHandler();
+
 	public override void _Ready()
     {
+        cityScene = ResourceLoader.Load<PackedScene>("City.tscn");
         baseLayer = GetNode<TileMapLayer>("BaseLayer");
         borderLayer = GetNode<TileMapLayer>("HexBordersLayer");
         overlayLayer = GetNode<TileMapLayer>("SelectionOverlayLayer");
@@ -99,6 +107,7 @@ public partial class HexTileMap : Node2D
             } else
             {
                 overlayLayer.SetCell(currentSelectedCell, -1);
+                EmitSignal(SignalName.ClickOffMap);
             }
         }
     }
@@ -132,6 +141,49 @@ public partial class HexTileMap : Node2D
                 }
             }
         }
+    }
+
+    public void CreateCity(Civilization civ, Vector2I coords, string name)
+    {
+        City city = cityScene.Instantiate() as City;
+        city.map = this;
+        civ.cities.Add(city);
+        city.civ = civ;
+
+        AddChild(city);
+
+        city.SetIconColor(civ.territoryColor);
+        city.SetCityName(name);
+        city.centerCoordinates = coords;
+        city.Position = baseLayer.MapToLocal(coords);
+        city.AddTerritory(new List<Hex>{mapData[coords]});
+        List<Hex> surrounding = GetSurroundingHexes(coords);
+        foreach (Hex h in surrounding)
+        {
+            if (h.ownerCity == null)
+                city.AddTerritory(new List<Hex>{h});
+        }
+    }
+
+    public List<Hex> GetSurroundingHexes(Vector2I coords)
+    {
+        List<Hex> result = new List<Hex>();
+
+        foreach (Vector2I coord in baseLayer.GetSurroundingCells(coords))
+        {
+            if (HexInBounds(coord))
+                result.Add(mapData[coords]);
+        }
+
+        return result;
+    }
+
+    public bool HexInBounds(Vector2I coords)
+    {
+        if (coords.X < 0 || coords.X >= width || coords.Y < 0 || coords.Y >= height)
+            return false;
+        
+        return true;
     }
 
     public void GenerateTerrain()

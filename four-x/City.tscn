@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cn463t0xvyms"]
+
+[ext_resource type="Script" uid="uid://b4q632ank5d0l" path="res://City.cs" id="1_0d5ds"]
+[ext_resource type="Texture2D" uid="uid://cwc5o1yewb71p" path="res://Assets/city.png" id="1_qodpt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0d5ds"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[node name="City" type="Node2D" unique_id=1528348205]
+script = ExtResource("1_0d5ds")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=954111215]
+position = Vector2(1, 3)
+texture = ExtResource("1_qodpt")
+
+[node name="Label" type="Label" parent="." unique_id=662598808]
+offset_left = -60.0
+offset_top = 41.0
+offset_right = 60.0
+offset_bottom = 75.0
+text = "City Name"
+label_settings = SubResource("LabelSettings_0d5ds")

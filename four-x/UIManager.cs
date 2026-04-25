@@ -13,6 +13,14 @@ public partial class UIManager : Node2D
         terrainUiScene = ResourceLoader.Load<PackedScene>("TerrainTileUI.tscn");
     }
 
+    public void HideAllPopups()
+    {
+        if (terrainUi is not null)
+        {
+            terrainUi.QueueFree();
+            terrainUi = null;
+        }
+    }
     public void SetTerrainUi(Hex h)
     {
         if (terrainUi is not null) terrainUi.QueueFree();
