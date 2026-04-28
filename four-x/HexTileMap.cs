@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-public enum TerrainType { PLAINS, WATER, DESERT, MOUNTAIN, ICE, SHALLOW_WATER, FOREST, BEACH }
+public enum TerrainType { PLAINS, WATER, DESERT, MOUNTAIN, ICE, SHALLOW_WATER, FOREST, BEACH, CIV_COLOR_BASE }
 
 public partial class Hex : GodotObject
 {
@@ -15,6 +15,7 @@ public partial class Hex : GodotObject
     public int food;
     public int production;
     public City ownerCity;
+    public bool isCityCenter = false;
 
     public Hex(Vector2I coords)
     {
@@ -38,12 +39,15 @@ public partial class HexTileMap : Node2D
     [Export]
     public int height = 60;
 
-    TileMapLayer baseLayer, borderLayer, overlayLayer;
+    TileMapLayer baseLayer, borderLayer, overlayLayer, civColorsLayer;
 
     System.Collections.Generic.Dictionary<Vector2I, Hex> mapData;
     System.Collections.Generic.Dictionary<TerrainType, Vector2I> terrainTextures;
 
     UIManager uiManager;
+
+    public Godot.Collections.Dictionary<Vector2I, City> cities;
+    public List<Civilization> civs;
 
     // Signals
     public delegate void SendHexDataEventHandler(Hex h);
@@ -55,9 +59,12 @@ public partial class HexTileMap : Node2D
 	public override void _Ready()
     {
         cityScene = ResourceLoader.Load<PackedScene>("City.tscn");
+
         baseLayer = GetNode<TileMapLayer>("BaseLayer");
         borderLayer = GetNode<TileMapLayer>("HexBordersLayer");
         overlayLayer = GetNode<TileMapLayer>("SelectionOverlayLayer");
+        civColorsLayer = GetNode<TileMapLayer>("CivColorsLayer");
+
         uiManager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
 
         mapData = new System.Collections.Generic.Dictionary<Vector2I, Hex>();
@@ -71,10 +78,13 @@ public partial class HexTileMap : Node2D
             { TerrainType.SHALLOW_WATER, new Vector2I(1, 2) },
             { TerrainType.FOREST, new Vector2I(1, 3) },
             { TerrainType.BEACH, new Vector2I(0, 2) },
+            { TerrainType.CIV_COLOR_BASE, new Vector2I(0, 3) },
         };
         GenerateTerrain();
         GenerateResources();
 
+        civs = new List<Civilization>();
+        cities = new Godot.Collections.Dictionary<Vector2I, City>();
         this.SendHexData += uiManager.SetTerrainUi;
     }
 
@@ -143,6 +153,42 @@ public partial class HexTileMap : Node2D
         }
     }
 
+    public List<Vector2I> GenerageCivStartingLocations(int numLocations)
+    {
+        List<Vector2I> locations = new List<Vector2I>();
+        List<Vector2I> plainsTiles = new List<Vector2I>();
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (mapData[new Vector2I(x, y)].terrainType == TerrainType.PLAINS)
+                {
+                    plainsTiles.Add(new Vector2I(x, y));
+                }
+            }
+        }
+        Random r = new Random();
+        for (int i = 0; i < numLocations; i++)
+        {
+            Vector2I coord = new Vector2I();
+            bool valid = false;
+            int counter = 0;
+            while(!valid && counter < 10000)
+            {
+                coord = plainsTiles[r.Next(plainsTiles.Count)];
+
+            }
+        }
+
+        return locations;
+    }
+
+    public bool IsValidLocation(Vector2I coord, List<Vector2I> locations)
+    {
+        return false;
+    }
+
     public void CreateCity(Civilization civ, Vector2I coords, string name)
     {
         City city = cityScene.Instantiate() as City;
@@ -156,12 +202,29 @@ public partial class HexTileMap : Node2D
         city.SetCityName(name);
         city.centerCoordinates = coords;
         city.Position = baseLayer.MapToLocal(coords);
+        mapData[coords].isCityCenter = true;
+
         city.AddTerritory(new List<Hex>{mapData[coords]});
         List<Hex> surrounding = GetSurroundingHexes(coords);
         foreach (Hex h in surrounding)
         {
             if (h.ownerCity == null)
                 city.AddTerritory(new List<Hex>{h});
+        }
+
+        UpdateCivTerritoryMap(civ);
+
+        cities[coords] = city;
+    }
+
+    public void UpdateCivTerritoryMap(Civilization civ)
+    {
+        foreach (City c in civ.cities)
+        {
+            foreach(Hex h in c.territory)
+            {
+                civColorsLayer.SetCell(h.coordinates, 0, terrainTextures[TerrainType.CIV_COLOR_BASE], civ.territoryColorAltTileId);
+            }
         }
     }
 
