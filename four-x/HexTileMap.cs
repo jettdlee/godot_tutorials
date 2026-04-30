@@ -39,7 +39,12 @@ public partial class HexTileMap : Node2D
     [Export]
     public int height = 60;
 
+    [Export]
+    public int num_ai_civs = 6;
+
     TileMapLayer baseLayer, borderLayer, overlayLayer, civColorsLayer;
+
+    TileSetAtlasSource terrainAtlas;
 
     System.Collections.Generic.Dictionary<Vector2I, Hex> mapData;
     System.Collections.Generic.Dictionary<TerrainType, Vector2I> terrainTextures;
@@ -67,6 +72,12 @@ public partial class HexTileMap : Node2D
 
         uiManager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
 
+        GD.Print(borderLayer);
+        GD.Print(civColorsLayer);
+        GD.Print(civColorsLayer.TileSet);
+        civColorsLayer.TileSet = baseLayer.TileSet;
+        this.terrainAtlas = civColorsLayer.TileSet.GetSource(0) as TileSetAtlasSource;
+
         mapData = new System.Collections.Generic.Dictionary<Vector2I, Hex>();
         terrainTextures = new System.Collections.Generic.Dictionary<TerrainType, Vector2I>
         {
@@ -85,6 +96,10 @@ public partial class HexTileMap : Node2D
 
         civs = new List<Civilization>();
         cities = new Godot.Collections.Dictionary<Vector2I, City>();
+
+        List<Vector2I> starts = GenerageCivStartingLocations(num_ai_civs + 1);
+        GenerateAICivs(starts);
+
         this.SendHexData += uiManager.SetTerrainUi;
     }
 
@@ -153,6 +168,30 @@ public partial class HexTileMap : Node2D
         }
     }
 
+    public void GenerateAICivs(List<Vector2I> civStarts)
+    {
+        for (int i = 0; i < civStarts.Count; i++)
+        {
+            Civilization currentCiv = new Civilization
+            {
+                id = i + 1,
+                playerCiv = false
+            };
+            
+            currentCiv.SetRandomColor();
+
+            GD.Print(terrainTextures[TerrainType.CIV_COLOR_BASE]);
+            GD.Print(this.terrainAtlas);
+            int id = terrainAtlas.CreateAlternativeTile(terrainTextures[TerrainType.CIV_COLOR_BASE]);
+            terrainAtlas.GetTileData(terrainTextures[TerrainType.CIV_COLOR_BASE], id).Modulate = currentCiv.territoryColor;
+
+            currentCiv.territoryColorAltTileId = id;
+            CreateCity(currentCiv, civStarts[i], "City " + civStarts[i].X);
+            
+            civs.Add(currentCiv);
+        }
+    }
+
     public List<Vector2I> GenerageCivStartingLocations(int numLocations)
     {
         List<Vector2I> locations = new List<Vector2I>();
@@ -177,8 +216,24 @@ public partial class HexTileMap : Node2D
             while(!valid && counter < 10000)
             {
                 coord = plainsTiles[r.Next(plainsTiles.Count)];
-
+                valid = IsValidLocation(coord, locations);
+                counter++;
             }
+            plainsTiles.Remove(coord);
+            foreach (Hex h in GetSurroundingHexes(coord))
+            {
+                foreach (Hex j in GetSurroundingHexes(h.coordinates))
+                {
+                    foreach (Hex k in GetSurroundingHexes(j.coordinates))
+                    {
+                        plainsTiles.Remove(h.coordinates);
+                        plainsTiles.Remove(j.coordinates);
+                        plainsTiles.Remove(k.coordinates);
+                    }
+                }
+            }
+
+            locations.Add(coord);
         }
 
         return locations;
@@ -186,17 +241,26 @@ public partial class HexTileMap : Node2D
 
     public bool IsValidLocation(Vector2I coord, List<Vector2I> locations)
     {
-        return false;
+        if (coord.X < 3 || coord.X > width - 3 || coord.Y < 3 || coord.Y > width - 3 )
+            return false;
+
+        foreach (Vector2I l in locations)
+        {
+            if (Math.Abs(coord.X - l.X) < 20 || Math.Abs(coord.X - l.X) < 20)
+                return false;
+        }
+
+        return true;
     }
 
     public void CreateCity(Civilization civ, Vector2I coords, string name)
     {
         City city = cityScene.Instantiate() as City;
+        AddChild(city);
+
         city.map = this;
         civ.cities.Add(city);
         city.civ = civ;
-
-        AddChild(city);
 
         city.SetIconColor(civ.territoryColor);
         city.SetCityName(name);
@@ -215,6 +279,7 @@ public partial class HexTileMap : Node2D
         UpdateCivTerritoryMap(civ);
 
         cities[coords] = city;
+        CallDeferred("SetCityColor", city, civ.territoryColor);
     }
 
     public void UpdateCivTerritoryMap(Civilization civ)
@@ -235,7 +300,7 @@ public partial class HexTileMap : Node2D
         foreach (Vector2I coord in baseLayer.GetSurroundingCells(coords))
         {
             if (HexInBounds(coord))
-                result.Add(mapData[coords]);
+                result.Add(mapData[coord]);
         }
 
         return result;

@@ -15,4 +15,10 @@ public class Civilization
     {
         cities = new List<City>();
     }
+
+    public void SetRandomColor()
+    {
+        Random r = new Random();
+        territoryColor = new Godot.Color(r.Next(255)/255.0f, r.Next(255)/255.0f, r.Next(255)/255.0f);
+    }
 }

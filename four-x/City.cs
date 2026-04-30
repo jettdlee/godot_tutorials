@@ -16,10 +16,18 @@ public partial class City : Node2D
     Label label;
     Sprite2D sprite;
 
+    public City()
+    {
+        territory = new List<Hex>();
+        borderTilePool = new List<Hex>();
+    }
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
-	{
-	}
+    {
+        label = GetNode<Label>("Label");
+        sprite = GetNode<Sprite2D>("Sprite2D");    
+    }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
