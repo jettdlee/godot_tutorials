@@ -42,6 +42,9 @@ public partial class HexTileMap : Node2D
     [Export]
     public int num_ai_civs = 6;
 
+    [Export]
+    public Color player_color = new Color(255, 255, 255);
+
     TileMapLayer baseLayer, borderLayer, overlayLayer, civColorsLayer;
 
     TileSetAtlasSource terrainAtlas;
@@ -72,9 +75,6 @@ public partial class HexTileMap : Node2D
 
         uiManager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
 
-        GD.Print(borderLayer);
-        GD.Print(civColorsLayer);
-        GD.Print(civColorsLayer.TileSet);
         civColorsLayer.TileSet = baseLayer.TileSet;
         this.terrainAtlas = civColorsLayer.TileSet.GetSource(0) as TileSetAtlasSource;
 
@@ -97,7 +97,11 @@ public partial class HexTileMap : Node2D
         civs = new List<Civilization>();
         cities = new Godot.Collections.Dictionary<Vector2I, City>();
 
-        List<Vector2I> starts = GenerageCivStartingLocations(num_ai_civs + 1);
+        List<Vector2I> starts = GenerageCivStartingLocations(num_ai_civs + 1);        
+
+        Civilization playerCiv = CreatePlayerCiv(starts[0]);
+        starts.RemoveAt(0);
+
         GenerateAICivs(starts);
 
         this.SendHexData += uiManager.SetTerrainUi;
@@ -121,7 +125,6 @@ public partial class HexTileMap : Node2D
                 if (mouse.ButtonMask == MouseButtonMask.Left)
                 {
                     Hex h = mapData[mapCoords];
-                    GD.Print(mapData[mapCoords]);
 
                     SendHexData?.Invoke(h);
 
@@ -137,6 +140,20 @@ public partial class HexTileMap : Node2D
         }
     }
 
+    public Civilization CreatePlayerCiv(Vector2I start)
+    {
+        Civilization playerCiv = new Civilization();
+        playerCiv.id = 0;
+        playerCiv.playerCiv = true;
+        playerCiv.territoryColor = new Color(player_color);
+        int id = terrainAtlas.CreateAlternativeTile(terrainTextures[TerrainType.CIV_COLOR_BASE]);
+        terrainAtlas.GetTileData(terrainTextures[TerrainType.CIV_COLOR_BASE], id).Modulate = playerCiv.territoryColor;
+        playerCiv.territoryColorAltTileId = id;
+        civs.Add(playerCiv);
+        CreateCity(playerCiv, start, "Player City");
+
+        return playerCiv;
+    }
     public void GenerateResources()
     {
         Random r = new Random();
@@ -180,8 +197,6 @@ public partial class HexTileMap : Node2D
             
             currentCiv.SetRandomColor();
 
-            GD.Print(terrainTextures[TerrainType.CIV_COLOR_BASE]);
-            GD.Print(this.terrainAtlas);
             int id = terrainAtlas.CreateAlternativeTile(terrainTextures[TerrainType.CIV_COLOR_BASE]);
             terrainAtlas.GetTileData(terrainTextures[TerrainType.CIV_COLOR_BASE], id).Modulate = currentCiv.territoryColor;
 

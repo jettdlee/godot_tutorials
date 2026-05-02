@@ -75,8 +75,8 @@ noise = SubResource("FastNoiseLite_ryrav")
 
 [node name="HexTileMap" type="Node2D" parent="." unique_id=441496480]
 script = ExtResource("1_e2o6t")
-width = 200
-height = 200
+height = 100
+num_ai_civs = 5
 
 [node name="BaseLayer" type="TileMapLayer" parent="HexTileMap" unique_id=1869568720]
 tile_set = SubResource("TileSet_7jktm")
