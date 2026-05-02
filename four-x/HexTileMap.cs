@@ -64,6 +64,9 @@ public partial class HexTileMap : Node2D
     [Signal]
     public delegate void ClickOffMapEventHandler();
 
+    [Signal]
+    public delegate void SendCityUIInfoEventHandler(City c);
+
 	public override void _Ready()
     {
         cityScene = ResourceLoader.Load<PackedScene>("City.tscn");
@@ -122,15 +125,20 @@ public partial class HexTileMap : Node2D
 
             if (mapCoords.X >= 0 && mapCoords.X < width && mapCoords.Y >= 0 && mapCoords.Y < height )
             {
+                Hex h = mapData[mapCoords];
                 if (mouse.ButtonMask == MouseButtonMask.Left)
                 {
-                    Hex h = mapData[mapCoords];
+                    if (cities.ContainsKey(mapCoords))
+                    {
+                        EmitSignal(SignalName.SendCityUIInfo, cities[mapCoords]);
+                    } else
+                    {
+                        SendHexData?.Invoke(h);
 
-                    SendHexData?.Invoke(h);
-
-                    if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
-                    overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
-                    currentSelectedCell = mapCoords;
+                        if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
+                        overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
+                        currentSelectedCell = mapCoords;
+                    }
                 }
             } else
             {

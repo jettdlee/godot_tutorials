@@ -13,6 +13,10 @@ public partial class City : Node2D
 
     public string name;
 
+    public int population = 1;
+    public int totalFood;
+    public int totalProduction;
+
     Label label;
     Sprite2D sprite;
 
@@ -41,6 +45,7 @@ public partial class City : Node2D
             h.ownerCity = this;
         }
         territory.AddRange(territoryToAdd);
+        CalculateTerritoryResourceTotals();
     }
 
     public void SetCityName(string newName)
@@ -52,5 +57,16 @@ public partial class City : Node2D
     public void SetIconColor(Color c)
     {
         sprite.Modulate = c;
+    }
+
+    public void CalculateTerritoryResourceTotals()
+    {
+        totalFood = 0;
+        totalProduction = 0;
+        foreach (Hex h in territory)
+        {
+            totalFood += h.food;
+            totalProduction += h.production;
+        }
     }
 }

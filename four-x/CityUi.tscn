@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bixehmfbw7rq6"]
+
+[ext_resource type="Script" uid="uid://cqafn4ufjxatn" path="res://CityUI.cs" id="1_h7t1p"]
+[ext_resource type="Texture2D" uid="uid://bk1fixx278o7o" path="res://Assets/city_painting.jpg" id="1_yim3b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yim3b"]
+font_size = 24
+
+[node name="CityUi" type="Panel" unique_id=1208121881]
+offset_right = 250.0
+offset_bottom = 648.0
+script = ExtResource("1_h7t1p")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=305173864]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 160.0
+texture = ExtResource("1_yim3b")
+expand_mode = 1
+
+[node name="CityName" type="Label" parent="." unique_id=1284191590]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 171.0
+offset_right = 237.0
+offset_bottom = 242.0
+text = "City Name
+"
+label_settings = SubResource("LabelSettings_yim3b")
+
+[node name="Food" type="Label" parent="." unique_id=113169768]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 238.0
+offset_right = 58.0
+offset_bottom = 261.0
+text = "Food:"
+
+[node name="Population" type="Label" parent="." unique_id=646484804]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 207.0
+offset_right = 103.0
+offset_bottom = 230.0
+text = "Population:"
+
+[node name="Production" type="Label" parent="." unique_id=560052660]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 268.0
+offset_right = 54.0
+offset_bottom = 291.0
+text = "Production:"

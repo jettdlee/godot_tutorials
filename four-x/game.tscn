@@ -75,7 +75,8 @@ noise = SubResource("FastNoiseLite_ryrav")
 
 [node name="HexTileMap" type="Node2D" parent="." unique_id=441496480]
 script = ExtResource("1_e2o6t")
-height = 100
+width = 50
+height = 50
 num_ai_civs = 5
 
 [node name="BaseLayer" type="TileMapLayer" parent="HexTileMap" unique_id=1869568720]
@@ -103,3 +104,4 @@ script = ExtResource("4_fc0e3")
 [node name="UiManager" parent="CanvasLayer" unique_id=127151639 instance=ExtResource("6_ryrav")]
 
 [connection signal="ClickOffMap" from="HexTileMap" to="CanvasLayer/UiManager" method="HideAllPopups"]
+[connection signal="SendCityUIInfo" from="HexTileMap" to="CanvasLayer/UiManager" method="SetCityUI"]
