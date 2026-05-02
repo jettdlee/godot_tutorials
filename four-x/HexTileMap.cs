@@ -279,7 +279,6 @@ public partial class HexTileMap : Node2D
         UpdateCivTerritoryMap(civ);
 
         cities[coords] = city;
-        CallDeferred("SetCityColor", city, civ.territoryColor);
     }
 
     public void UpdateCivTerritoryMap(Civilization civ)
