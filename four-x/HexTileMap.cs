@@ -151,6 +151,10 @@ public partial class HexTileMap : Node2D
     public void ProcessTurn()
     {
         GD.Print("End Turn");
+        foreach (Civilization c in civs)
+        {
+            c.ProcessTurn();
+        }
     }
 
     public Civilization CreatePlayerCiv(Vector2I start)
