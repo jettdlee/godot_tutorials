@@ -108,6 +108,7 @@ public partial class HexTileMap : Node2D
         GenerateAICivs(starts);
 
         this.SendHexData += uiManager.SetTerrainUi;
+        uiManager.EndTurn += ProcessTurn;
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -134,11 +135,10 @@ public partial class HexTileMap : Node2D
                     } else
                     {
                         SendHexData?.Invoke(h);
-
-                        if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
-                        overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
-                        currentSelectedCell = mapCoords;
                     }
+                    if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
+                    overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
+                    currentSelectedCell = mapCoords;
                 }
             } else
             {
@@ -146,6 +146,11 @@ public partial class HexTileMap : Node2D
                 EmitSignal(SignalName.ClickOffMap);
             }
         }
+    }
+
+    public void ProcessTurn()
+    {
+        GD.Print("End Turn");
     }
 
     public Civilization CreatePlayerCiv(Vector2I start)

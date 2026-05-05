@@ -7,12 +7,26 @@ public partial class UIManager : Node2D
     PackedScene cityUiScene;
     TerrainTileUi terrainUi = null;
     CityUI cityUi = null;
+    GeneralUI generalUi;
+
+    [Signal]
+    public delegate void EndTurnEventHandler();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
     {
         terrainUiScene = ResourceLoader.Load<PackedScene>("TerrainTileUI.tscn");
         cityUiScene = ResourceLoader.Load<PackedScene>("CityUi.tscn");
+        generalUi = GetNode<Panel>("GeneralUi") as GeneralUI;
+
+        Button endTurnButton = generalUi.GetNode<Button>("EndTurnButton");
+        endTurnButton.Pressed += SignalEndTurn;
+    }
+
+    public void SignalEndTurn()
+    {
+        EmitSignal(SignalName.EndTurn);
+        generalUi.IncrementTurnCounter();
     }
 
     public void HideAllPopups()

@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://bh63f4sumavmv"]
 
 [ext_resource type="Script" uid="uid://52by3kswuki1" path="res://UIManager.cs" id="1_fpov5"]
+[ext_resource type="PackedScene" uid="uid://bp53n45ylj384" path="res://GeneralUI.tscn" id="2_gei0y"]
 
 [node name="UiManager" type="Node2D" unique_id=127151639]
 script = ExtResource("1_fpov5")
+
+[node name="GeneralUi" parent="." unique_id=628125526 instance=ExtResource("2_gei0y")]

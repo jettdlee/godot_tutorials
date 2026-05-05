@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bp53n45ylj384"]
+
+[ext_resource type="Script" uid="uid://bnm2eo47f0bol" path="res://GeneralUI.cs" id="1_rlkgr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pvj8y"]
+font_size = 24
+
+[node name="GeneralUi" type="Panel" unique_id=628125526]
+offset_left = 250.0
+offset_right = 900.0
+offset_bottom = 50.0
+script = ExtResource("1_rlkgr")
+
+[node name="TurnLabel" type="Label" parent="." unique_id=253248541]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 7.0
+offset_right = 92.0
+offset_bottom = 41.0
+text = "Turn: 0"
+label_settings = SubResource("LabelSettings_pvj8y")
+
+[node name="EndTurnButton" type="Button" parent="." unique_id=476620840]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 9.0
+offset_right = 375.0
+offset_bottom = 40.0
+text = "End Turn"
