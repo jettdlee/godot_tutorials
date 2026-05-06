@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dbh7aw63821o"]
+
+[ext_resource type="Texture2D" uid="uid://caeqdpp8b3krw" path="res://Assets/settler.png" id="1_c58w5"]
+[ext_resource type="Script" uid="uid://cpshs11oeuxnm" path="res://Unit.cs" id="1_ypl2c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ypl2c"]
+
+[node name="Unit" type="Node2D" unique_id=2004332522]
+script = ExtResource("1_ypl2c")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1666546131]
+texture = ExtResource("1_c58w5")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=1907711685]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=2010500684]
+scale = Vector2(3.5, 3.5)
+shape = SubResource("CircleShape2D_ypl2c")

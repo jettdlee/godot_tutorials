@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cqafn4ufjxatn" path="res://CityUI.cs" id="1_h7t1p"]
 [ext_resource type="Texture2D" uid="uid://bk1fixx278o7o" path="res://Assets/city_painting.jpg" id="1_yim3b"]
+[ext_resource type="PackedScene" uid="uid://t31xjug0cok7" path="res://UnitBuildButton.tscn" id="3_7jywj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yim3b"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_h7t1p"]
 font_size = 24
 
 [node name="CityUi" type="Panel" unique_id=1208121881]
@@ -51,3 +55,50 @@ offset_top = 268.0
 offset_right = 54.0
 offset_bottom = 291.0
 text = "Production:"
+
+[node name="BuildLabel" type="Label" parent="." unique_id=379030561]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 311.0
+offset_right = 69.0
+offset_bottom = 345.0
+text = "Build"
+label_settings = SubResource("LabelSettings_h7t1p")
+
+[node name="UnitBuildButtons" type="ScrollContainer" parent="." unique_id=1273213727]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 348.0
+offset_right = 232.0
+offset_bottom = 454.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UnitBuildButtons" unique_id=758265062]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UnitBuildButton" parent="UnitBuildButtons/VBoxContainer" unique_id=1763529075 instance=ExtResource("3_7jywj")]
+layout_mode = 2
+text = "Settler"
+
+[node name="UnitBuildButton2" parent="UnitBuildButtons/VBoxContainer" unique_id=1302772490 instance=ExtResource("3_7jywj")]
+layout_mode = 2
+text = "Warrior"
+
+[node name="QueueLabel" type="Label" parent="." unique_id=162016052]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 460.0
+offset_right = 94.0
+offset_bottom = 494.0
+text = "Queue"
+label_settings = SubResource("LabelSettings_h7t1p")
+
+[node name="QueueContainer" type="ScrollContainer" parent="." unique_id=869935430]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 501.0
+offset_right = 235.0
+offset_bottom = 607.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QueueContainer" unique_id=1288300188]
+layout_mode = 2
