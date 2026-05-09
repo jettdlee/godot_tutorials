@@ -1,10 +1,24 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Unit : Node2D
 {
+    public static Dictionary<Type, PackedScene> unitSceneResources;
+    public static void LoadUnitScenes()
+    {
+        unitSceneResources = new Dictionary<Type, PackedScene>
+        {
+            { typeof(Settler), ResourceLoader.Load<PackedScene>("res://Settler.tscn")},
+            { typeof(Warrior), ResourceLoader.Load<PackedScene>("res://Warrior.tscn")}
+        };
+    }
+
     public string unitName = "DEFAULT";
     public int productionRequired;
+    public Civilization civ;
+    public Vector2I coords = new Vector2I();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -14,4 +28,11 @@ public partial class Unit : Node2D
 	public override void _Process(double delta)
 	{
 	}
+
+    public void SetCiv(Civilization civ)
+    {
+        this.civ = civ;
+        GetNode<Sprite2D>("Sprite2D").Modulate = civ.territoryColor;
+        this.civ.units.Add(this);
+    }
 }

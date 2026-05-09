@@ -8,6 +8,7 @@ public partial class Game : Node
 
     public override void _EnterTree()
     {
+        Unit.LoadUnitScenes();
         TerrainTileUi.LoadTerrainImages();
     }
 }

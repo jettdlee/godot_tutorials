@@ -8,7 +8,7 @@ public partial class City : Node2D
     public static Dictionary<Hex, City> invalidTiles = new Dictionary<Hex, City>();
 
     public HexTileMap map;
-    public Vector2 centerCoordinates;
+    public Vector2I centerCoordinates;
     public List<Hex> territory;
     public List<Hex> borderTilePool;
     public Civilization civ;
@@ -57,6 +57,8 @@ public partial class City : Node2D
             AddRandomNewTile();
             map.UpdateCivTerritoryMap(civ);
         }
+
+        ProcessUnitBuildQueue();
     }
 
     public void CleanUpBorderPool()
@@ -130,6 +132,37 @@ public partial class City : Node2D
     public void AddUnitToBuildQueue(Unit u)
     {
         unitBuildQueue.Add(u);
+    }
+
+    public void SpawnUnit(Unit u)
+    {
+        Unit unitToSpawn = (Unit) Unit.unitSceneResources[u.GetType()].Instantiate();
+        unitToSpawn.Position = map.MapToLocal(this.centerCoordinates);
+        unitToSpawn.SetCiv(this.civ);
+        unitToSpawn.coords = this.centerCoordinates;
+
+        map.AddChild(unitToSpawn);
+    }
+
+    public void ProcessUnitBuildQueue()
+    {
+        if (unitBuildQueue.Count > 0)
+        {
+            if (currentUnitBeingBuilt == null)
+            {
+                currentUnitBeingBuilt = unitBuildQueue[0];
+            }
+
+            unitBuildTracker += totalProduction;
+
+            if (unitBuildTracker >= currentUnitBeingBuilt.productionRequired)
+            {
+                SpawnUnit(currentUnitBeingBuilt);
+                unitBuildQueue.RemoveAt(0);
+                currentUnitBeingBuilt = null;
+                unitBuildTracker = 0;
+            }
+        }
     }
     public void CalculateTerritoryResourceTotals()
     {
