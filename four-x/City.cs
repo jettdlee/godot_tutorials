@@ -15,6 +15,9 @@ public partial class City : Node2D
 
     public string name;
 
+    public List<Unit> unitBuildQueue;
+    public Unit currentUnitBeingBuilt;
+    public int unitBuildTracker = 0;
     public int population = 1;
     public int totalFood;
     public int totalProduction;
@@ -37,6 +40,7 @@ public partial class City : Node2D
 
         territory = new List<Hex>();
         borderTilePool = new List<Hex>();
+        unitBuildQueue = new List<Unit>();
     }
 
     public void ProcessTurn()
@@ -123,6 +127,10 @@ public partial class City : Node2D
         sprite.Modulate = c;
     }
 
+    public void AddUnitToBuildQueue(Unit u)
+    {
+        unitBuildQueue.Add(u);
+    }
     public void CalculateTerritoryResourceTotals()
     {
         totalFood = 0;

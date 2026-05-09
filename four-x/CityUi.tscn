@@ -76,11 +76,11 @@ offset_bottom = 454.0
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="UnitBuildButton" parent="UnitBuildButtons/VBoxContainer" unique_id=1763529075 instance=ExtResource("3_7jywj")]
+[node name="SettlerButton" parent="UnitBuildButtons/VBoxContainer" unique_id=1763529075 instance=ExtResource("3_7jywj")]
 layout_mode = 2
 text = "Settler"
 
-[node name="UnitBuildButton2" parent="UnitBuildButtons/VBoxContainer" unique_id=1302772490 instance=ExtResource("3_7jywj")]
+[node name="WarriorButton" parent="UnitBuildButtons/VBoxContainer" unique_id=1302772490 instance=ExtResource("3_7jywj")]
 layout_mode = 2
 text = "Warrior"
 

@@ -3,6 +3,11 @@ using System;
 
 public partial class Settler : Unit
 {
+    public Settler()
+    {
+        unitName = "Settler";
+        productionRequired = 100;
+    }
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

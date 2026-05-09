@@ -19,6 +19,49 @@ public partial class CityUI : Panel
     {
         this.city = city;
         Refresh();
+        ConnectUnitBuildSignals(this.city);
+    }
+
+    public void ConnectUnitBuildSignals(City city)
+    {
+        VBoxContainer buttons = GetNode<VBoxContainer>("UnitBuildButtons/VBoxContainer");
+        UnitBuildButton settlerButton = buttons.GetNode<UnitBuildButton>("SettlerButton");
+        settlerButton.u = new Settler();
+        UnitBuildButton warriorButton = buttons.GetNode<UnitBuildButton>("WarriorButton");
+        warriorButton.u = new Warrior();
+    
+        settlerButton.OnPressed += city.AddUnitToBuildQueue;
+        settlerButton.OnPressed += this.Refresh;
+        warriorButton.OnPressed += city.AddUnitToBuildQueue;
+        warriorButton.OnPressed += this.Refresh;
+    }
+
+    public void PopulateUnitQueueUi(City city)
+    {
+        VBoxContainer queue = GetNode<VBoxContainer>("QueueContainer/VBoxContainer");
+        foreach(Node n in queue.GetChildren())
+        {
+            queue.RemoveChild(n);
+            n.QueueFree();
+        }
+
+        for (int i = 0; i < city.unitBuildQueue.Count; i++)
+        {
+            Unit u = city.unitBuildQueue[i];
+            if (i == 0)
+            {
+                queue.AddChild(new Label()
+                {
+                    Text = $"{u.unitName} {city.unitBuildTracker}/{u.productionRequired}"
+                });
+            } else
+            {
+                queue.AddChild(new Label()
+                {
+                    Text = $"{u.unitName} 0/{u.productionRequired}"
+                });
+            }
+        }
     }
 
     public void Refresh()
@@ -27,5 +70,12 @@ public partial class CityUI : Panel
         population.Text = "Population: " + this.city.population;
         food.Text = "Food: " + this.city.totalFood;
         production.Text = "Production: " + this.city.totalProduction;
+
+        PopulateUnitQueueUi(this.city);
+    }
+
+    public void Refresh(Unit u)
+    {
+        Refresh();
     }
 }
