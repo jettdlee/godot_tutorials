@@ -7,6 +7,10 @@ public partial class Settler : Unit
     {
         unitName = "Settler";
         productionRequired = 100;
+        maxHp = 1;
+        hp = 1;
+        maxMovePoints = 2;
+        movePoints = 2;
     }
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

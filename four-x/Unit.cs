@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public partial class Unit : Node2D
 {
     public static Dictionary<Type, PackedScene> unitSceneResources;
+    public static Dictionary<Type, Texture2D> uiImages;
     public static void LoadUnitScenes()
     {
         unitSceneResources = new Dictionary<Type, PackedScene>
@@ -14,10 +15,24 @@ public partial class Unit : Node2D
         };
     }
 
+    public static void LoadTextures()
+    {
+        uiImages = new Dictionary<Type, Texture2D>
+        {
+            { typeof(Settler), (Texture2D) ResourceLoader.Load("res://Assets/settler_image.png")},
+            { typeof(Warrior), (Texture2D) ResourceLoader.Load("res://Assets/warrior_image.jpg")},
+        };
+    }
+
     public string unitName = "DEFAULT";
     public int productionRequired;
     public Civilization civ;
     public Vector2I coords = new Vector2I();
+
+    public int maxHp;
+    public int hp;
+    public int maxMovePoints;
+    public int movePoints;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

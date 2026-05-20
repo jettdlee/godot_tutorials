@@ -5,9 +5,11 @@ public partial class UIManager : Node2D
 {
     PackedScene terrainUiScene;
     PackedScene cityUiScene;
+    PackedScene unitUiScene;
     TerrainTileUi terrainUi = null;
     CityUI cityUi = null;
     GeneralUI generalUi;
+    UnitUI unitUi;
 
     [Signal]
     public delegate void EndTurnEventHandler();
@@ -17,6 +19,7 @@ public partial class UIManager : Node2D
     {
         terrainUiScene = ResourceLoader.Load<PackedScene>("TerrainTileUI.tscn");
         cityUiScene = ResourceLoader.Load<PackedScene>("CityUi.tscn");
+        unitUiScene = ResourceLoader.Load<PackedScene>("UnitUI.tscn");
         generalUi = GetNode<Panel>("GeneralUi") as GeneralUI;
 
         Button endTurnButton = generalUi.GetNode<Button>("EndTurnButton");
@@ -43,6 +46,12 @@ public partial class UIManager : Node2D
             cityUi.QueueFree();
             cityUi = null;
         }
+
+        if (unitUi is not null)
+        {
+            unitUi.QueueFree();
+            unitUi = null;
+        }
     }
     public void SetTerrainUi(Hex h)
     {
@@ -56,6 +65,8 @@ public partial class UIManager : Node2D
     {
         if (cityUi is not null)
             cityUi.Refresh();
+        if (unitUi is not null)
+            unitUi.Refresh();
     }
 
     public void SetCityUI(City c)
@@ -64,5 +75,13 @@ public partial class UIManager : Node2D
         cityUi = cityUiScene.Instantiate() as CityUI;
         AddChild(cityUi);
         cityUi.SetCityUI(c);
+    }
+
+    public void SetUnitUI(Unit u)
+    {
+        HideAllPopups();
+        unitUi = unitUiScene.Instantiate() as UnitUI;
+        AddChild(unitUi);
+        unitUi.SetUnit(u);
     }
 }

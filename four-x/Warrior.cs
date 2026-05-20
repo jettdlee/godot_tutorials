@@ -7,6 +7,10 @@ public partial class Warrior : Unit
     {
         unitName = "Warrior";
         productionRequired = 50;
+        maxHp = 3;
+        hp = 3;
+        movePoints = 1;
+        maxMovePoints = 1;
     }
 
 	// Called when the node enters the scene tree for the first time.
