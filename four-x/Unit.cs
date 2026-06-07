@@ -7,6 +7,10 @@ public partial class Unit : Node2D
 {
     [Signal]
     public delegate void UnitClickedEventHandler(Unit u);
+
+    public delegate void SelectedUnitDestroyedEventHandler();
+    public event SelectedUnitDestroyedEventHandler SelectedUnitDestroyed;
+
     public static Dictionary<Type, PackedScene> unitSceneResources;
     public static Dictionary<Type, Texture2D> uiImages;
     public static void LoadUnitScenes()
@@ -59,6 +63,7 @@ public partial class Unit : Node2D
         this.UnitClicked += manager.SetUnitUI;
 
         manager.EndTurn += this.ProcessTurn;
+        this.SelectedUnitDestroyed += manager.HideAllPopups;
 
         // map = GetNode<HexTileMap>("root/Game/HexTileMap");
         map = GetParent<HexTileMap>();
@@ -67,6 +72,7 @@ public partial class Unit : Node2D
         map.RightClickOnMap += Move;
 
         validMovementHexes = CalculateValidAdjacentMovementHexes();
+
 
         if (unitLocations.ContainsKey(map.GetHex(this.coords)))
         {
@@ -162,6 +168,21 @@ public partial class Unit : Node2D
         hexes = hexes.Where(h => !impassible.Contains(h.terrainType)).ToList();
 
         return hexes;
+    }
+
+    public void DestroyUnit()
+    {
+        map.RightClickOnMap -= Move;
+
+        if (selected)
+        {
+            SelectedUnitDestroyed?.Invoke();
+        }
+
+        this.civ.units.Remove(this);
+        unitLocations[map.GetHex(this.coords)].Remove(this);
+
+        this.QueueFree();
     }
 
     public override void _UnhandledInput(InputEvent @event)

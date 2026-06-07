@@ -18,6 +18,24 @@ public partial class Settler : Unit
         base._Ready();
     }
 
+    public void FoundCity()
+    {
+        if (map.GetHex(this.coords).ownerCity is null && !City.invalidTiles.ContainsKey(map.GetHex(this.coords)))
+        {
+            bool valid = true;
+            foreach (Hex h in map.GetSurroundingHexes(this.coords))
+            {
+                valid = h.ownerCity is null && !City.invalidTiles.ContainsKey(h);
+            }
+
+            if (valid)
+            {
+                map.CreateCity(this.civ, this.coords, $"Settled City {coords.X}");
+                this.DestroyUnit();
+            }
+        } 
+    }
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
