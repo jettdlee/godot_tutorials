@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Unit : Node2D
 {
@@ -38,6 +39,17 @@ public partial class Unit : Node2D
     public bool selected = false;
     public Area2D collider;
     public HexTileMap map;
+    public static Dictionary<Hex, List<Unit>> unitLocations = new Dictionary<Hex, List<Unit>>();
+
+    public HashSet<TerrainType> impassible = new HashSet<TerrainType>
+    {
+        TerrainType.WATER,
+        TerrainType.SHALLOW_WATER,
+        TerrainType.ICE,
+        TerrainType.MOUNTAIN
+    };
+
+    List<Hex> validMovementHexes = new List<Hex>();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -46,15 +58,71 @@ public partial class Unit : Node2D
         UIManager manager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
         this.UnitClicked += manager.SetUnitUI;
 
+        manager.EndTurn += this.ProcessTurn;
+
         // map = GetNode<HexTileMap>("root/Game/HexTileMap");
         map = GetParent<HexTileMap>();
         this.UnitClicked += map.DeselectCurrentCell;
+
+        map.RightClickOnMap += Move;
+
+        validMovementHexes = CalculateValidAdjacentMovementHexes();
+
+        if (unitLocations.ContainsKey(map.GetHex(this.coords)))
+        {
+            unitLocations[map.GetHex(this.coords)].Add(this);
+        } else
+        {
+            unitLocations[map.GetHex(this.coords)] = new List<Unit>{this};
+        }
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
+
+    public void ProcessTurn()
+    {
+        movePoints = maxMovePoints;
+    }
+
+    public void MoveToHex(Hex h)
+    {
+        if (!unitLocations.ContainsKey(h) || (unitLocations.ContainsKey(h) && unitLocations[h].Count == 0))
+        {
+            unitLocations[map.GetHex(this.coords)].Remove(this);
+
+            Position = map.MapToLocal(h.coordinates);
+            coords = h.coordinates;
+        
+            if (!unitLocations.ContainsKey(h))
+            {
+                Unit.unitLocations[h] = new List<Unit>{this};
+            } else
+            {
+                unitLocations[h].Add(this);
+            }
+
+            validMovementHexes = CalculateValidAdjacentMovementHexes();
+            movePoints -= 1;
+        } else
+        {
+            
+        }
+    }
+
+    public void Move(Hex h)
+    {
+        if (selected && movePoints > 0)
+        {
+            if (validMovementHexes.Contains(h))
+            {
+                MoveToHex(h);
+                EmitSignal(SignalName.UnitClicked, this);
+            }
+        }
+    }
 
     public void SetCiv(Civilization civ)
     {
@@ -72,14 +140,28 @@ public partial class Unit : Node2D
             Color c = new Color(sprite.Modulate);
             c.V = c.V - 0.25f;
             sprite.Modulate = c;
+
+            validMovementHexes = CalculateValidAdjacentMovementHexes();
         }
     }
 
     public void SetDeselected()
     {
         selected = false;
+        validMovementHexes.Clear();
+
         Sprite2D sprite = GetNode<Sprite2D>("Sprite2D");
         sprite.Modulate = civ.territoryColor;
+    }
+
+    public List<Hex> CalculateValidAdjacentMovementHexes()
+    {
+        List<Hex> hexes = new List<Hex>();
+
+        hexes.AddRange(map.GetSurroundingHexes(this.coords));
+        hexes = hexes.Where(h => !impassible.Contains(h.terrainType)).ToList();
+
+        return hexes;
     }
 
     public override void _UnhandledInput(InputEvent @event)

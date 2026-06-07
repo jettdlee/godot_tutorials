@@ -66,6 +66,9 @@ public partial class HexTileMap : Node2D
 
     [Signal]
     public delegate void SendCityUIInfoEventHandler(City c);
+    public delegate void RightClickOnMapEventHandler(Hex h);
+    public event RightClickOnMapEventHandler RightClickOnMap;
+
 
 	public override void _Ready()
     {
@@ -140,6 +143,11 @@ public partial class HexTileMap : Node2D
                     overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
                     currentSelectedCell = mapCoords;
                 }
+
+                if (mouse.ButtonMask == MouseButtonMask.Right)
+                {
+                    RightClickOnMap?.Invoke(h);
+                }
             } else
             {
                 overlayLayer.SetCell(currentSelectedCell, -1);
@@ -160,6 +168,11 @@ public partial class HexTileMap : Node2D
     public void DeselectCurrentCell(Unit u = null)
     {
         overlayLayer.SetCell(currentSelectedCell, -1);
+    }
+
+    public Hex GetHex(Vector2I coords)
+    {
+        return mapData[coords];
     }
 
     public Civilization CreatePlayerCiv(Vector2I start)
