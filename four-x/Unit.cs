@@ -206,4 +206,13 @@ public partial class Unit : Node2D
         }
     }
 
+    public void RandomMove()
+    {
+        Random r = new Random();
+        validMovementHexes = CalculateValidAdjacentMovementHexes();
+        Hex h = validMovementHexes.ElementAt(r.Next(validMovementHexes.Count));
+
+        MoveToHex(h);
+    }
+
 }

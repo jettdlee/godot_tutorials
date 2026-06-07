@@ -11,6 +11,7 @@ public class Civilization
     public int territoryColorAltTileId;
     public string name;
     public bool playerCiv;
+    public int maxUnits = 3;
 
     public Civilization()
     {
@@ -28,5 +29,42 @@ public class Civilization
     {
         foreach (City c in cities)
             c.ProcessTurn();
+    
+        if (!playerCiv)
+        {
+            Random r = new Random();
+
+            foreach (City c in cities)
+            {
+                int rand = r.Next(30);
+                if(rand > 27)
+                {
+                    c.AddUnitToBuildQueue(new Warrior());
+                }
+
+                if (rand > 28)
+                {
+                    c.AddUnitToBuildQueue(new Settler());
+                }
+            }
+
+            List<Settler> citiesToFound = new List<Settler>();
+            foreach (Unit u in units)
+            {
+                u.RandomMove();
+                if (u is Settler && r.Next(10) > 8)
+                {
+                    Settler s = u as Settler;
+                    citiesToFound.Add(s);
+                }
+            }
+
+            for (int i = 0; i < citiesToFound.Count; i++)
+            {
+                citiesToFound[i].FoundCity();
+            }
+        }
+
+        maxUnits = this.cities.Count * 3;
     }
 }
