@@ -46,6 +46,7 @@ public partial class HexTileMap : Node2D
     public Color player_color = new Color(255, 255, 255);
 
     TileMapLayer baseLayer, borderLayer, overlayLayer, civColorsLayer;
+    HighlightLayer highlightLayer;
 
     TileSetAtlasSource terrainAtlas;
 
@@ -78,6 +79,7 @@ public partial class HexTileMap : Node2D
         borderLayer = GetNode<TileMapLayer>("HexBordersLayer");
         overlayLayer = GetNode<TileMapLayer>("SelectionOverlayLayer");
         civColorsLayer = GetNode<TileMapLayer>("CivColorsLayer");
+        highlightLayer = GetNode<TileMapLayer>("HighlightLayer") as HighlightLayer;
 
         uiManager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
 
@@ -112,6 +114,8 @@ public partial class HexTileMap : Node2D
 
         this.SendHexData += uiManager.SetTerrainUi;
         uiManager.EndTurn += ProcessTurn;
+
+        highlightLayer.SetupHighlightLayer(width, height);
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -135,8 +139,11 @@ public partial class HexTileMap : Node2D
                     if (cities.ContainsKey(mapCoords))
                     {
                         EmitSignal(SignalName.SendCityUIInfo, cities[mapCoords]);
+                        GD.Print("asdfsdafdsa");
+                        highlightLayer.SetupHighlightLayerForCity(cities[mapCoords]);
                     } else
                     {
+                        highlightLayer.ResetHighlightLayer();
                         SendHexData?.Invoke(h);
                     }
                     if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
@@ -150,6 +157,7 @@ public partial class HexTileMap : Node2D
                 }
             } else
             {
+                highlightLayer.ResetHighlightLayer();
                 overlayLayer.SetCell(currentSelectedCell, -1);
                 EmitSignal(SignalName.ClickOffMap);
             }
@@ -163,6 +171,7 @@ public partial class HexTileMap : Node2D
         {
             c.ProcessTurn();
         }
+        highlightLayer.RefreshLayer();
     }
 
     public void DeselectCurrentCell(Unit u = null)
