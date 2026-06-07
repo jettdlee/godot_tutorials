@@ -157,6 +157,11 @@ public partial class HexTileMap : Node2D
         }
     }
 
+    public void DeselectCurrentCell(Unit u = null)
+    {
+        overlayLayer.SetCell(currentSelectedCell, -1);
+    }
+
     public Civilization CreatePlayerCiv(Vector2I start)
     {
         Civilization playerCiv = new Civilization();
@@ -171,6 +176,7 @@ public partial class HexTileMap : Node2D
 
         return playerCiv;
     }
+
     public void GenerateResources()
     {
         Random r = new Random();
