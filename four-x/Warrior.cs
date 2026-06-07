@@ -11,6 +11,7 @@ public partial class Warrior : Unit
         hp = 3;
         movePoints = 1;
         maxMovePoints = 1;
+        attackValue = 2;
     }
 
 	// Called when the node enters the scene tree for the first time.

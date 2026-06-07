@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 
 public partial class Unit : Node2D
 {
@@ -40,6 +41,9 @@ public partial class Unit : Node2D
     public int hp;
     public int maxMovePoints;
     public int movePoints;
+
+    public int attackValue;
+
     public bool selected = false;
     public Area2D collider;
     public HexTileMap map;
@@ -114,7 +118,12 @@ public partial class Unit : Node2D
             movePoints -= 1;
         } else
         {
-            
+            Unit opposing_unit = Unit.unitLocations[h][0];
+
+            if (opposing_unit.civ != this.civ)
+            {
+                CalculateCombat(this, opposing_unit);
+            }
         }
     }
 
@@ -127,6 +136,22 @@ public partial class Unit : Node2D
                 MoveToHex(h);
                 EmitSignal(SignalName.UnitClicked, this);
             }
+        }
+    }
+
+    public void CalculateCombat(Unit attacker, Unit defender)
+    {
+        defender.hp -= attacker.attackValue;
+        attacker.hp -= defender.attackValue/2;
+
+        if (defender.hp <= 0)
+        {
+            defender.DestroyUnit();
+        }
+
+        if (attacker.hp <= 0)
+        {
+            attacker.DestroyUnit();
         }
     }
 
