@@ -116,6 +116,11 @@ public partial class Unit : Node2D
 
             validMovementHexes = CalculateValidAdjacentMovementHexes();
             movePoints -= 1;
+
+            if (h.isCityCenter && h.ownerCity.civ != this.civ && this is Warrior)
+            {
+                h.ownerCity.ChangeOwnership(this.civ);
+            }
         } else
         {
             Unit opposing_unit = Unit.unitLocations[h][0];
